@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KHOI. — AI Filmmaker & Creative Director</title>
+<meta name="description" content="Đặng Minh Khôi (KHOI.) — AI Filmmaker & Creative Director. 8 năm DOP, nay làm phim bằng AI. TP.HCM, làm việc với client toàn cầu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#050507; --bg2:#08080d; --panel:#0c0c12; --panel2:#101018;
+    --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.14);
+    --txt:#f4f4f8; --muted:#9a9aae; --muted2:#6f6f82;
+    --accent:#7c5cff; --accent2:#ff4d9d; --accent3:#00e5ff;
+    --grad:linear-gradient(120deg,var(--accent3),var(--accent),var(--accent2));
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;overflow-x:hidden;line-height:1.65;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4,.disp{font-family:'Space Grotesk',sans-serif}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:rgba(124,92,255,.4)}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  .grad-txt{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* film grain / noise overlay */
+  body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:overlay}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(16px);background:rgba(5,5,7,.55);border-bottom:1px solid var(--line);transition:.4s}
+  nav.scrolled{background:rgba(5,5,7,.82)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .logo{font-family:'Space Grotesk';font-weight:700;font-size:21px;letter-spacing:1.5px;display:flex;align-items:center;gap:11px}
+  .logo .dot{width:11px;height:11px;border-radius:50%;background:conic-gradient(from 0deg,var(--accent),var(--accent2),var(--accent3),var(--accent));animation:spin 4s linear infinite;box-shadow:0 0 14px rgba(124,92,255,.6)}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .navlinks{display:flex;gap:34px;font-size:14px;color:var(--muted)}
+  .navlinks a{position:relative;transition:.25s}
+  .navlinks a::after{content:"";position:absolute;left:0;bottom:-6px;height:1.5px;width:0;background:var(--grad);transition:.3s}
+  .navlinks a:hover{color:var(--txt)}
+  .navlinks a:hover::after{width:100%}
+  .btn{background:linear-gradient(135deg,var(--accent),var(--accent2));padding:11px 22px;border-radius:100px;font-weight:600;font-size:14px;color:#fff;border:none;cursor:pointer;transition:.3s;font-family:'Space Grotesk';display:inline-flex;align-items:center;gap:8px}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(124,92,255,.45)}
+  @media(max-width:860px){.navlinks{display:none}}
+
+  /* ===== HERO — FULL-SCREEN CINEMATIC ===== */
+  .hero{position:relative;height:100vh;min-height:640px;display:flex;align-items:center;overflow:hidden;isolation:isolate}
+
+  /* Ken Burns background layer (parallax target) */
+  .hero-stage{position:absolute;inset:-6% -4%;z-index:0;will-change:transform}
+  .hero-bg{position:absolute;inset:0;
+    background:url('https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=2000&q=80') center 40%/cover;
+    opacity:.5;transform-origin:60% 45%;animation:kenburns 30s ease-in-out infinite alternate;filter:saturate(1.05) contrast(1.05)}
+  @keyframes kenburns{
+    0%{transform:scale(1.08) translate3d(0,0,0)}
+    100%{transform:scale(1.22) translate3d(-3%,-4%,0)}}
+
+  /* cinematic gradient overlays: neon color wash + vignette + bottom fade */
+  .hero-grade{position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:
+      radial-gradient(120% 90% at 25% 30%,rgba(124,92,255,.30),transparent 55%),
+      radial-gradient(110% 90% at 85% 70%,rgba(255,77,157,.24),transparent 55%),
+      radial-gradient(90% 80% at 62% 95%,rgba(0,229,255,.16),transparent 55%),
+      linear-gradient(to bottom,rgba(5,5,7,.55) 0%,rgba(5,5,7,.20) 40%,rgba(5,5,7,.72) 82%,var(--bg) 100%)}
+  .hero-vignette{position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:radial-gradient(130% 120% at 50% 45%,transparent 45%,rgba(0,0,0,.55) 100%);mix-blend-mode:multiply}
+
+  /* cinematic scanline / film flicker */
+  .hero-scan{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.5;
+    background:repeating-linear-gradient(to bottom,rgba(255,255,255,.035) 0 1px,transparent 1px 3px);
+    animation:flicker 5s steps(60) infinite;mix-blend-mode:overlay}
+  @keyframes flicker{0%,100%{opacity:.5}48%{opacity:.32}70%{opacity:.55}}
+
+  /* floating light particles */
+  .hero-particles{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+  .hero-particles i{position:absolute;bottom:-20px;width:4px;height:4px;border-radius:50%;
+    background:var(--accent3);box-shadow:0 0 12px 2px var(--accent3);opacity:0;animation:rise linear infinite}
+  .hero-particles i:nth-child(3n){background:var(--accent2);box-shadow:0 0 12px 2px var(--accent2)}
+  .hero-particles i:nth-child(3n+1){background:var(--accent);box-shadow:0 0 12px 2px var(--accent)}
+  @keyframes rise{0%{transform:translateY(0) scale(.6);opacity:0}10%{opacity:.8}90%{opacity:.5}100%{transform:translateY(-108vh) scale(1);opacity:0}}
+
+  /* film-frame corner decor + timecode */
+  .hero-frame{position:absolute;z-index:4;pointer-events:none;font-family:'Space Grotesk';font-size:11px;letter-spacing:2px;color:var(--muted2)}
+  .hero-frame.tl{top:96px;left:26px}.hero-frame.tr{top:96px;right:26px;text-align:right}
+  .hero-frame.bl{bottom:30px;left:26px}.hero-frame.br{bottom:30px;right:26px;text-align:right}
+  .hero-frame .corner{width:26px;height:26px;border:1.5px solid var(--line2);position:absolute}
+  .hero-frame.tl .corner{top:-10px;left:-10px;border-right:none;border-bottom:none}
+  .hero-frame.tr .corner{top:-10px;right:-10px;border-left:none;border-bottom:none}
+  .hero-frame.bl .corner{bottom:-10px;left:-10px;border-right:none;border-top:none}
+  .hero-frame.br .corner{bottom:-10px;right:-10px;border-left:none;border-top:none}
+  .hero-frame .rec{display:inline-flex;align-items:center;gap:7px}
+  .hero-frame .rec .rd{width:7px;height:7px;border-radius:50%;background:var(--accent2);box-shadow:0 0 10px var(--accent2);animation:pulse 1.4s infinite}
+  @media(max-width:860px){.hero-frame.tr,.hero-frame.br{display:none}.hero-frame.tl,.hero-frame.bl{font-size:10px}}
+
+  .hero .wrap{position:relative;z-index:4;padding-top:70px;will-change:transform}
+  .badge{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border:1px solid var(--line);border-radius:100px;font-size:13px;color:var(--muted);background:rgba(255,255,255,.04);backdrop-filter:blur(6px);margin-bottom:26px;opacity:0;animation:fadeUp .8s .05s forwards}
+  .badge .pulse{width:8px;height:8px;border-radius:50%;background:var(--accent3);box-shadow:0 0 12px var(--accent3);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+  .greet{font-family:'Space Grotesk';font-size:clamp(15px,1.8vw,19px);color:var(--accent3);font-weight:500;letter-spacing:.5px;margin-bottom:18px;opacity:0;animation:fadeUp .8s .18s forwards}
+  .greet b{color:var(--txt);font-weight:600}
+
+  /* GIANT staggered line-reveal title */
+  .hero h1{font-size:clamp(46px,10vw,120px);line-height:.98;font-weight:700;letter-spacing:-3px;margin-bottom:30px;text-shadow:0 20px 60px rgba(0,0,0,.5)}
+  .hero h1 .line{display:block;overflow:hidden;padding-bottom:.06em}
+  .hero h1 .line > span{display:block;transform:translateY(115%);animation:lineUp 1s cubic-bezier(.19,1,.22,1) forwards}
+  .hero h1 .line:nth-child(1) > span{animation-delay:.30s}
+  .hero h1 .line:nth-child(2) > span{animation-delay:.44s}
+  .hero h1 .line:nth-child(3) > span{animation-delay:.58s}
+  @keyframes lineUp{to{transform:translateY(0)}}
+
+  .hero p{font-size:clamp(16px,1.4vw,19px);color:var(--muted);max-width:560px;margin-bottom:38px;opacity:0;animation:fadeUp .9s .78s forwards}
+  .hero-cta{display:flex;gap:18px;flex-wrap:wrap;align-items:center;opacity:0;animation:fadeUp .9s .9s forwards}
+  .btn-lg{padding:15px 30px;font-size:15px}
+  .btn-lg:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 16px 46px rgba(124,92,255,.5)}
+  .btn-ghost{padding:12px 24px;border:1px solid var(--line2);border-radius:100px;font-weight:500;font-size:14px;transition:.3s;display:inline-flex;align-items:center;gap:8px;font-family:'Space Grotesk'}
+  .btn-ghost:hover{border-color:var(--accent);background:rgba(124,92,255,.12);transform:translateY(-2px)}
+
+  /* circular showreel play button */
+  .play-reel{display:inline-flex;align-items:center;gap:14px;cursor:pointer;color:var(--txt);font-family:'Space Grotesk';font-size:14px;font-weight:500}
+  .play-reel .ring{position:relative;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    border:1.5px solid var(--line2);background:rgba(255,255,255,.05);backdrop-filter:blur(6px);transition:.35s}
+  .play-reel .ring::before{content:"";position:absolute;inset:-4px;border-radius:50%;border:1.5px solid transparent;
+    background:var(--grad) border-box;-webkit-mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:.35s;animation:spin 6s linear infinite}
+  .play-reel:hover .ring{transform:scale(1.08);background:rgba(124,92,255,.15)}
+  .play-reel:hover .ring::before{opacity:1}
+  .play-reel .ring span{font-size:15px;margin-left:2px}
+  .play-reel small{color:var(--muted);display:block;font-family:'Inter';font-size:12px}
+
+  .stats{display:flex;gap:clamp(28px,5vw,60px);margin-top:clamp(40px,7vh,72px);flex-wrap:wrap;opacity:0;animation:fadeUp .9s 1.02s forwards}
+  .stat .n{font-family:'Space Grotesk';font-size:clamp(30px,3.4vw,40px);font-weight:700}
+  .stat .l{font-size:13px;color:var(--muted)}
+
+  .scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:4;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;animation:fadeUp 1s 1.3s forwards}
+  .scroll-hint .mouse{width:22px;height:34px;border:1.5px solid var(--line2);border-radius:12px;display:flex;justify-content:center;padding-top:6px}
+  .scroll-hint .mouse i{width:3px;height:7px;border-radius:2px;background:var(--accent3);box-shadow:0 0 8px var(--accent3);animation:wheel 1.8s infinite}
+  @keyframes wheel{0%{opacity:0;transform:translateY(-3px)}40%{opacity:1}100%{opacity:0;transform:translateY(9px)}}
+
+  @media(max-width:860px){
+    .hero h1{letter-spacing:-1.5px}
+    .hero-scan,.hero-particles{display:none}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .hero-bg{animation:none}.hero-particles,.hero-scan{display:none}
+    .hero h1 .line > span{transform:none;animation:none}
+  }
+
+  /* SECTION */
+  section{padding:120px 0;position:relative;z-index:2}
+  .eyebrow{color:var(--accent);font-size:13px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:28px;height:1px;background:var(--accent)}
+  .sec-title{font-size:clamp(30px,4.6vw,54px);font-weight:700;letter-spacing:-1.2px;margin-bottom:18px;line-height:1.08}
+  .sec-sub{color:var(--muted);max-width:640px;font-size:17px}
+
+  /* ABOUT */
+  #about{background:linear-gradient(to bottom,var(--bg),var(--bg2))}
+  .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center;margin-top:20px}
+  .about-photo{position:relative}
+  .about-photo .frame{position:relative;border-radius:24px;overflow:hidden;border:1px solid var(--line2);aspect-ratio:4/5}
+  .about-photo img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05) contrast(1.03)}
+  .about-photo .frame::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(5,5,7,.35))}
+  .about-photo .glow{position:absolute;inset:-30px;z-index:-1;background:radial-gradient(circle,rgba(124,92,255,.35),transparent 65%);filter:blur(30px)}
+  .about-photo .chip{position:absolute;bottom:20px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-radius:16px;background:rgba(12,12,18,.72);backdrop-filter:blur(10px);border:1px solid var(--line2)}
+  .about-photo .chip .nm{font-family:'Space Grotesk';font-weight:600;font-size:16px}
+  .about-photo .chip .rl{font-size:12px;color:var(--muted)}
+  .about-photo .chip .loc{font-size:12px;color:var(--accent3);display:flex;align-items:center;gap:6px}
+  .about-photo .chip .loc .d{width:6px;height:6px;border-radius:50%;background:var(--accent3);box-shadow:0 0 8px var(--accent3)}
+  .about-body h2{font-size:clamp(28px,3.6vw,42px);font-weight:700;letter-spacing:-1px;margin-bottom:24px;line-height:1.12}
+  .about-body p{color:var(--muted);font-size:16.5px;margin-bottom:20px}
+  .about-body p b{color:var(--txt);font-weight:600}
+  .sign{font-family:'Space Grotesk';font-size:26px;font-weight:700;letter-spacing:1px;margin-top:12px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
+  .about-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .about-tags span{font-size:13px;padding:7px 15px;border:1px solid var(--line);border-radius:100px;color:var(--muted);background:var(--panel)}
+  @media(max-width:900px){.about-grid{grid-template-columns:1fr;gap:44px}.about-photo{max-width:420px}}
+
+  /* SHOWREEL GRID */
+  .reel{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:56px}
+  .clip{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/5;cursor:pointer;border:1px solid var(--line)}
+  .clip img{width:100%;height:100%;object-fit:cover;transition:.7s cubic-bezier(.2,.8,.2,1);filter:saturate(1.12)}
+  .clip:hover img{transform:scale(1.08)}
+  .clip .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,7,.92),transparent 62%);display:flex;flex-direction:column;justify-content:flex-end;padding:22px}
+  .clip .tag{font-size:11px;color:var(--accent3);font-weight:600;letter-spacing:1px;text-transform:uppercase}
+  .clip .ct{font-family:'Space Grotesk';font-weight:600;font-size:18px;margin-top:4px}
+  .clip .meta{font-size:12px;color:var(--muted);margin-top:3px}
+  .clip .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.8);width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.12);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:0;transition:.35s;border:1px solid rgba(255,255,255,.28);font-size:15px}
+  .clip:hover .play{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  @media(max-width:860px){.reel{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.reel{grid-template-columns:1fr}}
+
+  /* CASE STUDIES */
+  #cases{background:linear-gradient(to bottom,var(--bg2),var(--bg))}
+  .case{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-top:72px;padding-top:72px;border-top:1px solid var(--line)}
+  .case:first-of-type{border-top:none;padding-top:0}
+  .case.flip .case-media{order:2}
+  .case-media{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--line2);aspect-ratio:16/11}
+  .case-media img{width:100%;height:100%;object-fit:cover;transition:.8s;filter:saturate(1.1)}
+  .case-media:hover img{transform:scale(1.05)}
+  .case-media .ribbon{position:absolute;top:18px;left:18px;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:7px 14px;border-radius:100px;background:rgba(5,5,7,.7);backdrop-filter:blur(8px);border:1px solid var(--line2);color:var(--accent3)}
+  .case-h{font-size:clamp(24px,3vw,34px);font-weight:700;letter-spacing:-.8px;margin-bottom:6px;line-height:1.12}
+  .case-client{font-size:13px;color:var(--accent);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:22px}
+  .case-block{margin-bottom:18px}
+  .case-block h4{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-bottom:6px;font-weight:600}
+  .case-block p{color:var(--muted);font-size:15.5px}
+  .case-block p b{color:var(--txt);font-weight:600}
+  .metrics{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
+  .metric{flex:1;min-width:120px;padding:18px 16px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
+  .metric .mv{font-family:'Space Grotesk';font-size:28px;font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .metric .ml{font-size:12px;color:var(--muted);margin-top:2px}
+  @media(max-width:860px){.case,.case.flip{grid-template-columns:1fr;gap:32px}.case.flip .case-media{order:0}}
+
+  /* TESTIMONIALS */
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px}
+  .quote{padding:32px 28px;border:1px solid var(--line);border-radius:22px;background:var(--panel);position:relative;transition:.35s}
+  .quote:hover{border-color:var(--line2);transform:translateY(-6px);background:var(--panel2)}
+  .quote .mark{font-family:'Space Grotesk';font-size:60px;line-height:.6;color:var(--accent);opacity:.5;margin-bottom:8px}
+  .quote p{font-size:15.5px;color:var(--txt);margin-bottom:22px}
+  .quote .who{display:flex;align-items:center;gap:13px}
+  .quote .who img{width:46px;height:46px;border-radius:50%;object-fit:cover;border:1px solid var(--line2)}
+  .quote .who .nm{font-family:'Space Grotesk';font-weight:600;font-size:15px}
+  .quote .who .rl{font-size:12.5px;color:var(--muted)}
+  @media(max-width:860px){.quotes{grid-template-columns:1fr}}
+
+  /* PROCESS */
+  #process{background:linear-gradient(to bottom,var(--bg),var(--bg2))}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:56px}
+  .step{padding:30px 26px;border:1px solid var(--line);border-radius:20px;background:var(--panel);position:relative;transition:.35s;overflow:hidden}
+  .step::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(124,92,255,.14),transparent 60%);opacity:0;transition:.35s}
+  .step:hover{border-color:var(--accent);transform:translateY(-8px)}
+  .step:hover::before{opacity:1}
+  .step .num{font-family:'Space Grotesk';font-size:46px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:12px}
+  .step h3{font-size:19px;margin-bottom:8px;position:relative}
+  .step p{font-size:14px;color:var(--muted);position:relative}
+  @media(max-width:860px){.steps{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:480px){.steps{grid-template-columns:1fr}}
+
+  /* TOOLS */
+  .tools{display:flex;flex-wrap:wrap;gap:14px;margin-top:44px}
+  .tool{padding:11px 21px;border:1px solid var(--line);border-radius:100px;font-size:14px;color:var(--muted);background:var(--panel);transition:.3s;cursor:default}
+  .tool:hover{color:var(--txt);border-color:var(--accent3);transform:translateY(-3px);box-shadow:0 8px 22px rgba(0,229,255,.12)}
+
+  /* CTA */
+  .cta{margin:40px 24px 70px;border-radius:34px;padding:88px 40px;text-align:center;background:radial-gradient(circle at 50% -10%,rgba(124,92,255,.32),transparent 60%),radial-gradient(circle at 50% 120%,rgba(255,77,157,.2),transparent 55%),var(--panel);border:1px solid var(--line2);position:relative;overflow:hidden}
+  .cta h2{font-size:clamp(30px,5vw,58px);font-weight:700;letter-spacing:-1.4px;margin-bottom:18px;line-height:1.05}
+  .cta p{color:var(--muted);max-width:500px;margin:0 auto 34px;font-size:17px}
+  .cta .contacts{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;margin-top:34px;font-size:14px;color:var(--muted)}
+  .cta .contacts a{transition:.25s}
+  .cta .contacts a:hover{color:var(--accent3)}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:56px 0 40px}
+  .foot-grid{display:flex;justify-content:space-between;align-items:flex-start;gap:32px;flex-wrap:wrap}
+  .foot-brand .logo{margin-bottom:12px}
+  .foot-brand p{color:var(--muted);font-size:14px;max-width:300px}
+  .foot-social{display:flex;gap:22px;font-size:14px;color:var(--muted)}
+  .foot-social a{transition:.25s}
+  .foot-social a:hover{color:var(--txt)}
+  .foot-copy{margin-top:44px;padding-top:24px;border-top:1px solid var(--line);color:var(--muted2);font-size:13px;text-align:center}
+
+  .reveal{opacity:0;transform:translateY(34px);transition:.8s cubic-bezier(.2,.8,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<nav id="nav"><div class="wrap">
+  <div class="logo"><span class="dot"></span>KHOI.</div>
+  <div class="navlinks">
+    <a href="#about">Về tôi</a><a href="#work">Showreel</a><a href="#cases">Case Study</a><a href="#process">Quy trình</a><a href="#tools">Công nghệ</a><a href="#contact">Liên hệ</a>
+  </div>
+  <button class="btn" onclick="location.href='#contact'">Làm việc cùng tôi</button>
+</div></nav>
+
+<!-- HERO -->
+<header class="hero" id="hero">
+  <div class="hero-stage"><div class="hero-bg"></div></div>
+  <div class="hero-grade"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-scan"></div>
+  <div class="hero-particles" id="heroParticles"></div>
+
+  <div class="hero-frame tl"><span class="corner"></span><span class="rec"><span class="rd"></span>REC · 24 FPS</span></div>
+  <div class="hero-frame tr"><span class="corner"></span>KHOI · STUDIO 2026</div>
+  <div class="hero-frame bl"><span class="corner"></span>ISO 800 · f/1.8 · 35mm</div>
+  <div class="hero-frame br"><span class="corner"></span><span id="tcode">00:00:00:00</span></div>
+
+  <div class="wrap">
+    <span class="badge"><span class="pulse"></span>AI Filmmaker & Creative Director · TP.HCM</span>
+    <div class="greet">Xin chào, tôi là <b>Khôi</b> 👋</div>
+    <h1>
+      <span class="line"><span>Tôi dựng những</span></span>
+      <span class="line"><span>thước phim</span></span>
+      <span class="line"><span class="grad-txt">chưa từng tồn tại.</span></span>
+    </h1>
+    <p>8 năm cầm máy quay TVC, giờ tôi làm phim bằng AI. Kết hợp con mắt điện ảnh cổ điển với Sora, Runway và Kling — để biến những ý tưởng "không thể quay thật" thành hình ảnh thật đến từng khung hình.</p>
+    <div class="hero-cta">
+      <button class="btn btn-lg" onclick="location.href='#work'">Xem showreel 2026 →</button>
+      <div class="play-reel" onclick="location.href='#work'">
+        <span class="ring"><span>▶</span></span>
+        <span>Xem showreel<small>2 phút · 2026</small></span>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="n grad-txt">8+</div><div class="l">Năm trong nghề phim</div></div>
+      <div class="stat"><div class="n grad-txt">120+</div><div class="l">Dự án AI đã giao</div></div>
+      <div class="stat"><div class="n grad-txt">52M</div><div class="l">Lượt xem tích lũy</div></div>
+      <div class="stat"><div class="n grad-txt">18</div><div class="l">Quốc gia client</div></div>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>Cuộn xuống</span><span class="mouse"><i></i></span></div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="reveal"><div class="eyebrow">Về tôi</div></div>
+    <div class="about-grid">
+      <div class="about-photo reveal">
+        <div class="glow"></div>
+        <div class="frame">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=700&q=80" alt="Đặng Minh Khôi">
+          <div class="chip">
+            <div>
+              <div class="nm">Đặng Minh Khôi</div>
+              <div class="rl">AI Filmmaker & DOP</div>
+            </div>
+            <div class="loc"><span class="d"></span>Sài Gòn</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-body reveal">
+        <h2>Từ sau ống kính máy quay <span class="grad-txt">đến dòng lệnh prompt</span>.</h2>
+        <p>Tôi bắt đầu nghề này năm 2015 với vai trò <b>DOP</b> — người đứng sau ánh sáng và bố cục cho những TVC lớn: nước giải khát, ngân hàng, xe hơi. Tôi mê cái cách một cú máy đúng có thể khiến người ta nín thở. Suốt 8 năm, tôi học cách "nhìn" một cảnh trước khi nó tồn tại.</p>
+        <p>Rồi năm <b>2023</b>, tôi xem một đoạn clip Runway. Rồi Sora. Và tôi hiểu ngay: cuộc chơi vừa thay đổi vĩnh viễn. Không phải AI thay thế người làm phim — mà là người làm phim <b>biết dùng AI</b> sẽ vượt xa phần còn lại. Tôi bán bớt đồ nghề, dành trọn một năm để làm chủ công cụ mới, và không nhìn lại.</p>
+        <p>Triết lý của tôi đơn giản: <b>công cụ có thể mới, nhưng ngôn ngữ điện ảnh thì vĩnh cửu.</b> AI cho tôi tự do dựng cảnh mà trước đây cần cả đoàn phim và ngân sách bảy con số — nhưng chính con mắt DOP mới quyết định khung hình nào chạm được vào cảm xúc.</p>
+        <p>Ngoài giờ làm, tôi sưu tầm ống kính vintage, nghiện cà phê phin đen và tin rằng mọi thương hiệu đều có một câu chuyện đáng để quay.</p>
+        <span class="sign">— Khôi.</span>
+        <div class="about-tags">
+          <span>Đạo diễn hình ảnh</span><span>AI Filmmaking</span><span>Color Grading điện ảnh</span><span>Storyboarding</span><span>Remote toàn cầu</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWREEL -->
+<section id="work">
+  <div class="wrap">
+    <div class="reveal"><div class="eyebrow">Showreel</div><h2 class="sec-title">Những khung hình biết kể chuyện</h2><p class="sec-sub">Tuyển chọn các dự án AI video nổi bật — từ TVC thương hiệu đến concept phim ngắn thử nghiệm. Mỗi clip là một bài toán hình ảnh riêng.</p></div>
+    <div class="reel">
+      <div class="clip reveal"><img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=800&q=80"><div class="play">▶</div><div class="ov"><span class="tag">TVC · Beauty</span><span class="ct">Aura — Chiến dịch mùa hè</span><span class="meta">Sora · Runway · 45s</span></div></div>
+      <div class="clip reveal"><img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=800&q=80"><div class="play">▶</div><div class="ov"><span class="tag">MV · Music</span><span class="ct">Neon Dreams</span><span class="meta">Kling · Luma · 3m20s</span></div></div>
+      <div class="clip reveal"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80" alt="Orbit 2049"><div class="play">▶</div><div class="ov"><span class="tag">Sci-fi · Concept</span><span class="ct">Orbit 2049</span><span class="meta">Sora · 90s</span></div></div>
+      <div class="clip reveal"><img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80"><div class="play">▶</div><div class="ov"><span class="tag">Product · Tech</span><span class="ct">Halo Earbuds</span><span class="meta">Runway Gen-4 · 30s</span></div></div>
+      <div class="clip reveal"><img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80"><div class="play">▶</div><div class="ov"><span class="tag">Fashion · Runway</span><span class="ct">Ethereal SS26</span><span class="meta">Kling · Midjourney · 60s</span></div></div>
+      <div class="clip reveal"><img src="https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?auto=format&fit=crop&w=800&q=80"><div class="play">▶</div><div class="ov"><span class="tag">Travel · Film</span><span class="ct">Wanderlight</span><span class="meta">Luma · Sora · 2m</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section id="cases">
+  <div class="wrap">
+    <div class="reveal"><div class="eyebrow">Case Study</div><h2 class="sec-title">Đằng sau những dự án tôi tự hào nhất</h2><p class="sec-sub">Không chỉ là kết quả đẹp — mà là cách chúng tôi giải một bài toán tưởng chừng bất khả thi. Đây là hai câu chuyện tôi hay kể nhất khi gặp client mới.</p></div>
+
+    <!-- CASE 1 -->
+    <div class="case">
+      <div class="case-media reveal">
+        <span class="ribbon">TVC · Nước hoa</span>
+        <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=900&q=80" alt="Case study nước hoa">
+      </div>
+      <div class="case-body reveal">
+        <div class="case-h">"MAISON NOIR" — Chai nước hoa nở ra từ đại dương</div>
+        <div class="case-client">Client · Maison Noir Parfums (Pháp)</div>
+        <div class="case-block"><h4>Bối cảnh</h4><p>Một thương hiệu nước hoa cao cấp muốn ra mắt dòng sản phẩm mới với concept: hương thơm được sinh ra từ biển cả. Brief yêu cầu cảnh chai nước hoa <b>nổi lên giữa đại dương siêu thực</b>, sóng nước biến thành lụa, ánh sáng vàng lúc hoàng hôn.</p></div>
+        <div class="case-block"><h4>Thách thức</h4><p>Cảnh quay này gần như <b>không thể thực hiện thật</b>: dựng bể nước ngoài khơi, đồng bộ ánh sáng golden-hour, mô phỏng nước hóa lụa — báo giá từ hãng production truyền thống lên tới <b>1,8 tỷ đồng</b> và 6 tuần. Client chỉ có 3 tuần trước ngày launch.</p></div>
+        <div class="case-block"><h4>Cách tiếp cận</h4><p>Tôi storyboard toàn bộ 8 cảnh bằng Midjourney để chốt art-direction, sinh chuyển động bằng <b>Runway Gen-4 và Sora</b>, rồi ghép chai sản phẩm thật (quay studio) vào môi trường AI bằng compositing. Color grade theo tông "amber-teal điện ảnh" để giữ cảm giác cao cấp, không "giả AI".</p></div>
+        <div class="metrics">
+          <div class="metric"><div class="mv">−78%</div><div class="ml">Chi phí sản xuất</div></div>
+          <div class="metric"><div class="mv">11 ngày</div><div class="ml">Từ brief đến master</div></div>
+          <div class="metric"><div class="mv">4.2M</div><div class="ml">Views 2 tuần đầu</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE 2 -->
+    <div class="case flip">
+      <div class="case-media reveal">
+        <span class="ribbon">MV · Indie</span>
+        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=900&q=80" alt="Case study MV indie">
+      </div>
+      <div class="case-body reveal">
+        <div class="case-h">"LẠC" — MV điện ảnh cho ca sĩ indie ngân sách 0 đồng quay</div>
+        <div class="case-client">Client · Mây (nghệ sĩ độc lập)</div>
+        <div class="case-block"><h4>Bối cảnh</h4><p>Mây là một ca sĩ indie tự sản xuất. Bài hát "Lạc" nói về cảm giác cô đơn giữa thành phố. Cô muốn một MV <b>điện ảnh, phi tuyến tính</b> — nhân vật đi qua nhiều không gian siêu thực — nhưng ngân sách quay gần như bằng không.</p></div>
+        <div class="case-block"><h4>Thách thức</h4><p>Không kinh phí thuê bối cảnh, đoàn phim hay diễn viên. Nếu quay thật, riêng 5 bối cảnh (sa mạc, tàu điện ngầm ngập nước, rừng neon...) đã vượt xa khả năng. Đồng thời phải <b>giữ được gương mặt thật</b> của Mây để khán giả nhận ra cô.</p></div>
+        <div class="case-block"><h4>Cách tiếp cận</h4><p>Chúng tôi quay Mây trên phông xanh trong <b>một buổi chiều duy nhất</b>, rồi dùng Kling và Luma dựng 5 thế giới siêu thực bao quanh cô. Tôi xử lý ánh sáng để chân dung thật hòa vào nền AI, thêm hạt film và grade lạnh để tăng cảm giác cô đơn theo đúng tinh thần bài hát.</p></div>
+        <div class="metrics">
+          <div class="metric"><div class="mv">1,3 triệu</div><div class="ml">Views tháng đầu</div></div>
+          <div class="metric"><div class="mv">1 buổi</div><div class="ml">Quay thực tế</div></div>
+          <div class="metric"><div class="mv">Top 12</div><div class="ml">#nhaccua tôi trending</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="wrap">
+    <div class="reveal"><div class="eyebrow">Khách hàng nói gì</div><h2 class="sec-title">Niềm tin được đo bằng lần hợp tác thứ hai</h2></div>
+    <div class="quotes">
+      <div class="quote reveal">
+        <div class="mark">"</div>
+        <p>Khôi không làm việc như một "người AI". Anh tư duy như một đạo diễn thực thụ — hiểu nhịp, hiểu ánh sáng, hiểu thương hiệu. Chúng tôi giao anh trọn gói và chưa bao giờ thất vọng.</p>
+        <div class="who"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80"><div><div class="nm">Nguyễn Thảo Vy</div><div class="rl">Brand Director · Maison Noir Parfums</div></div></div>
+      </div>
+      <div class="quote reveal">
+        <div class="mark">"</div>
+        <p>Tôi tưởng MV trong mơ của mình là bất khả thi với ngân sách indie. Khôi biến nó thành hiện thực chỉ trong hai tuần, và còn đẹp hơn cả những gì tôi tưởng tượng. Anh cứu cả album của tôi.</p>
+        <div class="who"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=120&q=80"><div><div class="nm">Mây</div><div class="rl">Ca sĩ / Nhạc sĩ độc lập</div></div></div>
+      </div>
+      <div class="quote reveal">
+        <div class="mark">"</div>
+        <p>Làm việc remote qua nhiều múi giờ mà cảm giác như anh ngồi ngay trong phòng. Deadline gắt, brief đổi liên tục, Khôi vẫn giao đúng hẹn với chất lượng khiến sếp tôi phải chuyển tiếp cho cả tập đoàn xem.</p>
+        <div class="who"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=120&q=80"><div><div class="nm">Daniel Pham</div><div class="rl">Creative Lead · Halo Audio (Singapore)</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="wrap">
+    <div class="reveal"><div class="eyebrow">Quy trình</div><h2 class="sec-title">Từ brief đến master trong 4 bước</h2><p class="sec-sub">Một quy trình gọn nhưng kỷ luật — giữ tốc độ của AI mà không đánh mất sự chỉn chu của điện ảnh.</p></div>
+    <div class="steps">
+      <div class="step reveal"><div class="num">01</div><h3>Concept & Script</h3><p>Phân tích brief, xây moodboard và kịch bản phân cảnh. Chốt art-direction bằng AI storyboard trước khi tốn một giây render.</p></div>
+      <div class="step reveal"><div class="num">02</div><h3>AI Generation</h3><p>Sinh cảnh quay với Sora, Runway Gen-4, Kling — kiểm soát ánh sáng, ống kính và chuyển động như một DOP thật.</p></div>
+      <div class="step reveal"><div class="num">03</div><h3>Edit & Grade</h3><p>Dựng phim, color grading điện ảnh, compositing sản phẩm thật, sound design đồng bộ nhịp thương hiệu.</p></div>
+      <div class="step reveal"><div class="num">04</div><h3>Delivery</h3><p>Xuất đa định dạng cho mọi nền tảng, kèm biến thể A/B tối ưu quảng cáo và file master lưu trữ.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools">
+  <div class="wrap">
+    <div class="reveal"><div class="eyebrow">Bộ công cụ</div><h2 class="sec-title">Công nghệ đứng sau mỗi thước phim</h2><p class="sec-sub">Tôi chọn công cụ theo bài toán, không theo trào lưu. Đây là những cái tên tôi tin dùng mỗi ngày.</p>
+    <div class="tools">
+      <span class="tool">Sora</span><span class="tool">Runway Gen-4</span><span class="tool">Kling AI</span><span class="tool">Luma Dream Machine</span><span class="tool">Midjourney</span><span class="tool">ElevenLabs</span><span class="tool">Suno</span><span class="tool">DaVinci Resolve</span><span class="tool">After Effects</span><span class="tool">Topaz Video AI</span><span class="tool">Nuke</span><span class="tool">Premiere Pro</span>
+    </div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta reveal" id="contact">
+  <div class="eyebrow" style="justify-content:center">Liên hệ</div>
+  <h2>Bạn có một ý tưởng<br>"không thể quay được"?</h2>
+  <p>Đó chính xác là loại dự án tôi thích nhất. Kể tôi nghe — chúng ta sẽ cùng biến nó thành hiện thực điện ảnh.</p>
+  <button class="btn" onclick="location.href='mailto:khoi@khoifilms.studio'">Bắt đầu dự án →</button>
+  <div class="contacts">
+    <a href="mailto:khoi@khoifilms.studio">khoi@khoifilms.studio</a>
+    <a href="#">Instagram @khoi.films</a>
+    <a href="#">YouTube / KHOI Studio</a>
+    <a href="#">Vimeo</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo"><span class="dot"></span>KHOI.</div>
+        <p>AI Filmmaker & Creative Director. Sản xuất tại Sài Gòn, làm việc với thế giới.</p>
+      </div>
+      <div class="foot-social">
+        <a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Vimeo</a><a href="#">LinkedIn</a><a href="mailto:khoi@khoifilms.studio">Email</a>
+      </div>
+    </div>
+    <div class="foot-copy">© 2026 Đặng Minh Khôi · KHOI. Films Studio · Thiết kế & sản xuất tại TP.HCM</div>
+  </div>
+</footer>
+
+<script>
+  // scroll reveal
+  const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%3*.09)+'s';io.observe(el)});
+  // nav bg on scroll
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
+
+  /* ===== HERO enhancements ===== */
+  const reduceMotion=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  // floating light particles
+  const pc=document.getElementById('heroParticles');
+  if(pc&&!reduceMotion&&innerWidth>860){
+    const N=18;let html='';
+    for(let i=0;i<N;i++){
+      const left=Math.random()*100,dur=9+Math.random()*11,delay=-Math.random()*20,size=2+Math.random()*3;
+      html+=`<i style="left:${left}%;width:${size}px;height:${size}px;animation-duration:${dur}s;animation-delay:${delay}s"></i>`;
+    }
+    pc.innerHTML=html;
+  }
+
+  // parallax: bg + content move at different speeds (rAF-throttled)
+  const stage=document.querySelector('.hero-stage'),
+        heroWrap=document.querySelector('.hero .wrap'),
+        hero=document.getElementById('hero');
+  let ticking=false;
+  function parallax(){
+    ticking=false;
+    const y=scrollY;
+    if(y>innerHeight)return; // stop once hero is off-screen
+    if(stage) stage.style.transform=`translate3d(0,${y*0.35}px,0)`;
+    if(heroWrap){heroWrap.style.transform=`translate3d(0,${y*0.16}px,0)`;heroWrap.style.opacity=String(Math.max(0,1-y/(innerHeight*0.8)));}
+  }
+  if(!reduceMotion){
+    addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(parallax);}},{passive:true});
+  }
+
+  // running film timecode
+  const tc=document.getElementById('tcode');
+  if(tc&&!reduceMotion){
+    let f=0;
+    setInterval(()=>{
+      f++;const fr=f%24,s=Math.floor(f/24)%60,m=Math.floor(f/1440)%60,h=Math.floor(f/86400)%24;
+      const p=n=>String(n).padStart(2,'0');
+      tc.textContent=`${p(h)}:${p(m)}:${p(s)}:${p(fr)}`;
+    },1000/24);
+  }
+</script>
+</body>
+</html>

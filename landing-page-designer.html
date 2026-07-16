@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NAM° — Landing Page & Conversion Designer</title>
+<meta name="description" content="Trần Hoàng Nam — Landing Page & Conversion Designer. Thiết kế trang đích tối giản, tối ưu chuyển đổi cho startup & SaaS.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f5f2; --ink:#16150f; --muted:#75736a; --line:#e2e0d8;
+    --accent:#4b3bff; --paper:#fffef9; --faint:#efeee9;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+    --grid:rgba(22,21,15,.045);      /* blueprint grid line on light */
+    --grid-strong:rgba(22,21,15,.07);
+    --acc-line:rgba(75,59,255,.5);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;position:relative}
+  /* ==== BLUEPRINT GRID — very faint engineering paper across the page ==== */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      linear-gradient(var(--grid) 1px,transparent 1px),
+      linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:64px 64px;
+    -webkit-mask-image:radial-gradient(ellipse 120% 90% at 50% 0%,#000 55%,transparent 100%);
+    mask-image:radial-gradient(ellipse 120% 90% at 50% 0%,#000 55%,transparent 100%);
+  }
+  body>*{position:relative;z-index:1}
+  .serif{font-family:'Playfair Display',serif;font-weight:400}
+  .mono{font-family:var(--mono)}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--accent);color:#fff}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 40px}
+  @media(max-width:640px){.wrap{padding:0 24px}}
+
+  /* ==== BLUEPRINT PRIMITIVES ==== */
+  /* corner ticks — drafting-style bracket marks on key blocks */
+  .tick{position:relative}
+  .tick::before,.tick::after{content:"";position:absolute;width:11px;height:11px;pointer-events:none;z-index:3;opacity:.5}
+  .tick::before{top:-1px;left:-1px;border-top:1px solid var(--accent);border-left:1px solid var(--accent)}
+  .tick::after{bottom:-1px;right:-1px;border-bottom:1px solid var(--accent);border-right:1px solid var(--accent)}
+  .tick-4{position:relative}
+  .tick-4 span.cnr{position:absolute;width:10px;height:10px;pointer-events:none;z-index:3;opacity:.55}
+  .tick-4 span.tl{top:-1px;left:-1px;border-top:1px solid var(--accent);border-left:1px solid var(--accent)}
+  .tick-4 span.tr{top:-1px;right:-1px;border-top:1px solid var(--accent);border-right:1px solid var(--accent)}
+  .tick-4 span.bl{bottom:-1px;left:-1px;border-bottom:1px solid var(--accent);border-left:1px solid var(--accent)}
+  .tick-4 span.br{bottom:-1px;right:-1px;border-bottom:1px solid var(--accent);border-right:1px solid var(--accent)}
+  /* technical coordinate / figure labels */
+  .fig{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;font-weight:500}
+  .fig .ac{color:var(--accent)}
+  /* dimension line: leader with end-ticks */
+  .dimline{font-family:var(--mono);font-size:10.5px;letter-spacing:1px;color:var(--muted);display:inline-flex;align-items:center;gap:8px;text-transform:uppercase}
+  .dimline::before{content:"";width:34px;height:1px;background:var(--line);position:relative}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(246,245,242,.72);backdrop-filter:blur(16px);border-bottom:1px solid transparent;transition:.4s}
+  nav.scrolled{border-bottom:1px solid var(--line);background:rgba(246,245,242,.9)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:78px}
+  .logo{font-family:'Playfair Display';font-size:27px;letter-spacing:.5px;display:flex;align-items:baseline;gap:1px}
+  .logo b{font-weight:400}.logo i{font-style:normal;color:var(--accent)}
+  .navlinks{display:flex;gap:34px;font-family:var(--mono);font-size:12.5px;letter-spacing:.3px;color:var(--muted);font-weight:500}
+  .navlinks a{position:relative;transition:.25s}
+  .navlinks a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:1px;background:var(--accent);transition:.3s}
+  .navlinks a:hover{color:var(--ink)}
+  .navlinks a:hover::after{width:100%}
+  .btn{background:var(--ink);color:var(--paper);padding:13px 26px;border-radius:9px;font-weight:500;font-size:13px;border:none;cursor:pointer;transition:.3s;font-family:var(--mono);letter-spacing:.3px}
+  .btn:hover{background:var(--accent);transform:translateY(-2px)}
+  @media(max-width:860px){.navlinks{display:none}}
+
+  /* ============ HERO — EDITORIAL GRID, REBUILT ============ */
+  .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:132px 0 0;overflow:hidden}
+  .hero .wrap{position:relative;z-index:2;width:100%}
+
+  /* two-column disciplined grid: copy left, mockup right */
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) clamp(300px,30vw,392px);gap:clamp(40px,5vw,80px);align-items:center}
+
+  /* eyebrow / label row */
+  .hero .num{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:26px;display:flex;align-items:center;gap:14px;font-weight:500}
+  .hero .num::before{content:"";width:48px;height:1px;background:var(--muted)}
+  .hero .num b{color:var(--accent);font-weight:600}
+  .hero .greet{font-family:'Playfair Display';font-size:clamp(19px,2.4vw,26px);color:var(--muted);margin-bottom:18px;font-style:italic}
+  .hero .greet b{font-style:normal;color:var(--ink);font-weight:400}
+
+  /* giant staggered-reveal headline — width bounded to its own column */
+  .hero h1{font-family:'Playfair Display';font-size:clamp(44px,6.4vw,88px);line-height:1.03;letter-spacing:-1px;font-weight:500}
+  .hero h1 i{font-style:italic;color:var(--accent)}
+  .hero h1 .ln{display:block;overflow:hidden;padding-bottom:.05em}
+  .hero h1 .ln > span{display:block;transform:translateY(112%);transition:transform 1.15s cubic-bezier(.16,1,.3,1)}
+  .hero.lit h1 .ln > span{transform:translateY(0)}
+  .hero h1 .ln:nth-child(1) > span{transition-delay:.18s}
+  .hero h1 .ln:nth-child(2) > span{transition-delay:.32s}
+  .hero h1 .ln:nth-child(3) > span{transition-delay:.46s}
+
+  /* soft fade-up for supporting hero bits */
+  .hero .fade{opacity:0;transform:translateY(22px);transition:opacity 1s ease,transform 1.1s cubic-bezier(.16,1,.3,1)}
+  .hero.lit .fade{opacity:1;transform:none}
+  .hero.lit .fade.d1{transition-delay:.72s}
+  .hero.lit .fade.d2{transition-delay:.86s}
+  .hero.lit .fade.d3{transition-delay:1s}
+
+  .hero p{font-size:17px;color:var(--muted);max-width:46ch;line-height:1.66;margin-top:clamp(30px,4vw,42px)}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
+  .btn-line{padding:13px 26px;border:1px solid var(--ink);border-radius:9px;font-family:var(--mono);font-weight:500;font-size:13px;letter-spacing:.3px;transition:.3s;display:inline-flex;align-items:center;gap:8px}
+  .btn-line:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px)}
+  .avail{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;letter-spacing:.3px;color:var(--muted);margin-top:26px;border:1px solid var(--line);padding:8px 14px;border-radius:100px;background:var(--paper)}
+  .dot{width:8px;height:8px;border-radius:50%;background:#3fbf6b;box-shadow:0 0 0 0 rgba(63,191,107,.5);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(63,191,107,.5)}70%{box-shadow:0 0 0 8px rgba(63,191,107,0)}100%{box-shadow:0 0 0 0 rgba(63,191,107,0)}}
+
+  /* mockup — in-flow grid cell, never overlaps copy */
+  .hero-shot{position:relative;z-index:1;width:100%;aspect-ratio:3/4;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 40px 90px -34px rgba(22,21,15,.34),0 8px 24px -12px rgba(22,21,15,.16);background:var(--paper);opacity:0;transform:translateY(28px) scale(.97);transition:opacity 1.2s ease .5s,transform 1.4s cubic-bezier(.16,1,.3,1) .5s}
+  .hero.lit .hero-shot{opacity:1;transform:none}
+  .hero-shot::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(75,59,255,.08),transparent 55%);pointer-events:none}
+  .hero-shot img{width:100%;height:100%;object-fit:cover;filter:grayscale(6%) contrast(1.02);display:block}
+  .hero-shot .tag{position:absolute;left:14px;bottom:14px;z-index:2;font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#fff;background:rgba(22,21,15,.5);backdrop-filter:blur(6px);padding:6px 12px;border-radius:6px}
+  /* blueprint coord readout pinned top-left of the mockup */
+  .hero-shot .coord{position:absolute;top:12px;left:12px;z-index:2;font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;color:#fff;background:rgba(75,59,255,.82);padding:4px 8px;border-radius:5px}
+  /* faint accent ordinal tucked behind the mockup, contained */
+  .hero-shot .ord{position:absolute;top:-.34em;right:-.06em;z-index:-1;font-family:'Playfair Display';font-size:34vw;line-height:.7;color:var(--accent);opacity:.06;pointer-events:none;user-select:none}
+
+  /* editorial statement line beneath grid */
+  .hero-state{margin-top:clamp(46px,6vw,78px);padding-top:clamp(30px,4vw,44px);border-top:1px solid var(--line);display:flex;align-items:baseline;gap:22px;flex-wrap:wrap}
+  .hero-state .lbl{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);flex-shrink:0}
+  .hero-state .st{font-family:'Playfair Display';font-size:clamp(20px,2.5vw,30px);line-height:1.28;font-weight:400;max-width:30ch}
+  .hero-state .st i{font-style:italic;color:var(--accent)}
+
+  /* marquee — sits GONE-CLEAN at foot of hero, no overlap */
+  .strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:24px 0;overflow:hidden;white-space:nowrap;position:relative;z-index:2}
+  .hero .strip{margin-top:clamp(50px,6vw,84px)}
+  .strip .t{display:inline-block;animation:sc 34s linear infinite}
+  .strip:hover .t{animation-play-state:paused}
+  .strip .t span{font-family:var(--mono);font-size:15px;letter-spacing:1.5px;text-transform:uppercase;margin:0 28px;color:var(--muted)}
+  @keyframes sc{to{transform:translateX(-50%)}}
+
+  @media(max-width:960px){
+    .hero-grid{grid-template-columns:1fr;gap:clamp(38px,7vw,54px)}
+    .hero-shot{max-width:360px;aspect-ratio:16/11}
+    .hero-shot .ord{font-size:60vw;top:-.28em}
+  }
+  @media(max-width:640px){
+    .hero{padding:120px 0 0}
+    .hero-shot{max-width:100%;aspect-ratio:4/3}
+    .hero-state .st{font-size:20px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .hero h1 .ln > span{transform:none;transition:none}
+    .hero .fade,.hero-shot{opacity:1;transform:none;transition:none}
+    .dot{animation:none}
+    .strip .t{animation:none}
+  }
+
+  section{padding:118px 0;position:relative}
+
+  /* ====== EDITORIAL SECTION HEADER — big index + oversized title ====== */
+  .lead{display:grid;grid-template-columns:1fr 1.5fr;gap:64px;align-items:start;position:relative}
+  .lead .k{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:12px}
+  .lead .k::before{content:attr(data-no);font-family:var(--mono);font-size:12px;color:var(--ink);opacity:.7;letter-spacing:.5px;font-weight:500}
+  .lead h2{font-family:'Playfair Display';font-size:clamp(34px,5.2vw,64px);line-height:1.02;font-weight:400;letter-spacing:-1px;margin-top:16px}
+  .lead h2 i{font-style:italic;color:var(--accent)}
+  .lead p{color:var(--muted);font-size:17px}
+  @media(max-width:860px){.lead{grid-template-columns:1fr;gap:24px}}
+
+  /* giant faint section ordinal watermark */
+  .sec-ord{position:absolute;top:-.28em;right:-1vw;font-family:'Playfair Display';font-style:italic;font-size:clamp(180px,26vw,360px);line-height:.7;color:var(--ink);opacity:.035;pointer-events:none;user-select:none;z-index:0;letter-spacing:-.04em}
+  #cases .sec-ord,#about .sec-ord{opacity:.045}
+  @media(max-width:860px){.sec-ord{font-size:34vw;top:-.15em}}
+
+  /* ABOUT */
+  #about{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:72px;align-items:center}
+  .about-photo{position:relative}
+  .about-photo .frame{border-radius:18px;overflow:hidden;aspect-ratio:4/5;border:1px solid var(--line);box-shadow:0 30px 70px rgba(22,21,15,.14);position:relative}
+  /* dimension marks flanking the portrait */
+  .about-photo .dim{position:absolute;font-family:var(--mono);font-size:10px;letter-spacing:.5px;color:var(--muted);z-index:2}
+  .about-photo .dim.dv{top:0;bottom:0;left:-26px;writing-mode:vertical-rl;display:flex;align-items:center;justify-content:center;gap:8px}
+  .about-photo .dim.dv::before,.about-photo .dim.dv::after{content:"";width:1px;flex:1;background:var(--line)}
+  @media(max-width:860px){.about-photo .dim.dv{display:none}}
+  .about-photo .frame img{width:100%;height:100%;object-fit:cover;filter:grayscale(12%) contrast(1.02)}
+  .about-photo .sig{position:absolute;bottom:-22px;right:-14px;background:var(--ink);color:var(--paper);padding:18px 26px;border-radius:14px;box-shadow:0 20px 44px rgba(22,21,15,.28)}
+  .about-photo .sig .name{font-family:'Playfair Display';font-size:26px;line-height:1}
+  .about-photo .sig .role{font-family:var(--mono);font-size:11px;color:#b8b6ad;letter-spacing:1px;text-transform:uppercase;margin-top:6px}
+  .about-copy .k{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:12px}
+  .about-copy .k::before{content:attr(data-no);font-family:var(--mono);font-size:12px;color:var(--ink);opacity:.7;letter-spacing:.5px;font-weight:500}
+  .about-copy h2{font-family:'Playfair Display';font-size:clamp(30px,4vw,50px);line-height:1.08;font-weight:400;letter-spacing:-.6px;margin:16px 0 26px}
+  .about-copy h2 i{font-style:italic;color:var(--accent)}
+  .about-copy p{color:var(--muted);font-size:17px;margin-bottom:20px;max-width:56ch}
+  .about-copy p strong{color:var(--ink);font-weight:500}
+  .about-copy .quote{font-family:'Playfair Display';font-size:clamp(22px,2.6vw,30px);color:var(--ink);line-height:1.3;margin:34px 0;padding-left:26px;border-left:2px solid var(--accent);font-style:italic}
+  .about-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+  .about-tags span{font-family:var(--mono);font-size:12px;letter-spacing:.3px;color:var(--muted);border:1px solid var(--line);padding:8px 15px;border-radius:6px;background:var(--bg);transition:.3s}
+  .about-tags span:hover{border-color:var(--acc-line);color:var(--ink)}
+  .about-tags span::before{content:"§ ";color:var(--accent);opacity:.7}
+  @media(max-width:860px){.about-grid{grid-template-columns:1fr;gap:60px}.about-photo{max-width:400px}}
+
+  /* work list */
+  .works{margin-top:32px}
+  .work{display:grid;grid-template-columns:92px 1fr 1.3fr auto;gap:32px;align-items:center;padding:34px 0;border-top:1px solid var(--line);transition:.45s cubic-bezier(.2,.8,.2,1);position:relative;cursor:pointer}
+  .work:last-child{border-bottom:1px solid var(--line)}
+  .work::before{content:"";position:absolute;left:0;top:-1px;height:1px;width:0;background:var(--accent);transition:width .5s cubic-bezier(.16,1,.3,1);z-index:2}
+  .work:hover::before{width:100%}
+  .work:hover{padding-left:22px;background:linear-gradient(90deg,rgba(75,59,255,.04),transparent 70%)}
+  .work .idx{font-family:var(--mono);font-weight:500;font-size:20px;color:var(--muted);transition:.4s;letter-spacing:1px}
+  .work .idx::before{content:"[";color:var(--accent);opacity:.55}
+  .work .idx::after{content:"]";color:var(--accent);opacity:.55}
+  .work:hover .idx{color:var(--accent)}
+  .work .nm{font-family:'Playfair Display';font-size:clamp(24px,2.6vw,34px);font-weight:400;letter-spacing:-.4px;transition:.4s}
+  .work:hover .nm{transform:translateX(2px)}
+  .work .nm .cat{display:block;font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:500;letter-spacing:1px;text-transform:uppercase;margin-top:8px}
+  .work .desc{color:var(--muted);font-size:15px}
+  .work .go{font-size:20px;transition:.35s}
+  .work:hover .go{transform:translate(6px,-6px);color:var(--accent)}
+  .thumb{position:absolute;right:70px;top:50%;transform:translateY(-50%) scale(.88) rotate(-3deg);width:230px;height:158px;border-radius:14px;overflow:hidden;opacity:0;pointer-events:none;transition:.4s cubic-bezier(.2,.8,.2,1);box-shadow:0 24px 56px rgba(22,21,15,.28);z-index:5}
+  .work:hover .thumb{opacity:1;transform:translateY(-50%) scale(1) rotate(0)}
+  .thumb img{width:100%;height:100%;object-fit:cover}
+  @media(max-width:860px){.work{grid-template-columns:38px 1fr auto;gap:16px}.work .desc{display:none}.thumb{display:none}}
+
+  /* CASE STUDIES */
+  #cases{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .case{display:grid;grid-template-columns:1.05fr 1fr;gap:64px;align-items:center;margin-top:72px}
+  .case:first-of-type{margin-top:44px}
+  .case.rev{direction:rtl}.case.rev>*{direction:ltr}
+  .case-media{border-radius:18px;overflow:hidden;aspect-ratio:5/4;border:1px solid var(--line);box-shadow:0 26px 60px rgba(22,21,15,.12);position:relative}
+  .case-media img{width:100%;height:100%;object-fit:cover;transition:.6s}
+  .case:hover .case-media img{transform:scale(1.03)}
+  .case-media .tagpill{position:absolute;top:18px;left:18px;background:rgba(255,254,249,.92);backdrop-filter:blur(6px);padding:7px 13px;border-radius:6px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.5px;color:var(--ink)}
+  /* figure label bottom-right of case media */
+  .case-media .figlbl{position:absolute;bottom:14px;right:14px;font-family:var(--mono);font-size:10px;letter-spacing:.5px;color:#fff;background:rgba(22,21,15,.5);backdrop-filter:blur(6px);padding:4px 9px;border-radius:5px}
+  .case-body .co{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;font-weight:600}
+  .case-body h3{font-family:'Playfair Display';font-size:clamp(28px,3.4vw,42px);line-height:1.06;font-weight:400;letter-spacing:-.5px;margin:12px 0 8px}
+  .case-body .ctx{color:var(--muted);font-size:16px;margin-bottom:26px}
+  .cblock{margin-bottom:20px}
+  .cblock .lbl{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:7px}
+  .cblock .lbl::before{content:attr(data-f);color:var(--accent);opacity:.85;font-weight:500}
+  .cblock .lbl::after{content:"";width:16px;height:1px;background:var(--accent);order:3}
+  .cblock p{color:var(--muted);font-size:15.5px;line-height:1.62}
+  .ba{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;margin-top:30px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--bg);position:relative}
+  .ba .cell{padding:22px 20px;border-right:1px solid var(--line);position:relative}
+  .ba .cell:last-child{border-right:none}
+  .ba .cell .t{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+  .ba .cell .t::before{content:"›";color:var(--accent);opacity:.7}
+  .ba .cell .v{font-family:var(--mono);font-weight:600;font-size:30px;line-height:1;letter-spacing:-.5px;font-variant-numeric:tabular-nums}
+  .ba .cell.up .v{color:var(--accent)}
+  .ba .cell .sub{font-family:var(--mono);font-size:10.5px;letter-spacing:.3px;color:var(--muted);margin-top:8px}
+  /* thin progress bar under each value */
+  .ba .cell .bar{height:2px;background:var(--line);border-radius:2px;margin-top:12px;overflow:hidden}
+  .ba .cell .bar i{display:block;height:100%;background:var(--muted);width:var(--w,30%);border-radius:2px}
+  .ba .cell.up .bar i{background:var(--accent)}
+  @media(max-width:860px){.case,.case.rev{grid-template-columns:1fr;gap:34px;direction:ltr}.case-media{order:-1}}
+  @media(max-width:520px){.ba{grid-template-columns:1fr}.ba .cell{border-right:none;border-bottom:1px solid var(--line)}}
+
+  /* PROCESS */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:48px;border-top:1px solid var(--line)}
+  .step{padding:44px 26px 44px 0;border-right:1px solid var(--line);position:relative;overflow:hidden;transition:.4s}
+  .step:last-child{border-right:none;padding-right:0}
+  .step .bignum{position:absolute;top:-.14em;right:.06em;font-family:var(--mono);font-weight:600;font-size:96px;line-height:1;color:var(--ink);opacity:.055;pointer-events:none;transition:.5s;letter-spacing:-2px}
+  .step:hover .bignum{opacity:.12;color:var(--accent)}
+  .step .no{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--accent);letter-spacing:1px;text-transform:uppercase;margin-bottom:24px;position:relative;z-index:2}
+  .step h4{font-family:'Playfair Display';font-size:28px;font-weight:400;margin-bottom:14px;position:relative;z-index:2}
+  .step p{font-size:14.5px;color:var(--muted);line-height:1.6;position:relative;z-index:2}
+  @media(max-width:860px){.steps{grid-template-columns:1fr 1fr}.step{border-right:none;border-bottom:1px solid var(--line);padding:32px 0}.step:nth-child(odd){padding-right:26px;border-right:1px solid var(--line)}}
+  @media(max-width:520px){.steps{grid-template-columns:1fr}.step:nth-child(odd){padding-right:0;border-right:none}}
+
+  /* TESTIMONIALS */
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+  .qcard{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:36px 30px;display:flex;flex-direction:column;transition:.35s}
+  .qcard:hover{transform:translateY(-6px);box-shadow:0 24px 50px rgba(22,21,15,.1);border-color:#d6d4ca}
+  .qcard .mark{font-family:'Playfair Display';font-size:56px;line-height:.5;color:var(--accent);height:24px}
+  .qcard blockquote{font-size:16.5px;line-height:1.62;color:var(--ink);margin:20px 0 26px;flex:1}
+  .qcard .who{display:flex;align-items:center;gap:14px;border-top:1px solid var(--line);padding-top:22px}
+  .qcard .who img{width:46px;height:46px;border-radius:50%;object-fit:cover;filter:grayscale(10%)}
+  .qcard .who .n{font-weight:600;font-size:15px}
+  .qcard .who .r{font-family:var(--mono);font-size:11.5px;letter-spacing:.2px;color:var(--muted)}
+  @media(max-width:860px){.quotes{grid-template-columns:1fr}}
+
+  /* metrics */
+  .metrics{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--paper)}
+  .metrics .m{padding:46px 32px;border-right:1px solid var(--line)}
+  .metrics .m:last-child{border-right:none}
+  .metrics .m .n{font-family:var(--mono);font-weight:600;font-size:clamp(38px,4.4vw,54px);line-height:1;color:var(--accent);letter-spacing:-1.5px}
+  .metrics .m .l{color:var(--muted);margin-top:14px;font-size:14px}
+  @media(max-width:860px){.metrics{grid-template-columns:1fr 1fr}.metrics .m{border-right:none;border-bottom:1px solid var(--line)}.metrics .m:nth-child(odd){border-right:1px solid var(--line)}}
+  @media(max-width:520px){.metrics{grid-template-columns:1fr}.metrics .m:nth-child(odd){border-right:none}}
+
+  /* gallery */
+  .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+  .g{border-radius:16px;overflow:hidden;position:relative;aspect-ratio:3/4;border:1px solid var(--line)}
+  .g.wide{grid-column:span 2;aspect-ratio:16/10}
+  .g img{width:100%;height:100%;object-fit:cover;transition:.6s}
+  .g:hover img{transform:scale(1.06)}
+  .g .cap{position:absolute;left:0;bottom:0;right:0;padding:24px;background:linear-gradient(to top,rgba(22,21,15,.72),transparent);color:#fff}
+  .g .cap b{font-family:'Playfair Display';font-size:22px;font-weight:400}
+  .g .cap span{font-family:var(--mono);font-size:11px;letter-spacing:.3px;opacity:.85;display:block;margin-top:4px}
+  @media(max-width:720px){.gal{grid-template-columns:1fr}.g.wide{grid-column:span 1;aspect-ratio:3/4}}
+
+  /* CTA */
+  .cta{text-align:center;padding:150px 0 130px}
+  .cta .k{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;font-weight:600;margin-bottom:28px}
+  .cta{position:relative}
+  .cta .cord{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);font-family:'Playfair Display';font-style:italic;font-size:min(60vw,520px);line-height:.7;color:var(--accent);opacity:.05;pointer-events:none;user-select:none;z-index:0}
+  .cta>*{position:relative;z-index:1}
+  .cta h2{font-family:'Playfair Display';font-size:clamp(40px,8.4vw,108px);line-height:.96;font-weight:400;letter-spacing:-1.8px;margin-bottom:28px}
+  .cta h2 i{font-style:italic;color:var(--accent)}
+  .cta p{color:var(--muted);font-size:18px;max-width:460px;margin:0 auto 38px}
+  .cta .btn{padding:16px 34px;font-size:15px}
+
+  footer{border-top:1px solid var(--line);padding:56px 0}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;align-items:start}
+  .foot-grid .fl{font-family:'Playfair Display';font-size:30px;margin-bottom:12px}
+  .foot-grid .fl i{color:var(--accent);font-style:normal}
+  .foot-grid p{color:var(--muted);font-size:15px;max-width:34ch}
+  .foot-grid h5{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);margin-bottom:16px;font-weight:600}
+  .foot-grid .fcol a{display:block;color:var(--muted);font-size:14.5px;margin-bottom:11px;transition:.25s}
+  .foot-grid .fcol a:hover{color:var(--accent)}
+  .foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-top:52px;padding-top:26px;border-top:1px solid var(--line);color:var(--muted);font-family:var(--mono);font-size:11.5px;letter-spacing:.3px}
+  @media(max-width:720px){.foot-grid{grid-template-columns:1fr;gap:32px}}
+
+  /* ============ MANIFESTO — oversized statement, edge-to-edge ============ */
+  .manifesto{background:var(--ink);color:var(--paper);padding:clamp(120px,15vw,190px) 0;position:relative;overflow:hidden}
+  /* blueprint grid on the dark band */
+  .manifesto::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+    background-size:64px 64px;
+    -webkit-mask-image:radial-gradient(ellipse 90% 90% at 20% 30%,#000 40%,transparent 100%);
+    mask-image:radial-gradient(ellipse 90% 90% at 20% 30%,#000 40%,transparent 100%)}
+  .manifesto::selection,.manifesto ::selection{background:var(--accent);color:#fff}
+  .manifesto .mord{position:absolute;left:-2vw;bottom:-8vw;font-family:'Playfair Display';font-size:52vw;line-height:.7;color:#fff;opacity:.03;pointer-events:none;user-select:none;font-style:italic}
+  .manifesto .mtop{display:flex;align-items:center;gap:16px;font-family:var(--mono);font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;color:#8f8d84;margin-bottom:clamp(38px,5vw,64px);position:relative;z-index:2}
+  .manifesto .mtop::before{content:"";width:52px;height:1px;background:#3a382f}
+  .manifesto .big{font-family:'Playfair Display';font-weight:400;font-size:clamp(38px,7.4vw,104px);line-height:1.04;letter-spacing:-1.5px;max-width:20ch;position:relative;z-index:2}
+  .manifesto .big i{font-style:italic;color:#a99bff}
+  .manifesto .big .hl{position:relative;white-space:nowrap}
+  .manifesto .big .hl::after{content:"";position:absolute;left:-.06em;right:-.06em;bottom:.1em;height:.42em;background:var(--accent);z-index:-1;opacity:.9;border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform 1.1s cubic-bezier(.16,1,.3,1) .3s}
+  .manifesto.in .big .hl::after{transform:scaleX(1)}
+  .manifesto .msig{margin-top:clamp(40px,5vw,68px);display:flex;align-items:center;gap:16px;font-family:var(--mono);font-size:12.5px;letter-spacing:.3px;color:#b8b6ad;position:relative;z-index:2}
+  .manifesto .msig b{font-family:'Playfair Display';color:var(--paper);font-size:20px;font-weight:400}
+  .manifesto .msig .ln{width:44px;height:1px;background:#3a382f}
+  @media(prefers-reduced-motion:reduce){.manifesto .big .hl::after{transition:none;transform:scaleX(1)}}
+
+  /* ============ METRICS — big count-up, accent-inverted band ============ */
+  #results .lead h2 i{color:var(--accent)}
+  .metrics .m .n{font-variant-numeric:tabular-nums;letter-spacing:-1px}
+  .metrics .m{position:relative;transition:.4s}
+  .metrics .m::before{content:attr(data-mi);position:absolute;top:20px;right:22px;font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--muted);opacity:.55}
+  .metrics .m::after{content:"";position:absolute;top:22px;left:32px;width:14px;height:14px;border-top:1px solid var(--accent);border-left:1px solid var(--accent);opacity:.4}
+  .metrics .m:hover{background:linear-gradient(180deg,rgba(75,59,255,.05),transparent)}
+  /* thin baseline meter under each metric */
+  .metrics .m .meter{height:2px;background:var(--line);border-radius:2px;margin-top:16px;overflow:hidden;max-width:180px}
+  .metrics .m .meter i{display:block;height:100%;background:var(--accent);width:var(--w,60%);border-radius:2px;opacity:.7}
+
+  /* running underline util for links */
+  .ulink{position:relative;display:inline-flex;align-items:center;gap:8px}
+  .ulink::after{content:"";position:absolute;left:0;bottom:-3px;height:1px;width:100%;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+  .ulink:hover::after{transform:scaleX(1);transform-origin:left}
+
+  .reveal{opacity:0;transform:translateY(30px);transition:.8s cubic-bezier(.2,.8,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ==== blueprint responsive + reduced-motion niceties ==== */
+  @media(max-width:640px){
+    body::before{background-size:44px 44px}
+    .manifesto::before{background-size:44px 44px}
+    /* hide the most decorative technical labels when space is tight */
+    .fig.opt,.dimline.opt,.case-media .figlbl{display:none}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    .work::before,.ba .cell .bar i,.metrics .m .meter i{transition:none}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+<nav id="nav"><div class="wrap">
+  <div class="logo"><b>Nam</b><i>°</i></div>
+  <div class="navlinks"><a href="#about">Về tôi</a><a href="#work">Dự án</a><a href="#cases">Case study</a><a href="#process">Quy trình</a><a href="#contact">Liên hệ</a></div>
+  <button class="btn" onclick="location.href='#contact'">Bắt đầu dự án</button>
+</div></nav>
+
+<!-- HERO -->
+<header class="hero" id="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <!-- left column: copy -->
+      <div class="hero-copy">
+        <div class="num fade d1"><b>SEC—00</b> · Landing Page & Conversion Designer — Từ 2019</div>
+        <div class="greet fade d1">Xin chào, tôi là <b>Nam.</b></div>
+        <h1>
+          <span class="ln"><span>Tôi thiết kế</span></span>
+          <span class="ln"><span>trang đích <i>biến khách</i></span></span>
+          <span class="ln"><span>thành doanh thu.</span></span>
+        </h1>
+        <p class="fade d2">Landing page tối giản, có chủ đích — nơi mỗi khoảng trắng, mỗi dòng chữ đều dẫn người dùng đến quyết định. Tôi làm việc cùng startup & SaaS, bắt đầu từ tâm lý người dùng, không từ hình khối.</p>
+        <div class="avail fade d2"><span class="dot"></span> Còn nhận 2 dự án cho Quý III · 2026</div>
+        <div class="hero-cta fade d3">
+          <a href="#cases" class="btn-line">Xem case study ↗</a>
+          <button class="btn" onclick="location.href='#contact'">Đặt lịch call</button>
+        </div>
+      </div>
+
+      <!-- right column: mockup, in-flow -->
+      <figure class="hero-shot tick-4">
+        <span class="cnr tl"></span><span class="cnr tr"></span><span class="cnr bl"></span><span class="cnr br"></span>
+        <span class="ord" aria-hidden="true">°</span>
+        <span class="coord" aria-hidden="true">FIG.01 · x:392 y:auto</span>
+        <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=800&q=85" alt="Landing page mockup">
+        <span class="tag">Selected work · 26</span>
+      </figure>
+    </div>
+
+    <!-- editorial statement line -->
+    <div class="hero-state fade d3">
+      <span class="lbl">Triết lý</span>
+      <p class="st">Một trang đẹp làm người ta dừng lại. Một trang đúng làm người ta <i>hành động.</i></p>
+    </div>
+  </div>
+
+  <div class="strip"><div class="t">
+    <span>SaaS</span><span>·</span><span>Fintech</span><span>·</span><span>Startup</span><span>·</span><span>D2C Brand</span><span>·</span><span>B2B</span><span>·</span><span>E-commerce</span><span>·</span><span>SaaS</span><span>·</span><span>Fintech</span><span>·</span><span>Startup</span><span>·</span><span>D2C Brand</span><span>·</span><span>B2B</span><span>·</span><span>E-commerce</span><span>·</span>
+  </div></div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-ord" aria-hidden="true">01</div>
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-photo reveal">
+        <div class="frame tick-4"><span class="cnr tl"></span><span class="cnr tr"></span><span class="cnr bl"></span><span class="cnr br"></span><span class="dim dv">POR—01 · 4:5</span><img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&w=700&q=80" alt="Trần Hoàng Nam"></div>
+        <div class="sig"><div class="name">Nam°</div><div class="role">Conversion Designer</div></div>
+      </div>
+      <div class="about-copy reveal">
+        <span class="k" data-no="01 —">Về tôi</span>
+        <h2>Sáu năm trước, tôi tin rằng <i>đẹp là đủ.</i> Tôi đã sai.</h2>
+        <p>Tôi là <strong>Trần Hoàng Nam</strong>. Tôi khởi đầu như một web designer — theo đuổi bố cục cân đối, màu sắc tinh tế, những trang web mà tôi thấy tự hào. Nhưng rồi tôi nhận ra một sự thật khó chịu: nhiều trang đẹp nhất tôi từng làm lại <strong>không bán được gì</strong>. Khách vào, ngắm nghía, rồi rời đi.</p>
+        <p>Bước ngoặt đến khi một khách hàng hỏi tôi một câu đơn giản: <em>"Trang này đẹp thật, nhưng nó giúp tôi thêm bao nhiêu khách hàng?"</em> Tôi không trả lời được. Từ ngày đó, tôi chuyển hẳn sang <strong>conversion design</strong> — thiết kế lấy kết quả kinh doanh làm thước đo, không phải cảm giác thẩm mỹ của riêng tôi.</p>
+        <div class="quote">"Đẹp là điều kiện cần. Chuyển đổi mới là điều kiện đủ."</div>
+        <p>Cách làm việc của tôi điềm đạm và có phương pháp: tôi đọc dữ liệu, phỏng vấn người dùng, hiểu vì sao họ do dự — rồi mới cầm bút. Mỗi quyết định thiết kế đều có lý do đứng sau, và tôi luôn có thể giải thích nó bằng tâm lý người dùng hoặc mục tiêu kinh doanh. Tôi không theo trend; tôi theo dữ liệu.</p>
+        <div class="about-tags">
+          <span>Conversion Rate Optimization</span><span>Messaging & Positioning</span><span>A/B Testing</span><span>UX Writing</span><span>Design System</span><span>Webflow · Framer</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO — dark inverted statement -->
+<section class="manifesto reveal" aria-label="Tuyên ngôn thiết kế">
+  <div class="mord" aria-hidden="true">°</div>
+  <div class="wrap">
+    <div class="mtop">Triết lý thiết kế — Điều tôi tin</div>
+    <p class="big">Một trang đẹp làm người ta <i>dừng lại.</i> Một trang đúng làm người ta <span class="hl">hành động.</span></p>
+    <div class="msig"><span class="ln"></span> Trần Hoàng Nam — <b>Nam°</b></div>
+  </div>
+</section>
+
+<!-- WORK LIST -->
+<section class="wrap" id="work">
+  <div class="sec-ord" aria-hidden="true">02</div>
+  <div class="lead reveal" style="margin-bottom:24px"><div><span class="k" data-no="02 —">Dự án chọn lọc</span></div><div><h2>Một vài trang đích <i>gần đây</i></h2></div></div>
+  <div class="works">
+    <a class="work reveal"><span class="idx">01</span><span class="nm">Fluxpay<span class="cat">Fintech · SaaS</span></span><span class="desc">Trang ra mắt ví điện tử, tăng đăng ký dùng thử 3.2 lần.</span><span class="go">↗</span><div class="thumb"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=500&q=80" alt=""></div></a>
+    <a class="work reveal"><span class="idx">02</span><span class="nm">Orbit HR<span class="cat">B2B · SaaS</span></span><span class="desc">Landing thu hút demo cho phần mềm quản trị nhân sự.</span><span class="go">↗</span><div class="thumb"><img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=500&q=80" alt=""></div></a>
+    <a class="work reveal"><span class="idx">03</span><span class="nm">Verdant<span class="cat">D2C · Skincare</span></span><span class="desc">Trang bán hàng mỹ phẩm thuần chay, CVR đạt 8.4%.</span><span class="go">↗</span><div class="thumb"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=500&q=80" alt=""></div></a>
+    <a class="work reveal"><span class="idx">04</span><span class="nm">Lumen<span class="cat">Startup · Launch</span></span><span class="desc">Waitlist page thu 12.000 email trước ngày ra mắt.</span><span class="go">↗</span><div class="thumb"><img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=500&q=80" alt=""></div></a>
+    <a class="work reveal"><span class="idx">05</span><span class="nm">Northwind<span class="cat">SaaS · Analytics</span></span><span class="desc">Tái thiết kế trang chủ, giảm bounce rate xuống còn 34%.</span><span class="go">↗</span><div class="thumb"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500&q=80" alt=""></div></a>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section id="cases">
+  <div class="sec-ord" aria-hidden="true">03</div>
+  <div class="wrap">
+    <div class="lead reveal"><div><span class="k" data-no="03 —">Case study</span></div><div><h2>Khi thiết kế phải trả lời cho <i>doanh thu</i></h2><p style="margin-top:20px">Hai dự án kể lại đầy đủ hành trình: từ vấn đề kinh doanh, cách tôi tiếp cận, đến con số cuối cùng.</p></div></div>
+
+    <!-- CASE 1 -->
+    <article class="case reveal">
+      <div class="case-media"><span class="tagpill">Fintech · SaaS</span><span class="figlbl">FIG.02 · CASE—01</span><img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=900&q=80" alt="Fluxpay"></div>
+      <div class="case-body">
+        <div class="co">Fluxpay — Ví điện tử</div>
+        <h3>Tái cấu trúc thông điệp cho một ví điện tử mới ra mắt</h3>
+        <p class="ctx">Fluxpay là startup fintech gọi vốn vòng seed, cung cấp ví điện tử cho freelancer nhận thanh toán quốc tế. Sản phẩm tốt, nhưng trang đích cũ nói quá nhiều về tính năng, quá ít về lợi ích.</p>
+        <div class="cblock"><div class="lbl" data-f="§01">Thách thức</div><p>Tỷ lệ đăng ký dùng thử chỉ 1.4%. Bounce rate 71%. Hero cũ dùng câu "Nền tảng thanh toán đa tính năng" — mơ hồ, không ai hiểu nó giải quyết vấn đề gì. Người dùng rời trang trước cả khi cuộn.</p></div>
+        <div class="cblock"><div class="lbl" data-f="§02">Cách tiếp cận</div><p>Tôi phỏng vấn 14 freelancer để tìm nỗi đau thật: phí chuyển tiền cắt cổ và chờ đợi 3–5 ngày. Tôi viết lại hero thành lời hứa cụ thể, tái cấu trúc trang theo mạch "nỗi đau → giải pháp → bằng chứng → giá", đơn giản hóa bảng giá từ 4 gói xuống 2, và chạy A/B test hai phiên bản hero trong 3 tuần.</p></div>
+        <div class="cblock"><div class="lbl" data-f="§03">Kết quả</div><p>Phiên bản mới thắng rõ rệt. Tỷ lệ đăng ký dùng thử tăng 3.2 lần chỉ sau một chu kỳ test, bounce rate giảm mạnh, và chi phí trên mỗi đăng ký giảm gần một nửa.</p></div>
+        <div class="ba">
+          <div class="cell"><div class="t">Trước</div><div class="v">1.4%</div><div class="sub">Tỷ lệ đăng ký</div><div class="bar"><i style="--w:22%"></i></div></div>
+          <div class="cell up"><div class="t">Sau</div><div class="v">4.5%</div><div class="sub">Tỷ lệ đăng ký</div><div class="bar"><i style="--w:72%"></i></div></div>
+          <div class="cell up"><div class="t">Thay đổi</div><div class="v">+221%</div><div class="sub">CVR · 6 tuần</div><div class="bar"><i style="--w:100%"></i></div></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- CASE 2 -->
+    <article class="case rev reveal">
+      <div class="case-media"><span class="tagpill">B2B · SaaS</span><span class="figlbl">FIG.03 · CASE—02</span><img src="https://images.unsplash.com/photo-1531538606174-0f90ff5dce83?auto=format&fit=crop&w=900&q=80" alt="Orbit HR"></div>
+      <div class="case-body">
+        <div class="co">Orbit HR — Phần mềm nhân sự</div>
+        <h3>Biến một trang chủ ai cũng bỏ qua thành máy tạo demo</h3>
+        <p class="ctx">Orbit HR là SaaS B2B bán phần mềm quản trị nhân sự cho doanh nghiệp vừa. Đội sales đủ giỏi để chốt, nhưng phễu đầu vào cạn: rất ít người đặt lịch demo qua website.</p>
+        <div class="cblock"><div class="lbl" data-f="§01">Thách thức</div><p>Trang chủ liệt kê 20 tính năng theo kiểu catalog, không phân biệt Orbit với đối thủ. Nút "Đặt demo" nằm cuối trang. Tỷ lệ đặt demo chỉ 0.9%, và thời gian trên trang trung bình dưới 20 giây — người ta không đọc.</p></div>
+        <div class="cblock"><div class="lbl" data-f="§02">Cách tiếp cận</div><p>Tôi định vị lại Orbit quanh một lời hứa duy nhất: "Giảm 8 giờ giấy tờ nhân sự mỗi tuần." Tôi thiết kế lại hero với ảnh dashboard thật, đưa social proof (logo khách hàng, con số) lên nửa trên, thêm CTA đặt demo dạng sticky, và viết lại toàn bộ copy theo ngôn ngữ của người làm HR chứ không phải dân kỹ thuật.</p></div>
+        <div class="cblock"><div class="lbl" data-f="§03">Kết quả</div><p>Số lượt đặt demo qua website tăng gấp đôi trong tháng đầu tiên. Chất lượng lead cũng tốt hơn — sales phản hồi rằng khách đến demo đã hiểu sản phẩm là gì.</p></div>
+        <div class="ba">
+          <div class="cell"><div class="t">Trước</div><div class="v">0.9%</div><div class="sub">Tỷ lệ đặt demo</div><div class="bar"><i style="--w:18%"></i></div></div>
+          <div class="cell up"><div class="t">Sau</div><div class="v">2.4%</div><div class="sub">Tỷ lệ đặt demo</div><div class="bar"><i style="--w:56%"></i></div></div>
+          <div class="cell up"><div class="t">Tác động</div><div class="v">2.1×</div><div class="sub">Demo/tháng</div><div class="bar"><i style="--w:100%"></i></div></div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- METRICS -->
+<section class="wrap" id="results">
+  <div class="sec-ord" aria-hidden="true">04</div>
+  <div class="lead reveal" style="margin-bottom:40px"><div><span class="k" data-no="04 —">Kết quả</span></div><div><h2>Con số <i>nói thay</i> lời</h2></div></div>
+  <div class="metrics reveal">
+    <div class="m" data-mi="[01/04]"><div class="n" data-count="186" data-pre="+" data-suf="%">+186%</div><div class="l">Tỷ lệ chuyển đổi tăng trung bình</div><div class="meter"><i style="--w:92%"></i></div></div>
+    <div class="m" data-mi="[02/04]"><div class="n" data-count="40" data-suf="+">40+</div><div class="l">Landing page đã bàn giao</div><div class="meter"><i style="--w:70%"></i></div></div>
+    <div class="m" data-mi="[03/04]"><div class="n" data-count="0.9" data-dec="1" data-suf="s">0.9s</div><div class="l">Thời gian tải trung bình</div><div class="meter"><i style="--w:40%"></i></div></div>
+    <div class="m" data-mi="[04/04]"><div class="n" data-count="6">6</div><div class="l">Năm chuyên sâu conversion</div><div class="meter"><i style="--w:55%"></i></div></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="wrap">
+  <div class="sec-ord" aria-hidden="true">05</div>
+  <div class="lead reveal" style="margin-bottom:8px"><div><span class="k" data-no="05 —">Ảnh dự án</span></div><div><h2>Một góc <i>phòng làm việc</i></h2></div></div>
+  <div class="gal">
+    <div class="g wide reveal"><img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=900&q=80" alt=""><div class="cap"><b>Verdant</b><span>Product storytelling page</span></div></div>
+    <div class="g reveal"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=700&q=80" alt=""><div class="cap"><b>Lumen</b><span>Waitlist launch</span></div></div>
+    <div class="g reveal"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=700&q=80" alt=""><div class="cap"><b>Northwind</b><span>Dashboard hero</span></div></div>
+    <div class="g wide reveal"><img src="https://images.unsplash.com/photo-1481487196290-c152efe083f5?auto=format&fit=crop&w=900&q=80" alt=""><div class="cap"><b>Wireframe sprint</b><span>Từ ý tưởng đến bố cục</span></div></div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="wrap" id="process">
+  <div class="sec-ord" aria-hidden="true">06</div>
+  <div class="lead reveal"><div><span class="k" data-no="06 —">Quy trình làm việc</span></div><div><h2>Bốn bước, <i>không bước nào</i> bỏ qua</h2><p style="margin-top:20px">Thiết kế đẹp là kết quả cuối cùng, không phải điểm khởi đầu. Đây là cách tôi đi từ vấn đề đến kết quả.</p></div></div>
+  <div class="steps">
+    <div class="step reveal"><span class="bignum" aria-hidden="true">1</span><div class="no">01 — Research</div><h4>Nghiên cứu</h4><p>Đọc dữ liệu analytics, phỏng vấn người dùng, phân tích đối thủ và làm rõ mục tiêu kinh doanh. Tôi tìm nỗi đau thật và lý do người dùng do dự.</p></div>
+    <div class="step reveal"><span class="bignum" aria-hidden="true">2</span><div class="no">02 — Wireframe</div><h4>Phác thảo</h4><p>Cấu trúc thông điệp và luồng cuộn trước khi nghĩ đến màu sắc. Wireframe low-fi để chốt mạch kể chuyện: nỗi đau → giải pháp → bằng chứng → hành động.</p></div>
+    <div class="step reveal"><span class="bignum" aria-hidden="true">3</span><div class="no">03 — Design</div><h4>Thiết kế</h4><p>Giai đoạn hình khối: typography, khoảng trắng, hình ảnh, micro-interaction. Đẹp, nhanh, và mỗi chi tiết đều phục vụ mục tiêu chuyển đổi.</p></div>
+    <div class="step reveal"><span class="bignum" aria-hidden="true">4</span><div class="no">04 — Test</div><h4>Kiểm chứng</h4><p>A/B test hero, CTA, bảng giá. Đo lường, học từ dữ liệu, lặp lại. Thiết kế chỉ hoàn thành khi con số xác nhận nó hiệu quả.</p></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="wrap" id="voices">
+  <div class="sec-ord" aria-hidden="true">07</div>
+  <div class="lead reveal"><div><span class="k" data-no="07 —">Lời chứng thực</span></div><div><h2>Điều các founder <i>nói về tôi</i></h2></div></div>
+  <div class="quotes">
+    <div class="qcard reveal">
+      <div class="mark">"</div>
+      <blockquote>Nam không vẽ đẹp rồi thôi. Anh hỏi về khách hàng của tôi kỹ hơn cả tôi. Trang mới nhân đôi số đăng ký dùng thử — và tôi hiểu vì sao nó hoạt động.</blockquote>
+      <div class="who"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80" alt=""><div><div class="n">Đỗ Minh Khôi</div><div class="r">Founder & CEO, Fluxpay</div></div></div>
+    </div>
+    <div class="qcard reveal">
+      <div class="mark">"</div>
+      <blockquote>Điềm đạm, chiến lược và cực kỳ đáng tin. Mỗi quyết định thiết kế Nam đưa ra đều có lý do rõ ràng đứng sau. Lượt đặt demo của chúng tôi tăng gấp đôi.</blockquote>
+      <div class="who"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80" alt=""><div><div class="n">Nguyễn Thảo Vy</div><div class="r">Co-founder, Orbit HR</div></div></div>
+    </div>
+    <div class="qcard reveal">
+      <div class="mark">"</div>
+      <blockquote>Tôi đã làm việc với nhiều designer. Nam là người đầu tiên bắt đầu bằng câu hỏi về doanh thu, không phải về màu sắc. Đó là khác biệt đáng giá.</blockquote>
+      <div class="who"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=120&q=80" alt=""><div><div class="n">Lê Anh Tuấn</div><div class="r">CEO, Northwind Analytics</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta wrap" id="contact">
+  <div class="cord" aria-hidden="true">°</div>
+  <div class="k reveal">Còn nhận dự án Quý III · 2026</div>
+  <h2 class="reveal">Cùng dựng một trang <i>bán được hàng.</i></h2>
+  <p class="reveal">Tư vấn miễn phí 30 phút — cùng phác thảo hướng đi cho trang đích tiếp theo của bạn. Không cam kết, chỉ là một cuộc trò chuyện thẳng thắn.</p>
+  <button class="btn reveal" onclick="location.href='mailto:nam@namdesign.co'">Liên hệ với Nam →</button>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="fl">Nam<i>°</i></div>
+        <p>Landing Page & Conversion Designer. Thiết kế trang đích cho startup & SaaS muốn bán được nhiều hơn.</p>
+      </div>
+      <div class="fcol">
+        <h5>Liên hệ</h5>
+        <a href="mailto:nam@namdesign.co">nam@namdesign.co</a>
+        <a href="#contact">Đặt lịch call</a>
+      </div>
+      <div class="fcol">
+        <h5>Theo dõi</h5>
+        <a href="https://linkedin.com" target="_blank" rel="noopener"><span class="ulink">LinkedIn ↗</span></a>
+        <a href="https://twitter.com" target="_blank" rel="noopener"><span class="ulink">Twitter / X ↗</span></a>
+        <a href="https://dribbble.com" target="_blank" rel="noopener"><span class="ulink">Dribbble ↗</span></a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>© 2026 Trần Hoàng Nam · NAM° Studio</div>
+      <div>Thiết kế tại Việt Nam · Làm việc toàn cầu</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%3*.09)+'s';io.observe(el)});
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>20)},{passive:true});
+
+  /* ===== metrics count-up on view (rAF, no libs) ===== */
+  (function(){
+    const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+    const nums=[...document.querySelectorAll('.metrics .n[data-count]')];
+    const fmt=(v,dec)=>dec?v.toFixed(dec):Math.round(v).toString();
+    const run=el=>{
+      const end=parseFloat(el.dataset.count),dec=parseInt(el.dataset.dec||0),
+        pre=el.dataset.pre||'',suf=el.dataset.suf||'';
+      if(reduce){el.textContent=pre+fmt(end,dec)+suf;return;}
+      const dur=1500,t0=performance.now();
+      const step=now=>{
+        const p=Math.min(1,(now-t0)/dur),e=1-Math.pow(1-p,3);
+        el.textContent=pre+fmt(end*e,dec)+suf;
+        if(p<1)requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    const mio=new IntersectionObserver(es=>es.forEach(x=>{
+      if(x.isIntersecting){run(x.target);mio.unobserve(x.target);}
+    }),{threshold:.5});
+    nums.forEach(n=>mio.observe(n));
+  })();
+
+  /* ===== HERO reveal on load (staggered lines + fade-up + mockup) ===== */
+  (function(){
+    const hero=document.getElementById('hero');
+    if(!hero) return;
+    // trigger the .lit state next frame so transitions play from initial values
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      hero.classList.add('lit');
+    }));
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Demo — Bộ sưu tập</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#0a0a0f;color:#f4f4f8;font-family:'Inter',sans-serif;min-height:100vh;padding:60px 24px}
+  .wrap{max-width:1100px;margin:0 auto}
+  h1{font-family:'Space Grotesk';font-size:clamp(32px,5vw,52px);letter-spacing:-1px;margin-bottom:12px}
+  .sub{color:#9a9aae;font-size:18px;margin-bottom:50px;max-width:560px}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  a.card{display:block;border-radius:22px;overflow:hidden;border:1px solid rgba(255,255,255,.1);text-decoration:none;color:inherit;transition:.35s;position:relative}
+  a.card:hover{transform:translateY(-8px);border-color:rgba(255,255,255,.3)}
+  .card .top{height:160px;display:flex;align-items:center;justify-content:center;font-size:52px}
+  .c1 .top{background:linear-gradient(135deg,#7c5cff,#ff4d9d)}
+  .c2 .top{background:linear-gradient(135deg,#8b5cff,#38e8ff)}
+  .c3 .top{background:linear-gradient(135deg,#ff7a6b,#ffc94d)}
+  .c4 .top{background:linear-gradient(135deg,#4b3bff,#16150f)}
+  .card .body{padding:24px;background:#111119}
+  .card .who{display:block;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#7c5cff;margin-bottom:8px}
+  .card h3{font-family:'Space Grotesk';font-size:22px;margin-bottom:6px}
+  .card p{color:#9a9aae;font-size:14px}
+  .card .go{margin-top:16px;font-weight:600;font-size:14px;color:#7c5cff}
+  .foot{margin-top:50px;color:#6a6a7e;font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Bộ sưu tập Portfolio Demo</h1>
+  <p class="sub">Bốn trang portfolio — mỗi ngành một phong cách thiết kế riêng, tối ưu cho việc demo với khách hàng.</p>
+  <div class="grid">
+    <a class="card c1" href="ai-video-creator.html"><div class="top">🎬</div><div class="body"><span class="who">KHOI. · Đặng Minh Khôi</span><h3>AI Video Creator</h3><p>Cinematic · dark · gradient điện ảnh</p><div class="go">Xem trang →</div></div></a>
+    <a class="card c2" href="shortform-editor.html"><div class="top">✂️</div><div class="body"><span class="who">JADE · Nguyễn Ngọc Trân</span><h3>Short-form Video Editor</h3><p>Trẻ trung · bold · năng động (TikTok/Reels)</p><div class="go">Xem trang →</div></div></a>
+    <a class="card c3" href="ai-social-designer.html"><div class="top">🌸</div><div class="body"><span class="who">MY BLOOM · Lê Thảo My</span><h3>AI Social Media Designer</h3><p>Sáng · playful · bento layout</p><div class="go">Xem trang →</div></div></a>
+    <a class="card c4" href="landing-page-designer.html"><div class="top">°</div><div class="body"><span class="who">NAM° · Trần Hoàng Nam</span><h3>Landing Page Designer</h3><p>Tối giản · editorial · sang trọng</p><div class="go">Xem trang →</div></div></a>
+  </div>
+  <p class="foot">Mở file này trong trình duyệt để điều hướng cả 4 trang. Cần internet để tải ảnh Unsplash.</p>
+</div>
+</body>
+</html>

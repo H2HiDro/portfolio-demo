@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>bolt · Nến thơm thủ công</title>
+<meta name="description" content="bolt — nến thơm thủ công từ sáp đậu nành tự nhiên. Thắp sáng không gian, đánh thức cảm xúc.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f7f2ea; --paper:#fffdf9; --ink:#2b241d; --muted:#8a7f70;
+    --line:#e7ddce; --accent:#b8623a; --accent-d:#95492a; --sand:#efe6d6; --deep:#241d16;
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Be Vietnam Pro',sans-serif;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,.serif{font-family:'Fraunces',serif;font-weight:500}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+  @media(max-width:620px){.wrap{padding:0 20px}}
+  ::selection{background:var(--accent);color:#fff}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(247,242,234,.8);backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:.35s}
+  nav.scrolled{border-bottom:1px solid var(--line);background:rgba(247,242,234,.94)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{font-family:'Fraunces';font-weight:600;font-size:26px;letter-spacing:-.5px;display:flex;align-items:center;gap:9px}
+  .logo .spark{width:22px;height:22px;display:inline-flex}
+  .logo .spark svg{width:100%;height:100%}
+  .navlinks{display:flex;gap:34px;font-size:15px;color:var(--muted);font-weight:500}
+  .navlinks a{transition:.2s;position:relative}
+  .navlinks a:hover{color:var(--ink)}
+  .navlinks a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1.5px;background:var(--accent);transition:.28s}
+  .navlinks a:hover::after{width:100%}
+  .nav-cta{display:flex;align-items:center;gap:18px}
+  .cart{position:relative;cursor:pointer;color:var(--ink);display:flex}
+  .cart .badge{position:absolute;top:-7px;right:-9px;background:var(--accent);color:#fff;font-size:10px;font-weight:700;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Be Vietnam Pro'}
+  .btn{background:var(--ink);color:var(--paper);padding:11px 22px;border-radius:100px;font-weight:600;font-size:14px;border:none;cursor:pointer;transition:.4s var(--ease);font-family:inherit;display:inline-flex;align-items:center;gap:8px;position:relative;overflow:hidden}
+  .btn::after{content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);transform:skewX(-18deg);transition:.7s var(--ease)}
+  .btn:hover{background:var(--accent);transform:translateY(-2px);box-shadow:0 14px 30px -10px rgba(184,98,58,.55)}
+  .btn:hover::after{left:130%}
+  .btn.block{width:100%;justify-content:center;padding:15px}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
+  .burger span{width:24px;height:2px;background:var(--ink);border-radius:2px;transition:.3s}
+  @media(max-width:860px){.navlinks{display:none}.burger{display:flex}}
+
+  /* mobile drawer */
+  .drawer{position:fixed;inset:0;z-index:200;background:var(--bg);transform:translateX(100%);transition:.4s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;padding:28px}
+  .drawer.open{transform:none}
+  .drawer .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px}
+  .drawer .close{background:none;border:none;font-size:30px;cursor:pointer;color:var(--ink);line-height:1}
+  .drawer a{font-family:'Fraunces';font-size:30px;padding:16px 0;border-bottom:1px solid var(--line);color:var(--ink)}
+
+  /* film grain overlay — cực nhẹ cho chất phim */
+  .grain{position:fixed;inset:0;z-index:400;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+  /* ===== HERO — FULLSCREEN CINEMATIC ===== */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;background:var(--deep)}
+  /* ảnh nền phủ toàn màn hình */
+  .hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);animation:kb 24s ease-in-out infinite alternate;will-change:transform}
+  @keyframes kb{to{transform:scale(1.2) translateY(-2%)}}
+  /* lớp phủ tối điện ảnh + ánh nến ấm */
+  .hero-bg::after{content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(120% 90% at 50% 22%,rgba(233,168,120,.28),transparent 46%),
+      linear-gradient(180deg,rgba(20,15,11,.55) 0%,rgba(20,15,11,.15) 32%,rgba(20,15,11,.5) 68%,rgba(20,15,11,.92) 100%),
+      linear-gradient(90deg,rgba(20,15,11,.7),transparent 55%)}
+  /* quầng ánh nến nhấp nháy nhẹ */
+  .hero-candleglow{position:absolute;top:16%;left:50%;width:70vw;height:60vh;transform:translateX(-50%);z-index:1;pointer-events:none;
+    background:radial-gradient(circle at 50% 40%,rgba(255,196,140,.32),rgba(184,98,58,.12) 38%,transparent 64%);
+    filter:blur(40px);animation:flicker 6.5s ease-in-out infinite;mix-blend-mode:screen}
+  @keyframes flicker{0%,100%{opacity:.9;transform:translateX(-50%) scale(1)}30%{opacity:.72;transform:translateX(-50.5%) scale(1.02)}55%{opacity:1;transform:translateX(-49.6%) scale(.99)}78%{opacity:.8;transform:translateX(-50%) scale(1.015)}}
+
+  /* embers bay lên */
+  .embers{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+  .ember{position:absolute;bottom:-4%;width:6px;height:6px;border-radius:50%;
+    background:radial-gradient(circle,#ffd9a8,rgba(184,98,58,.5) 60%,transparent 72%);
+    opacity:0;filter:blur(.4px);animation:rise linear infinite}
+  @keyframes rise{0%{opacity:0;transform:translateY(0) translateX(0) scale(.6)}12%{opacity:.9}80%{opacity:.5}100%{opacity:0;transform:translateY(-92vh) translateX(30px) scale(1.1)}}
+
+  /* nội dung hero — căn dưới, chữ trắng khổng lồ */
+  .hero .wrap{position:relative;z-index:3;width:100%;padding-bottom:clamp(48px,7vh,88px);padding-top:120px}
+  .hero-copy{max-width:900px}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#f0c9a8;font-weight:600;margin-bottom:26px}
+  .eyebrow::before{content:"";width:34px;height:1px;background:#f0c9a8}
+  .hero h1{font-size:clamp(52px,8.4vw,120px);line-height:.98;letter-spacing:-2.5px;font-weight:500;margin-bottom:28px;color:#fff;text-shadow:0 4px 40px rgba(0,0,0,.4)}
+  .hero h1 .ln{display:block;overflow:hidden}
+  .hero h1 .ln>span{display:block;transform:translateY(105%);opacity:0;animation:lineUp 1.1s var(--ease) forwards}
+  .hero h1 .ln:nth-child(2)>span{animation-delay:.16s}
+  @keyframes lineUp{to{transform:none;opacity:1}}
+  .hero h1 em{font-style:italic;color:#e9a877}
+  .hero-copy .eyebrow,.hero-copy .lead,.hero-cta,.hero-note{opacity:0;animation:fadeUp 1s var(--ease) forwards}
+  .hero-copy .eyebrow{animation-delay:.05s}
+  .hero-copy .lead{animation-delay:.5s}
+  .hero-cta{animation-delay:.64s}
+  .hero-note{animation-delay:.78s}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  .hero .lead{font-size:clamp(16px,1.5vw,19px);color:rgba(255,253,249,.82);max-width:520px;margin-bottom:38px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:52px}
+  .hero .btn{background:#fff;color:var(--ink)}
+  .hero .btn:hover{background:var(--accent);color:#fff}
+  .btn-ghost{padding:13px 26px;border:1px solid rgba(255,255,255,.4);border-radius:100px;font-weight:600;font-size:14px;transition:.28s;background:rgba(255,255,255,.06);color:#fff;backdrop-filter:blur(6px)}
+  .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.14);transform:translateY(-2px)}
+  /* dải số liệu dưới cùng, phân cách bằng đường mảnh */
+  .hero-note{display:flex;gap:clamp(28px,5vw,64px);flex-wrap:wrap;padding-top:30px;border-top:1px solid rgba(255,255,255,.18)}
+  .hero-note .it{font-size:13px;color:rgba(255,253,249,.65);letter-spacing:.3px}
+  .hero-note .it b{display:block;font-family:'Fraunces';font-size:clamp(28px,3vw,40px);color:#fff;font-weight:600;margin-bottom:2px}
+  .hero-note .it b em{font-style:normal;color:#e9a877}
+
+  /* scroll cue */
+  .scroll-cue{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.6);font-size:11px;letter-spacing:2px;text-transform:uppercase}
+  .scroll-cue .rail{width:1px;height:38px;background:rgba(255,255,255,.3);position:relative;overflow:hidden}
+  .scroll-cue .rail::after{content:"";position:absolute;top:-14px;left:0;width:1px;height:14px;background:#e9a877;animation:railrun 2.4s ease-in-out infinite}
+  @keyframes railrun{0%{transform:translateY(0)}60%,100%{transform:translateY(52px)}}
+  @media(max-width:860px){.scroll-cue{display:none}}
+
+  /* MARQUEE */
+  .strip{background:var(--deep);color:var(--sand);padding:16px 0;overflow:hidden;white-space:nowrap}
+  .strip .t{display:inline-block;animation:sc 26s linear infinite;font-family:'Fraunces';font-size:19px;font-style:italic}
+  .strip .t span{margin:0 30px}.strip .t b{color:var(--accent);font-style:normal;font-weight:600}
+  @keyframes sc{to{transform:translateX(-50%)}}
+
+  /* SECTION */
+  section{padding:100px 0}
+  .head{text-align:center;max-width:640px;margin:0 auto 56px}
+  .head .eyebrow{justify-content:center}
+  .head h2{font-size:clamp(32px,4.6vw,54px);letter-spacing:-1.2px;line-height:1.08;margin-bottom:16px}
+  .head h2 em{font-style:italic;color:var(--accent)}
+  .head p{color:var(--muted);font-size:17px}
+  .hero-note .it b{transition:.3s}
+
+  /* PRODUCTS */
+  .grid-p{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .prod{background:var(--paper);border:1px solid var(--line);border-radius:22px;overflow:hidden;transition:transform .55s var(--ease),box-shadow .55s var(--ease),border-color .55s var(--ease);cursor:pointer;display:flex;flex-direction:column}
+  .prod:hover{transform:translateY(-10px);box-shadow:0 44px 80px -34px rgba(36,29,22,.4),0 12px 30px -18px rgba(184,98,58,.3);border-color:transparent}
+  .prod .img{position:relative;aspect-ratio:4/5;overflow:hidden}
+  .prod .img img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease),filter .6s ease}
+  .prod:hover .img img{transform:scale(1.09)}
+  /* lớp phủ ấm + hé lộ khi hover */
+  .prod .img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(36,29,22,.5));opacity:0;transition:.6s var(--ease);pointer-events:none}
+  .prod:hover .img::after{opacity:1}
+  .prod .peek{position:absolute;left:0;right:0;bottom:0;padding:16px;color:#fff;font-size:12px;letter-spacing:.4px;font-weight:500;
+    transform:translateY(12px);opacity:0;transition:.6s var(--ease);pointer-events:none;display:flex;align-items:center;gap:8px}
+  .prod:hover .peek{transform:none;opacity:1}
+  .prod .peek svg{width:15px;height:15px}
+  .prod .tag{position:absolute;top:14px;left:14px;background:rgba(255,253,249,.92);backdrop-filter:blur(6px);color:var(--accent);font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:6px 12px;border-radius:100px;z-index:2;box-shadow:0 6px 18px -6px rgba(36,29,22,.3)}
+  .prod .body{padding:22px;display:flex;flex-direction:column;flex:1}
+  .prod .scent{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+  .prod h3{font-size:22px;margin-bottom:8px;transition:color .3s}
+  .prod:hover h3{color:var(--accent-d)}
+  .prod .desc{font-size:14px;color:var(--muted);margin-bottom:18px;flex:1}
+  .prod .foot{display:flex;align-items:center;justify-content:space-between}
+  .prod .price{font-family:'Fraunces';font-size:23px;font-weight:600}
+  .prod .add{background:var(--sand);border:none;width:42px;height:42px;border-radius:50%;cursor:pointer;font-size:20px;color:var(--ink);transition:.35s var(--ease);display:flex;align-items:center;justify-content:center}
+  .prod .add:hover{background:var(--accent);color:#fff;transform:rotate(90deg);box-shadow:0 8px 22px -6px rgba(184,98,58,.6)}
+  @media(max-width:860px){.grid-p{grid-template-columns:1fr 1fr;gap:16px}}
+  @media(max-width:520px){.grid-p{grid-template-columns:1fr}}
+
+  /* STORY */
+  .story{background:var(--sand);position:relative;overflow:hidden}
+  /* khối glow ấm tinh tế phía sau */
+  .story::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;top:-160px;right:-120px;z-index:0;
+    background:radial-gradient(circle,rgba(184,98,58,.16),transparent 68%);filter:blur(20px);pointer-events:none}
+  .story .wrap{position:relative;z-index:1}
+  .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .story-img{border-radius:24px;overflow:hidden;aspect-ratio:1/1;position:relative;box-shadow:0 50px 100px -40px rgba(36,29,22,.5)}
+  .story-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(36,29,22,.28));pointer-events:none}
+  .story-img img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
+  .story-img:hover img{transform:scale(1.05)}
+  .story-copy h2{font-size:clamp(28px,4vw,46px);letter-spacing:-1px;line-height:1.12;margin:14px 0 20px}
+  .story-copy h2 em{font-style:italic;color:var(--accent)}
+  .story-copy p{color:var(--muted);margin-bottom:16px;font-size:16px}
+  .feats{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:30px}
+  .feat{display:flex;gap:12px;align-items:flex-start}
+  .feat .ic{width:40px;height:40px;flex:0 0 auto;border-radius:12px;background:var(--paper);display:flex;align-items:center;justify-content:center;font-size:19px;box-shadow:0 8px 20px -10px rgba(36,29,22,.35);transition:.4s var(--ease)}
+  .feat:hover .ic{transform:translateY(-3px);box-shadow:0 14px 28px -12px rgba(184,98,58,.5)}
+  .feat b{font-size:15px;display:block}
+  .feat span{font-size:13px;color:var(--muted)}
+  @media(max-width:860px){.story-grid{grid-template-columns:1fr;gap:36px}.story-img{aspect-ratio:16/11}}
+  @media(max-width:520px){.feats{grid-template-columns:1fr}}
+
+  /* GALLERY / LOOKBOOK — nhiều ảnh nến */
+  .gallery{background:var(--deep);color:var(--sand);position:relative;overflow:hidden}
+  .gallery .head h2,.gallery .head p{color:var(--sand)}
+  .gallery .head p{color:#b7ac9a}
+  .gallery .eyebrow{color:#f0c9a8}.gallery .eyebrow::before{background:#f0c9a8}
+  .gallery::before{content:"";position:absolute;top:-10%;left:50%;transform:translateX(-50%);width:80%;height:60%;
+    background:radial-gradient(circle,rgba(184,98,58,.18),transparent 62%);filter:blur(60px);pointer-events:none}
+  .g-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:14px;position:relative;z-index:1}
+  .g-item{position:relative;border-radius:16px;overflow:hidden;cursor:pointer}
+  .g-item img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease),filter .5s ease;filter:brightness(.92)}
+  .g-item:hover img{transform:scale(1.08);filter:brightness(1.05)}
+  .g-item::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(20,15,11,.7));opacity:.5;transition:.5s}
+  .g-item:hover::after{opacity:.85}
+  .g-item .cap{position:absolute;left:14px;bottom:12px;z-index:2;color:#fff;font-family:'Fraunces';font-size:16px;font-style:italic;
+    transform:translateY(8px);opacity:0;transition:.5s var(--ease)}
+  .g-item:hover .cap{transform:none;opacity:1}
+  .g-item.tall{grid-row:span 2}.g-item.wide{grid-column:span 2}
+  @media(max-width:860px){.g-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:170px}.g-item.wide{grid-column:span 2}.g-item.tall{grid-row:span 1}}
+  @media(max-width:520px){.g-grid{grid-template-columns:1fr 1fr;grid-auto-rows:130px}.g-item.wide{grid-column:span 2}}
+
+  /* ORDER FORM */
+  .order{background:var(--deep);color:var(--sand);position:relative;overflow:hidden}
+  /* glow ấm nhẹ ở góc — chất phim */
+  .order::before{content:"";position:absolute;width:640px;height:640px;border-radius:50%;left:-200px;bottom:-260px;z-index:0;
+    background:radial-gradient(circle,rgba(184,98,58,.22),transparent 66%);filter:blur(30px);pointer-events:none;animation:breathe 14s ease-in-out infinite}
+  .order .wrap{position:relative;z-index:1}
+  .order .head h2,.order .head{color:var(--sand)}
+  .order .head h2 em{font-style:italic;color:#e9a877}
+  .order-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}
+  .order-side h2{font-size:clamp(28px,3.6vw,42px);color:#fff;letter-spacing:-1px;line-height:1.14;margin-bottom:18px}
+  .order-side h2 em{font-style:italic;color:#e9a877}
+  .order-side p{color:#b7ac9a;margin-bottom:28px}
+  .osum{background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.03));border:1px solid rgba(233,168,120,.18);border-radius:18px;padding:24px;box-shadow:0 30px 70px -40px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.06)}
+  .osum .row{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:15px;color:#cfc5b5}
+  .osum .row:last-child{border:none;padding-top:16px;margin-top:6px;border-top:1px solid rgba(255,255,255,.15);font-size:19px;color:#fff;font-family:'Fraunces'}
+  .osum .row b{color:#fff}
+  .trust{display:flex;gap:20px;margin-top:22px;flex-wrap:wrap}
+  .trust .t{font-size:12px;color:#b7ac9a;display:flex;align-items:center;gap:7px}
+
+  .form{background:var(--paper);border-radius:22px;padding:34px;box-shadow:0 50px 100px -40px rgba(0,0,0,.6);border:1px solid rgba(233,168,120,.14);position:relative}
+  .form::before{content:"";position:absolute;inset:0;border-radius:22px;padding:1px;pointer-events:none;
+    background:linear-gradient(160deg,rgba(233,168,120,.5),transparent 40%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.5}
+  .form h3{color:var(--ink);font-size:24px;margin-bottom:6px}
+  .form .sub{color:var(--muted);font-size:14px;margin-bottom:24px}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .field{margin-bottom:18px}
+  .field.full{grid-column:1/-1}
+  .field label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:7px}
+  .field label .req{color:var(--accent)}
+  .field input,.field select,.field textarea{width:100%;padding:13px 15px;border:1px solid var(--line);border-radius:11px;font-family:inherit;font-size:15px;background:var(--bg);color:var(--ink);transition:.2s;outline:none}
+  .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent);background:var(--paper);box-shadow:0 0 0 3px rgba(184,98,58,.12)}
+  .field textarea{resize:vertical;min-height:80px}
+  .field .err{color:#c0392b;font-size:12px;margin-top:5px;display:none}
+  .field.invalid input,.field.invalid select{border-color:#c0392b}
+  .field.invalid .err{display:block}
+  .pay{display:flex;gap:10px;flex-wrap:wrap}
+  .pay label{flex:1;min-width:120px;border:1px solid var(--line);border-radius:11px;padding:12px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:.2s;background:var(--bg)}
+  .pay label:hover{border-color:var(--accent)}
+  .pay input{width:auto;margin:0}
+  .pay input:checked + span{font-weight:600;color:var(--accent)}
+  .pay label:has(input:checked){border-color:var(--accent);background:rgba(184,98,58,.06)}
+  .form-note{font-size:12px;color:var(--muted);text-align:center;margin-top:14px}
+  .ok{display:none;text-align:center;padding:30px 10px}
+  .ok.show{display:block;animation:pop .5s cubic-bezier(.2,.9,.3,1.3)}
+  @keyframes pop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
+  .ok .ic{width:70px;height:70px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:34px;margin:0 auto 18px}
+  .ok h3{font-size:26px;color:var(--ink);margin-bottom:10px}
+  .ok p{color:var(--muted);font-size:15px}
+  .ok .oid{font-family:'Fraunces';color:var(--accent);font-weight:600}
+  @media(max-width:860px){.order-grid{grid-template-columns:1fr;gap:34px}}
+  @media(max-width:520px){.frow{grid-template-columns:1fr}.form{padding:24px}}
+
+  /* NEWSLETTER + FOOTER */
+  footer{background:var(--bg);padding:70px 0 34px}
+  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:40px;margin-bottom:48px}
+  .foot-brand .logo{margin-bottom:14px}
+  .foot-brand p{color:var(--muted);font-size:14px;max-width:260px}
+  .fcol h4{font-size:14px;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px}
+  .fcol a{display:block;color:var(--muted);font-size:14px;padding:6px 0;transition:.2s}
+  .fcol a:hover{color:var(--accent)}
+  .news label{font-size:14px;display:block;margin-bottom:10px;color:var(--muted)}
+  .news .box{display:flex;gap:8px}
+  .news input{flex:1;padding:12px 14px;border:1px solid var(--line);border-radius:100px;background:var(--paper);font-family:inherit;outline:none;font-size:14px}
+  .news input:focus{border-color:var(--accent)}
+  .news button{background:var(--ink);color:#fff;border:none;border-radius:100px;padding:0 20px;cursor:pointer;font-family:inherit;font-weight:600;transition:.2s}
+  .news button:hover{background:var(--accent)}
+  .foot-bot{border-top:1px solid var(--line);padding-top:26px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;color:var(--muted);font-size:13px}
+  @media(max-width:860px){.foot-grid{grid-template-columns:1fr 1fr;gap:30px}}
+  @media(max-width:520px){.foot-grid{grid-template-columns:1fr}}
+
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--ink);color:#fff;padding:14px 24px;border-radius:100px;font-size:14px;font-weight:500;z-index:300;transition:.4s cubic-bezier(.2,.9,.3,1.3);box-shadow:0 14px 40px rgba(0,0,0,.25)}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition-duration:.001s!important}
+    .reveal{opacity:1;transform:none}
+    .hero h1 .ln>span,.hero-copy .eyebrow,.hero-copy>p,.hero-cta,.hero-note{opacity:1;transform:none}
+    .grain,.embers,.hero-visual .glow{display:none}
+    .btn::after{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<nav id="nav"><div class="wrap">
+  <div class="logo">
+    <span class="spark"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2L4.5 13.5H11L10 22l9-12h-6.5L13 2z" fill="#b8623a"/></svg></span>bolt
+  </div>
+  <div class="navlinks">
+    <a href="#products">Sản phẩm</a>
+    <a href="#story">Câu chuyện</a>
+    <a href="#gallery">Lookbook</a>
+    <a href="#order">Đặt hàng</a>
+    <a href="#contact">Liên hệ</a>
+  </div>
+  <div class="nav-cta">
+    <div class="cart" onclick="scrollTo(0,document.getElementById('order').offsetTop-60)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none"/><circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none"/><path d="M6 6L5 3H2"/></svg>
+      <span class="badge" id="cartCount">0</span>
+    </div>
+    <button class="btn" onclick="scrollTo(0,document.getElementById('order').offsetTop-60)">Đặt ngay</button>
+    <button class="burger" onclick="document.getElementById('drawer').classList.add('open')"><span></span><span></span><span></span></button>
+  </div>
+</div></nav>
+
+<div class="drawer" id="drawer">
+  <div class="top">
+    <div class="logo"><span class="spark"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2L4.5 13.5H11L10 22l9-12h-6.5L13 2z" fill="#b8623a"/></svg></span>bolt</div>
+    <button class="close" onclick="document.getElementById('drawer').classList.remove('open')">×</button>
+  </div>
+  <a href="#products" onclick="document.getElementById('drawer').classList.remove('open')">Sản phẩm</a>
+  <a href="#story" onclick="document.getElementById('drawer').classList.remove('open')">Câu chuyện</a>
+  <a href="#gallery" onclick="document.getElementById('drawer').classList.remove('open')">Lookbook</a>
+  <a href="#order" onclick="document.getElementById('drawer').classList.remove('open')">Đặt hàng</a>
+  <a href="#contact" onclick="document.getElementById('drawer').classList.remove('open')">Liên hệ</a>
+</div>
+
+<header class="hero">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1512389142860-9c449e58a543?auto=format&fit=crop&w=1800&q=85" alt="Nến thơm bolt"></div>
+  <div class="hero-candleglow"></div>
+  <div class="embers" id="embers"></div>
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow">Nến thơm thủ công · từ 2021</span>
+      <h1><span class="ln"><span>Thắp sáng không gian,</span></span><span class="ln"><span><em>đánh thức</em> cảm xúc.</span></span></h1>
+      <p class="lead">bolt tạo nên những cây nến từ sáp đậu nành tự nhiên và tinh dầu nguyên chất — cháy sạch, thơm lâu, chạm đến từng khoảnh khắc bình yên.</p>
+      <div class="hero-cta">
+        <button class="btn" onclick="scrollTo(0,document.getElementById('products').offsetTop-50)">Khám phá bộ sưu tập</button>
+        <a href="#story" class="btn-ghost">Câu chuyện của bolt</a>
+      </div>
+      <div class="hero-note">
+        <div class="it"><b data-count="100" data-suffix="%">100%</b>sáp đậu nành</div>
+        <div class="it"><b data-count="50" data-suffix="h+">50h+</b>thời gian cháy</div>
+        <div class="it"><b data-count="4.9" data-suffix="" data-dec="1">4.9<em>★</em></b>từ <span data-count="2300" data-suffix="" data-sep="1">2.300</span> khách</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Cuộn</span><div class="rail"></div></div>
+</header>
+
+<div class="strip"><div class="t">
+  <span>Sáp đậu nành <b>tự nhiên</b></span><span>·</span><span>Tinh dầu <b>nguyên chất</b></span><span>·</span><span>Thủ công <b>từng mẻ</b></span><span>·</span><span>Giao hàng <b>toàn quốc</b></span><span>·</span>
+  <span>Sáp đậu nành <b>tự nhiên</b></span><span>·</span><span>Tinh dầu <b>nguyên chất</b></span><span>·</span><span>Thủ công <b>từng mẻ</b></span><span>·</span><span>Giao hàng <b>toàn quốc</b></span><span>·</span>
+</div></div>
+
+<section id="products">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Bộ sưu tập</span>
+      <h2>Chọn <em>hương</em> của riêng bạn</h2>
+      <p>Mỗi cây nến là một tâm trạng. Khám phá những mùi hương được pha chế tỉ mỉ bởi nghệ nhân của bolt.</p>
+    </div>
+    <div class="grid-p" id="prodGrid">
+      <div class="prod reveal" data-name="Amber & Gỗ đàn hương" data-price="320000">
+        <div class="img"><span class="tag">Best seller</span><img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=600&q=80" alt="Amber & Gỗ đàn hương"><div class="peek"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.3" fill="currentColor" stroke="none"/><circle cx="18" cy="20" r="1.3" fill="currentColor" stroke="none"/><path d="M6 6L5 3H2"/></svg>Xem chi tiết &amp; đặt hàng</div></div>
+        <div class="body"><div class="scent">Ấm áp · Gỗ</div><h3>Amber & Gỗ đàn hương</h3><p class="desc">Ấm nồng, sâu lắng — như một buổi tối mùa đông bên lò sưởi.</p>
+          <div class="foot"><span class="price">320.000₫</span><button class="add" aria-label="Thêm">+</button></div></div>
+      </div>
+      <div class="prod reveal" data-name="Oải hương & Vani" data-price="290000">
+        <div class="img"><span class="tag">Thư giãn</span><img src="https://images.unsplash.com/photo-1640095889747-2090ee12fa7d?auto=format&fit=crop&w=600&q=80" alt="Oải hương & Vani"><div class="peek"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.3" fill="currentColor" stroke="none"/><circle cx="18" cy="20" r="1.3" fill="currentColor" stroke="none"/><path d="M6 6L5 3H2"/></svg>Xem chi tiết &amp; đặt hàng</div></div>
+        <div class="body"><div class="scent">Dịu nhẹ · Hoa</div><h3>Oải hương & Vani</h3><p class="desc">Xoa dịu tâm trí, ru bạn vào giấc ngủ sâu và bình yên.</p>
+          <div class="foot"><span class="price">290.000₫</span><button class="add" aria-label="Thêm">+</button></div></div>
+      </div>
+      <div class="prod reveal" data-name="Cam Bergamot & Sả" data-price="280000">
+        <div class="img"><span class="tag">Tươi mát</span><img src="https://images.unsplash.com/photo-1612293905607-b003de9e54fb?auto=format&fit=crop&w=600&q=80" alt="Cam Bergamot & Sả"><div class="peek"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.3" fill="currentColor" stroke="none"/><circle cx="18" cy="20" r="1.3" fill="currentColor" stroke="none"/><path d="M6 6L5 3H2"/></svg>Xem chi tiết &amp; đặt hàng</div></div>
+        <div class="body"><div class="scent">Tươi · Cam quýt</div><h3>Cam Bergamot & Sả</h3><p class="desc">Đánh thức giác quan, tràn đầy năng lượng cho buổi sáng.</p>
+          <div class="foot"><span class="price">280.000₫</span><button class="add" aria-label="Thêm">+</button></div></div>
+      </div>
+      <div class="prod reveal" data-name="Hoa nhài đêm" data-price="340000">
+        <div class="img"><span class="tag">Mới</span><img src="https://images.unsplash.com/photo-1601922046210-41e129a3e64a?auto=format&fit=crop&w=600&q=80" alt="Hoa nhài đêm"><div class="peek"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.3" fill="currentColor" stroke="none"/><circle cx="18" cy="20" r="1.3" fill="currentColor" stroke="none"/><path d="M6 6L5 3H2"/></svg>Xem chi tiết &amp; đặt hàng</div></div>
+        <div class="body"><div class="scent">Nồng nàn · Hoa</div><h3>Hoa nhài đêm</h3><p class="desc">Quyến rũ và bí ẩn, hương hoa nhài nở rộ trong đêm.</p>
+          <div class="foot"><span class="price">340.000₫</span><button class="add" aria-label="Thêm">+</button></div></div>
+      </div>
+      <div class="prod reveal" data-name="Cà phê & Hạt phỉ" data-price="300000">
+        <div class="img"><span class="tag">Ấm cúng</span><img src="https://images.unsplash.com/photo-1572726729207-a78d6feb18d7?auto=format&fit=crop&w=600&q=80" alt="Cà phê & Hạt phỉ"><div class="peek"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.3" fill="currentColor" stroke="none"/><circle cx="18" cy="20" r="1.3" fill="currentColor" stroke="none"/><path d="M6 6L5 3H2"/></svg>Xem chi tiết &amp; đặt hàng</div></div>
+        <div class="body"><div class="scent">Ngọt · Rang</div><h3>Cà phê & Hạt phỉ</h3><p class="desc">Thơm lừng như quán cà phê nhỏ vào một sớm se lạnh.</p>
+          <div class="foot"><span class="price">300.000₫</span><button class="add" aria-label="Thêm">+</button></div></div>
+      </div>
+      <div class="prod reveal" data-name="Biển & Muối khoáng" data-price="310000">
+        <div class="img"><span class="tag">Thanh mát</span><img src="https://images.unsplash.com/photo-1528351655744-27cc30462816?auto=format&fit=crop&w=600&q=80" alt="Biển & Muối khoáng"><div class="peek"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.3" fill="currentColor" stroke="none"/><circle cx="18" cy="20" r="1.3" fill="currentColor" stroke="none"/><path d="M6 6L5 3H2"/></svg>Xem chi tiết &amp; đặt hàng</div></div>
+        <div class="body"><div class="scent">Mát · Khoáng</div><h3>Biển & Muối khoáng</h3><p class="desc">Làn gió biển trong lành, khoáng đạt và tự do.</p>
+          <div class="foot"><span class="price">310.000₫</span><button class="add" aria-label="Thêm">+</button></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="story" id="story">
+  <div class="wrap"><div class="story-grid">
+    <div class="story-img reveal"><img src="https://images.unsplash.com/photo-1613068431228-8cb6a1e92573?auto=format&fit=crop&w=800&q=80" alt="Xưởng làm nến bolt"></div>
+    <div class="story-copy reveal">
+      <span class="eyebrow">Câu chuyện của chúng tôi</span>
+      <h2>Làm thủ công, <em>từng mẻ nhỏ</em>, bằng cả trái tim.</h2>
+      <p>bolt bắt đầu từ một căn bếp nhỏ năm 2021, với niềm tin rằng một mùi hương đúng có thể thay đổi cả một ngày. Chúng tôi từ chối sáp paraffin và hương liệu tổng hợp rẻ tiền.</p>
+      <p>Mỗi cây nến bolt được đổ tay từ sáp đậu nành nguyên chất và tinh dầu thiên nhiên — cháy sạch, không khói đen, an toàn cho cả gia đình bạn.</p>
+      <div class="feats">
+        <div class="feat"><div class="ic">🌱</div><div><b>Thuần chay</b><span>Sáp đậu nành 100%</span></div></div>
+        <div class="feat"><div class="ic">🕯️</div><div><b>Cháy 50h+</b><span>Bền lâu, tiết kiệm</span></div></div>
+        <div class="feat"><div class="ic">🤍</div><div><b>Không độc hại</b><span>Không paraffin, chì</span></div></div>
+        <div class="feat"><div class="ic">♻️</div><div><b>Ly tái sử dụng</b><span>Thân thiện môi trường</span></div></div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Lookbook</span>
+      <h2>Ánh nến trong không gian sống</h2>
+      <p>Một chút bolt cho mỗi góc nhà — nơi làm việc, phòng tắm, bàn ăn hay góc đọc sách yêu thích.</p>
+    </div>
+    <div class="g-grid reveal">
+      <div class="g-item tall"><img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=700&q=80" alt="Nến bên cửa sổ"><span class="cap">Sớm mai bên cửa sổ</span></div>
+      <div class="g-item wide"><img src="https://images.unsplash.com/photo-1561212856-44e9bae482aa?auto=format&fit=crop&w=900&q=80" alt="Nến trên bàn gỗ"><span class="cap">Bàn làm việc ấm áp</span></div>
+      <div class="g-item"><img src="https://images.unsplash.com/photo-1537948756265-406a522f1a45?auto=format&fit=crop&w=600&q=80" alt="Nến thư giãn"><span class="cap">Phút thư giãn</span></div>
+      <div class="g-item"><img src="https://images.unsplash.com/photo-1572203176799-40836603681d?auto=format&fit=crop&w=600&q=80" alt="Nến trang trí"><span class="cap">Góc trang trí</span></div>
+      <div class="g-item"><img src="https://images.unsplash.com/photo-1605651202774-7d573fd3f12d?auto=format&fit=crop&w=600&q=80" alt="Nến và sách"><span class="cap">Đêm đọc sách</span></div>
+      <div class="g-item wide"><img src="https://images.unsplash.com/photo-1476900164809-ff19b8ae5968?auto=format&fit=crop&w=900&q=80" alt="Nhiều cây nến"><span class="cap">Bộ sưu tập hương</span></div>
+      <div class="g-item tall"><img src="https://images.unsplash.com/photo-1514436598301-27a65f40469f?auto=format&fit=crop&w=700&q=80" alt="Nến spa"><span class="cap">Không gian spa tại gia</span></div>
+      <div class="g-item"><img src="https://images.unsplash.com/photo-1489101960932-eb71762e6bc8?auto=format&fit=crop&w=600&q=80" alt="Nến ấm cúng"><span class="cap">Tối mùa đông</span></div>
+      <div class="g-item"><img src="https://images.unsplash.com/photo-1570823635306-250abb06d4b3?auto=format&fit=crop&w=600&q=80" alt="Nến và hoa"><span class="cap">Nến & hoa khô</span></div>
+      <div class="g-item"><img src="https://images.unsplash.com/photo-1559091156-b9610fb12eda?auto=format&fit=crop&w=600&q=80" alt="Nến thắp sáng"><span class="cap">Lung linh</span></div>
+      <div class="g-item"><img src="https://images.unsplash.com/photo-1612293905607-b003de9e54fb?auto=format&fit=crop&w=600&q=80" alt="Nến thủ công"><span class="cap">Thủ công từng mẻ</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="order" id="order">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Đặt hàng</span>
+      <h2>Mang bolt về <em>nhà bạn</em></h2>
+      <p>Điền thông tin bên dưới — chúng tôi sẽ gọi xác nhận trong vòng 24 giờ.</p>
+    </div>
+    <div class="order-grid">
+      <div class="order-side reveal">
+        <h2>Chỉ vài bước đến <em>không gian thơm</em> của bạn.</h2>
+        <p>Giao hàng toàn quốc. Thanh toán khi nhận hàng (COD) hoặc chuyển khoản. Đổi trả trong 7 ngày nếu không hài lòng.</p>
+        <div class="osum">
+          <div class="row"><span>Sản phẩm đã chọn</span><b id="sumItems">Chưa có</b></div>
+          <div class="row"><span>Tạm tính</span><b id="sumSub">0₫</b></div>
+          <div class="row"><span>Phí giao hàng</span><b>30.000₫</b></div>
+          <div class="row"><span>Tổng cộng</span><b id="sumTotal">30.000₫</b></div>
+        </div>
+        <div class="trust">
+          <div class="t">🔒 Thông tin bảo mật</div>
+          <div class="t">🚚 Giao 2–4 ngày</div>
+          <div class="t">↩️ Đổi trả 7 ngày</div>
+        </div>
+      </div>
+
+      <form class="form" id="orderForm" novalidate>
+        <div id="formBody">
+          <h3>Thông tin đặt hàng</h3>
+          <p class="sub">Các trường có dấu <span style="color:var(--accent)">*</span> là bắt buộc.</p>
+          <div class="frow">
+            <div class="field"><label>Họ và tên <span class="req">*</span></label><input name="name" type="text" placeholder="Nguyễn Văn A"><div class="err">Vui lòng nhập họ tên.</div></div>
+            <div class="field"><label>Số điện thoại <span class="req">*</span></label><input name="phone" type="tel" placeholder="09xx xxx xxx"><div class="err">Số điện thoại chưa hợp lệ.</div></div>
+          </div>
+          <div class="field full"><label>Email</label><input name="email" type="email" placeholder="ban@email.com"><div class="err">Email chưa hợp lệ.</div></div>
+          <div class="field full"><label>Chọn sản phẩm <span class="req">*</span></label>
+            <select name="product"><option value="">— Chọn hương nến —</option></select>
+            <div class="err">Vui lòng chọn sản phẩm.</div>
+          </div>
+          <div class="frow">
+            <div class="field"><label>Số lượng <span class="req">*</span></label><input name="qty" type="number" min="1" value="1"><div class="err">Số lượng tối thiểu là 1.</div></div>
+            <div class="field"><label>Tỉnh / Thành phố <span class="req">*</span></label><input name="city" type="text" placeholder="TP. Hồ Chí Minh"><div class="err">Vui lòng nhập tỉnh/thành.</div></div>
+          </div>
+          <div class="field full"><label>Địa chỉ nhận hàng <span class="req">*</span></label><input name="address" type="text" placeholder="Số nhà, đường, phường/xã, quận/huyện"><div class="err">Vui lòng nhập địa chỉ.</div></div>
+          <div class="field full"><label>Ghi chú</label><textarea name="note" placeholder="Ví dụ: gói quà, giao giờ hành chính…"></textarea></div>
+          <div class="field full"><label>Phương thức thanh toán</label>
+            <div class="pay">
+              <label><input type="radio" name="pay" value="COD" checked><span>💵 COD khi nhận</span></label>
+              <label><input type="radio" name="pay" value="Chuyển khoản"><span>🏦 Chuyển khoản</span></label>
+              <label><input type="radio" name="pay" value="Ví điện tử"><span>📱 Ví điện tử</span></label>
+            </div>
+          </div>
+          <button type="submit" class="btn block">Xác nhận đặt hàng →</button>
+          <p class="form-note">Đây là trang mẫu demo — đơn hàng không được gửi đi đâu cả.</p>
+        </div>
+        <div class="ok" id="okBox">
+          <div class="ic">✓</div>
+          <h3>Đặt hàng thành công!</h3>
+          <p>Cảm ơn <b id="okName"></b> đã tin chọn bolt.<br>Mã đơn của bạn: <span class="oid" id="okId"></span><br>Chúng tôi sẽ liên hệ xác nhận trong 24 giờ.</p>
+          <button class="btn" style="margin-top:22px" onclick="resetForm()">Đặt đơn khác</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo"><span class="spark"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2L4.5 13.5H11L10 22l9-12h-6.5L13 2z" fill="#b8623a"/></svg></span>bolt</div>
+        <p>Nến thơm thủ công từ sáp đậu nành tự nhiên. Thắp sáng không gian, đánh thức cảm xúc.</p>
+      </div>
+      <div class="fcol"><h4>Sản phẩm</h4><a href="#products">Bộ sưu tập</a><a href="#products">Best seller</a><a href="#products">Hàng mới</a><a href="#order">Đặt hàng</a></div>
+      <div class="fcol"><h4>Về bolt</h4><a href="#story">Câu chuyện</a><a href="#story">Nguyên liệu</a><a href="#contact">Liên hệ</a><a href="#">Chính sách</a></div>
+      <div class="fcol news">
+        <h4>Nhận ưu đãi</h4>
+        <label>Đăng ký để nhận giảm 10% đơn đầu tiên.</label>
+        <div class="box"><input type="email" id="newsEmail" placeholder="Email của bạn"><button onclick="subscribe()">Gửi</button></div>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <div>© 2026 bolt Candles · Trang mẫu demo</div>
+      <div>hello@bolt.candles · 0900 000 000 · TP.HCM</div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast">Đã thêm vào giỏ 🕯️</div>
+
+<script>
+// ---- data ----
+const products = [...document.querySelectorAll('.prod')].map(p=>({
+  name:p.dataset.name, price:+p.dataset.price, el:p
+}));
+const fmt = n => n.toLocaleString('vi-VN')+'₫';
+const SHIP = 30000;
+let cart = {}; // name -> qty
+
+// populate select
+const sel = document.querySelector('select[name=product]');
+products.forEach(p=>{
+  const o=document.createElement('option');
+  o.value=p.name; o.textContent=`${p.name} — ${fmt(p.price)}`;
+  sel.appendChild(o);
+});
+
+// ---- cart ----
+function addToCart(name){
+  cart[name]=(cart[name]||0)+1;
+  updateCart();
+  showToast('Đã thêm '+name+' 🕯️');
+  // reflect in form
+  sel.value=name;
+  syncQtyFromCart();
+  recalcSummary();
+}
+function updateCart(){
+  const count=Object.values(cart).reduce((a,b)=>a+b,0);
+  document.getElementById('cartCount').textContent=count;
+}
+function syncQtyFromCart(){
+  const name=sel.value; const q=document.querySelector('input[name=qty]');
+  if(cart[name]) q.value=cart[name];
+}
+document.querySelectorAll('.prod .add').forEach((btn,i)=>{
+  btn.addEventListener('click',e=>{e.stopPropagation();addToCart(products[i].name);});
+});
+document.querySelectorAll('.prod').forEach((p,i)=>{
+  p.addEventListener('click',()=>{ sel.value=products[i].name; recalcSummary(); scrollTo(0,document.getElementById('order').offsetTop-60);});
+});
+
+// ---- summary ----
+const qtyInput=document.querySelector('input[name=qty]');
+function recalcSummary(){
+  const name=sel.value;
+  const p=products.find(x=>x.name===name);
+  const qty=Math.max(1,+qtyInput.value||1);
+  if(!p){ document.getElementById('sumItems').textContent='Chưa có';
+    document.getElementById('sumSub').textContent='0₫';
+    document.getElementById('sumTotal').textContent=fmt(SHIP); return; }
+  const sub=p.price*qty;
+  document.getElementById('sumItems').textContent=`${name} ×${qty}`;
+  document.getElementById('sumSub').textContent=fmt(sub);
+  document.getElementById('sumTotal').textContent=fmt(sub+SHIP);
+}
+sel.addEventListener('change',recalcSummary);
+qtyInput.addEventListener('input',recalcSummary);
+
+// ---- validation + submit ----
+const form=document.getElementById('orderForm');
+function setErr(field,on){ field.classList.toggle('invalid',on); }
+form.addEventListener('submit',e=>{
+  e.preventDefault();
+  let ok=true;
+  const f=form.elements;
+  const checks=[
+    ['name', v=>v.trim().length>=2],
+    ['phone', v=>/^[0-9+\s.]{9,15}$/.test(v.trim())],
+    ['email', v=>v.trim()===''||/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.trim())],
+    ['product', v=>v!==''],
+    ['qty', v=>+v>=1],
+    ['city', v=>v.trim().length>=2],
+    ['address', v=>v.trim().length>=5],
+  ];
+  checks.forEach(([n,test])=>{
+    const el=f[n]; const field=el.closest('.field');
+    const good=test(el.value);
+    if(field) setErr(field,!good);
+    if(!good) ok=false;
+  });
+  if(!ok){ form.querySelector('.invalid input,.invalid select')?.focus(); return; }
+  // success
+  document.getElementById('okName').textContent=f['name'].value.trim();
+  document.getElementById('okId').textContent='#BOLT'+Math.floor(100000+performance.now()%900000);
+  document.getElementById('formBody').style.display='none';
+  document.getElementById('okBox').classList.add('show');
+  scrollTo(0,document.getElementById('order').offsetTop-60);
+});
+function resetForm(){
+  form.reset();
+  document.getElementById('okBox').classList.remove('show');
+  document.getElementById('formBody').style.display='';
+  document.querySelectorAll('.field.invalid').forEach(x=>x.classList.remove('invalid'));
+  recalcSummary();
+}
+
+// ---- misc ----
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),2200);
+}
+function subscribe(){
+  const e=document.getElementById('newsEmail');
+  if(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e.value.trim())){ showToast('Đăng ký thành công 🎉'); e.value=''; }
+  else showToast('Email chưa hợp lệ');
+}
+// nav scroll
+addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>20));
+// reveal
+const io=new IntersectionObserver(en=>en.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%3*.08)+'s';io.observe(el);});
+recalcSummary();
+
+// ======== NÂNG CẤP CINEMATIC (chỉ thêm, không sửa logic cũ) ========
+const REDUCED = matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+// -- embers: vài hạt sáng ấm bay lên chậm, tinh tế --
+if(!REDUCED){
+  const box=document.getElementById('embers');
+  if(box){
+    const N=9;
+    for(let i=0;i<N;i++){
+      const e=document.createElement('span');
+      e.className='ember';
+      const dur=9+Math.random()*8, delay=-Math.random()*dur, size=3+Math.random()*4;
+      e.style.left=(8+Math.random()*84)+'%';
+      e.style.width=e.style.height=size+'px';
+      e.style.animationDuration=dur+'s';
+      e.style.animationDelay=delay+'s';
+      box.appendChild(e);
+    }
+  }
+}
+
+// -- count-up cho các con số thống kê khi vào viewport --
+function animateCount(el){
+  const target=parseFloat(el.dataset.count);
+  const dec=+(el.dataset.dec||0);
+  const suf=el.dataset.suffix!==undefined?el.dataset.suffix:'';
+  const sep=el.dataset.sep==='1';
+  const format=v=>{
+    let n=dec>0?v.toFixed(dec):Math.round(v).toString();
+    if(sep) n=(dec>0?parseFloat(n):Math.round(v)).toLocaleString('vi-VN');
+    return n+suf;
+  };
+  if(REDUCED){ el.textContent=format(target); return; }
+  const dur=1500, t0=performance.now();
+  const ease=x=>1-Math.pow(1-x,3);
+  function step(now){
+    const p=Math.min(1,(now-t0)/dur);
+    el.textContent=format(target*ease(p));
+    if(p<1) requestAnimationFrame(step);
+    else el.textContent=format(target);
+  }
+  requestAnimationFrame(step);
+}
+const countEls=document.querySelectorAll('[data-count]');
+const cio=new IntersectionObserver(en=>en.forEach(x=>{
+  if(x.isIntersecting){ animateCount(x.target); cio.unobserve(x.target); }
+}),{threshold:.6});
+countEls.forEach(el=>cio.observe(el));
+
+// -- parallax nhẹ hero (rAF, passive) --
+if(!REDUCED){
+  const shot=document.querySelector('.hero-visual .shot');
+  const f1=document.querySelector('.hero-visual .f1');
+  const f2=document.querySelector('.hero-visual .f2');
+  const f3=document.querySelector('.hero-visual .f3');
+  let ticking=false, sy=0;
+  function onScroll(){ sy=scrollY; if(!ticking){ ticking=true; requestAnimationFrame(applyPar);} }
+  function applyPar(){
+    if(sy<window.innerHeight){
+      if(shot) shot.style.transform='translateY('+(sy*0.06)+'px)';
+      if(f1) f1.style.marginTop=(sy*-0.05)+'px';
+      if(f2) f2.style.marginTop=(sy*0.07)+'px';
+      if(f3) f3.style.marginTop=(sy*0.03)+'px';
+    }
+    ticking=false;
+  }
+  addEventListener('scroll',onScroll,{passive:true});
+}
+</script>
+</body>
+</html>
