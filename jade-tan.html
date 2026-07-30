@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jade Tan — Social Media Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#eceaf0; --panel:#ffffff; --ink:#1c2340; --navy:#1f2547; --muted:#6a6f85;
+    --red:#8a1b2e; --red2:#b02a3d; --line:#e6e4ee; --soft:#f4f3f8;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;padding:18px}
+  @media(max-width:600px){body{padding:8px}}
+  h1,h2,h3,.disp{font-family:'Archivo',sans-serif}
+  .anton{font-family:'Anton',sans-serif;font-weight:400;letter-spacing:.5px}
+  .script{font-family:'Dancing Script',cursive}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  ::selection{background:var(--red);color:#fff}
+  .panel{background:var(--panel);border-radius:22px;padding:clamp(22px,3.4vw,48px)}
+  .container{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+  .star{color:var(--red);display:inline-block}
+
+  /* NAV */
+  nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:14px}
+  nav .brand{font-family:'Archivo';font-weight:800;font-size:20px;letter-spacing:1px;color:var(--navy)}
+  nav .links{display:flex;gap:clamp(18px,3vw,42px);flex-wrap:wrap}
+  nav .links a{font-family:'Archivo';font-weight:600;font-size:13px;letter-spacing:1.5px;color:var(--navy);transition:.2s;position:relative}
+  nav .links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:2px;background:var(--red);transition:.25s}
+  nav .links a:hover{color:var(--red)}
+  nav .links a:hover::after{width:100%}
+  @media(max-width:720px){nav .links{gap:16px}nav .links a{font-size:11px}}
+
+  /* HERO */
+  .hero{position:relative;min-height:78vh;display:flex;flex-direction:column;overflow:hidden}
+  .hero .tagline{position:absolute;top:6px;left:0;max-width:230px;font-size:14px;color:var(--navy);font-weight:500;line-height:1.4;z-index:3}
+  .hero .site{position:absolute;bottom:8px;left:0;font-family:'Archivo';font-weight:800;letter-spacing:1px;color:var(--navy);font-size:15px;z-index:3}
+  .hero .socials{position:absolute;bottom:6px;right:0;display:flex;gap:12px;z-index:3}
+  .hero .socials a{width:38px;height:38px;border:1.5px solid var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--navy);transition:.25s}
+  .hero .socials a:hover{background:var(--navy);color:#fff;transform:translateY(-3px)}
+  .hero .socials svg{width:17px;height:17px}
+  .hero-title{text-align:center;position:relative;z-index:2;pointer-events:none}
+  .hero-title .l1{font-family:'Anton';font-size:clamp(48px,11vw,150px);line-height:.86;color:var(--navy);letter-spacing:1px;position:relative;display:inline-block}
+  .hero-title .l1 .burst{position:absolute;top:-.05em;right:-.5em;color:var(--red);font-size:.34em;animation:spin 9s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .hero-mid{position:relative;flex:1;display:flex;align-items:flex-end;justify-content:center;min-height:300px}
+  .hero-photo{position:relative;z-index:2;width:clamp(230px,32vw,360px)}
+  .hero-photo img{width:100%;border-radius:14px 14px 0 0;object-fit:cover;object-position:top center;aspect-ratio:3/3.4;filter:contrast(1.02)}
+  .hero-photo .sig{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);font-family:'Dancing Script';font-weight:700;font-size:clamp(34px,5vw,60px);color:var(--red);z-index:3;text-shadow:0 2px 10px rgba(255,255,255,.6);white-space:nowrap}
+  .hero-back{position:absolute;bottom:34%;left:50%;transform:translateX(-50%);z-index:1;font-family:'Anton';font-size:clamp(48px,11vw,150px);color:var(--navy);opacity:.06;letter-spacing:2px;pointer-events:none;white-space:nowrap}
+  @media(max-width:600px){
+    .hero .tagline{position:static;max-width:none;margin-bottom:18px}
+    .hero .site,.hero .socials{position:static}
+    .hero .socials{justify-content:center;margin-top:16px}
+    .hero-mid{min-height:auto;margin-top:10px}
+  }
+
+  /* section titles */
+  .sec-h{font-family:'Anton';font-size:clamp(30px,5vw,58px);color:var(--navy);letter-spacing:1px;line-height:1;position:relative;display:inline-block}
+  .sec-h .burst{color:var(--red);font-size:.4em;vertical-align:super;margin-left:4px}
+  .dots{display:flex;gap:5px}
+  .dots i{width:6px;height:6px;border-radius:50%;background:var(--red);display:block}
+
+  /* ROW of two panels */
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:860px){.row2{grid-template-columns:1fr}}
+
+  /* WHO AM I */
+  .who{display:grid;grid-template-columns:1fr .9fr;gap:28px;align-items:center}
+  .who .txt p{font-size:14px;color:var(--muted);margin:14px 0}
+  .who .stats{display:flex;gap:22px;margin:20px 0 16px}
+  .who .stats .s .n{font-family:'Anton';font-size:30px;color:var(--navy)}
+  .who .stats .s .k{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+  .who .brands{display:flex;gap:16px;flex-wrap:wrap;align-items:center;opacity:.6;font-family:'Archivo';font-weight:700;font-size:13px;color:var(--navy)}
+  .who .photo{position:relative}
+  .who .photo img{width:100%;border-radius:16px;aspect-ratio:4/4.2;object-fit:cover}
+  .who .photo .burst{position:absolute;bottom:-10px;left:-10px;color:var(--red);font-size:34px;animation:spin 9s linear infinite}
+  @media(max-width:600px){.who{grid-template-columns:1fr}}
+
+  /* QUALIFICATIONS */
+  .qual{display:grid;grid-template-columns:1fr .8fr auto;gap:22px;align-items:center}
+  .qual .list{display:flex;flex-direction:column;gap:12px}
+  .qual .q{border:1.5px solid var(--line);border-radius:100px;padding:12px 20px;font-size:13px;font-weight:600;color:var(--navy);background:var(--soft);transition:.2s}
+  .qual .q:hover{border-color:var(--red);transform:translateX(4px)}
+  .qual .qphoto img{width:100%;border-radius:14px;aspect-ratio:3/3.6;object-fit:cover}
+  .qual .right{text-align:right}
+  .qual .cert{border:1.5px solid var(--line);border-radius:10px;padding:16px;width:200px;text-align:center;background:var(--soft)}
+  .qual .cert .u{font-size:9px;letter-spacing:1px;color:var(--muted);text-transform:uppercase}
+  .qual .cert .t{font-family:'Archivo';font-weight:700;font-size:15px;color:var(--navy);margin:8px 0}
+  .qual .cert .b{font-size:11px;color:var(--muted)}
+  .qual .cert .seal{width:34px;height:34px;border-radius:50%;background:var(--red);margin:10px auto 0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px}
+  .qual .tools{display:flex;gap:8px;justify-content:flex-end;margin-top:12px;font-size:20px}
+  @media(max-width:860px){.qual{grid-template-columns:1fr 1fr}.qual .right{grid-column:1/-1;text-align:left}.qual .cert{margin:0}}
+  @media(max-width:600px){.qual{grid-template-columns:1fr}}
+
+  /* WORK INCLUDES */
+  .work-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .wcard .thumb{border-radius:12px;overflow:hidden;aspect-ratio:16/10;margin-bottom:12px;background:var(--soft)}
+  .wcard .thumb img{width:100%;height:100%;object-fit:cover;transition:.5s}
+  .wcard:hover .thumb img{transform:scale(1.06)}
+  .wcard h4{font-family:'Archivo';font-weight:800;font-size:14px;letter-spacing:.5px;text-transform:uppercase;color:var(--navy);margin-bottom:6px}
+  .wcard p{font-size:12.5px;color:var(--muted)}
+  @media(max-width:860px){.grid3{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.grid3{grid-template-columns:1fr}}
+
+  /* CASE STUDY */
+  .case-item{display:grid;grid-template-columns:.85fr 1.15fr;gap:20px;align-items:center;padding:20px 0;border-top:1px solid var(--line)}
+  .case-item:first-of-type{border-top:none}
+  .case-item .info .lab{font-family:'Archivo';font-weight:800;font-size:12px;letter-spacing:1px;color:var(--navy);text-transform:uppercase;margin-bottom:8px}
+  .case-item .info p{font-size:13px;color:var(--muted);margin-bottom:10px}
+  .case-item .media{border-radius:12px;overflow:hidden}
+  .case-item .media img{width:100%;object-fit:cover}
+  .case-item.web .media img{aspect-ratio:16/9}
+  /* instagram feed grid */
+  .feed{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+  .feed img{aspect-ratio:1/1;object-fit:cover;border-radius:6px}
+  /* video phones */
+  .phones{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .phones .ph{border-radius:16px;overflow:hidden;aspect-ratio:9/17;border:3px solid var(--navy)}
+  .phones .ph img{width:100%;height:100%;object-fit:cover}
+  @media(max-width:720px){.case-item{grid-template-columns:1fr}}
+
+  /* PHOTOGRAPHY */
+  .photo-head{display:flex;align-items:baseline;gap:12px;margin-bottom:20px}
+  .photo-head .add{font-family:'Dancing Script';font-weight:700;color:var(--red);font-size:26px}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .pcard .im{border-radius:10px;overflow:hidden;aspect-ratio:4/5;margin-bottom:10px}
+  .pcard .im img{width:100%;height:100%;object-fit:cover;transition:.5s}
+  .pcard:hover .im img{transform:scale(1.05)}
+  .pcard .cn{font-family:'Archivo';font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--navy)}
+  .pcard .cd{font-size:11px;color:var(--muted)}
+  @media(max-width:860px){.grid4{grid-template-columns:1fr 1fr}}
+
+  /* TESTIMONIALS */
+  .tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .tc{background:var(--soft);border-radius:14px;padding:24px;border:1px solid var(--line)}
+  .tc .qt{color:var(--red);font-family:'Anton';font-size:40px;line-height:.5}
+  .tc p{font-size:13.5px;color:var(--ink);margin:6px 0 16px}
+  .tc .who2{display:flex;align-items:center;gap:11px}
+  .tc .who2 .av{width:40px;height:40px;border-radius:50%;object-fit:cover}
+  .tc .who2 b{font-family:'Archivo';font-weight:700;font-size:13px;color:var(--navy);display:block}
+  .tc .who2 span{font-size:11px;color:var(--muted)}
+  @media(max-width:860px){.tgrid{grid-template-columns:1fr}}
+
+  /* CONTACT */
+  .contact{background:var(--navy);color:#fff;text-align:center}
+  .contact h2{font-family:'Anton';font-size:clamp(30px,6vw,64px);letter-spacing:1px;color:#fff}
+  .contact h2 .burst{color:var(--red2);font-size:.4em;vertical-align:super}
+  .contact p{color:#b9bcd0;margin:14px auto 26px;max-width:440px;font-size:15px}
+  .cbtn{display:inline-flex;align-items:center;gap:10px;background:var(--red);color:#fff;font-family:'Archivo';font-weight:700;padding:15px 34px;border-radius:100px;font-size:14px;letter-spacing:.5px;transition:.25s;border:none;cursor:pointer}
+  .cbtn:hover{background:var(--red2);transform:translateY(-2px)}
+  .cinfo{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin-top:26px;color:#b9bcd0;font-size:13px}
+  .contact .socials{display:flex;gap:12px;justify-content:center;margin-top:22px}
+  .contact .socials a{width:40px;height:40px;border:1.5px solid rgba(255,255,255,.35);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;transition:.25s}
+  .contact .socials a:hover{background:var(--red);border-color:var(--red)}
+  .contact .socials svg{width:17px;height:17px}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:.7s cubic-bezier(.2,.8,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ===== HERO PANEL ===== -->
+  <section class="panel hero">
+    <nav>
+      <div class="brand">JADE TAN</div>
+      <div class="links">
+        <a href="#work">MY WORK</a>
+        <a href="#case">CASE STUDY</a>
+        <a href="#testi">TESTIMONIALS</a>
+        <a href="#contact">CONTACT</a>
+      </div>
+    </nav>
+    <div class="tagline">Authentic storytelling that connects brands with audiences through relatable experiences.</div>
+    <div class="hero-title">
+      <div class="l1">SOCIAL MEDIA<span class="burst">✳</span></div>
+    </div>
+    <div class="hero-mid">
+      <div class="hero-back">MANAGER</div>
+      <div class="hero-photo">
+        <img src="https://images.unsplash.com/photo-1655249493799-9cee4fe983bb?auto=format&fit=crop&w=600&q=80" alt="Jade Tan">
+        <span class="sig">Manager</span>
+      </div>
+    </div>
+    <div class="site">JADETAN.COM</div>
+    <div class="socials">
+      <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.2-.4-4.7a2.5 2.5 0 0 0-1.8-1.8C19.2 5 12 5 12 5s-7.2 0-8.8.5A2.5 2.5 0 0 0 1.4 7.3C1 8.8 1 12 1 12s0 3.2.4 4.7a2.5 2.5 0 0 0 1.8 1.8C4.8 19 12 19 12 19s7.2 0 8.8-.5a2.5 2.5 0 0 0 1.8-1.8C23 15.2 23 12 23 12zM9.8 15.3V8.7l5.7 3.3-5.7 3.3z"/></svg></a>
+      <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></a>
+      <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.3 8.3L23 22h-6.6l-5.2-6.8L5.3 22H2l7.8-8.9L1.5 2h6.8l4.7 6.2L18.9 2zm-1.2 18h1.8L7.4 3.8H5.5L17.7 20z"/></svg></a>
+      <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.7l-.4 2.9h-2.3v7A10 10 0 0 0 22 12z"/></svg></a>
+    </div>
+  </section>
+
+  <!-- ===== WHO AM I + QUALIFICATIONS ===== -->
+  <div class="row2">
+    <section class="panel reveal">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+        <h2 class="sec-h">WHO AM I</h2><span class="dots"><i></i><i></i><i></i></span>
+      </div>
+      <div class="who">
+        <div class="txt">
+          <p>I'm Jade, a London-based Social Media Manager. I help brands grow through cohesive visual identity, creative content and effective advertising campaigns.</p>
+          <p>I've elevated the online presence of hundreds of global brands, helping them take control of the narrative.</p>
+          <div class="stats">
+            <div class="s"><div class="n">50+</div><div class="k">Brands</div></div>
+            <div class="s"><div class="n">20m+</div><div class="k">Reach</div></div>
+            <div class="s"><div class="n">3yrs+</div><div class="k">Experience</div></div>
+          </div>
+          <div class="brands"><span>Ordinary</span><span>·</span><span>Amazon</span><span>·</span><span>lululemon</span><span>·</span><span>alo</span></div>
+        </div>
+        <div class="photo">
+          <img src="https://images.unsplash.com/photo-1581065178047-8ee15951ede6?auto=format&fit=crop&w=600&q=80" alt="Jade portrait">
+          <span class="burst">✳</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel reveal">
+      <div style="display:flex;justify-content:flex-end;margin-bottom:16px"><span class="dots"><i></i><i></i><i></i></span></div>
+      <div class="qual">
+        <div class="list">
+          <div class="q">✳ Canva Masterclass Certificate</div>
+          <div class="q">✳ Email Marketing · Hubspot</div>
+          <div class="q">✳ Accenture Digital Marketing</div>
+          <div class="q">✳ Ad Week Digital Marketing</div>
+          <div class="tools">🎨 📷 🎬 📊 🅜</div>
+        </div>
+        <div class="qphoto">
+          <img src="https://images.unsplash.com/photo-1758599543125-0a927f1d7a3b?auto=format&fit=crop&w=500&q=80" alt="Jade at work">
+        </div>
+        <div class="right">
+          <h2 class="sec-h" style="margin-bottom:14px">QUALI&shy;FICATIONS</h2>
+          <div class="cert">
+            <div class="u">University of Higher Education</div>
+            <div class="t">Bachelor of Marketing</div>
+            <div class="b">First Class Honours · 2022</div>
+            <div class="seal">★</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== MY WORK INCLUDES + CASE STUDY ===== -->
+  <div class="row2">
+    <section class="panel reveal" id="work">
+      <div class="work-head"><h2 class="sec-h">MY WORK<br>INCLUDES</h2><span class="dots"><i></i><i></i><i></i></span></div>
+      <div class="grid3">
+        <div class="wcard"><div class="thumb"><img src="https://images.unsplash.com/photo-1586509580808-e1a9e455b537?auto=format&fit=crop&w=500&q=80" alt=""></div><h4>UGC Video</h4><p>Short & long form video content aligned with your brand's identity and goals.</p></div>
+        <div class="wcard"><div class="thumb"><img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=500&q=80" alt=""></div><h4>Branding & Aesthetic</h4><p>Cohesive branding through curated graphics, content styling and a consistent presence.</p></div>
+        <div class="wcard"><div class="thumb"><img src="https://images.unsplash.com/photo-1683721003111-070bcc053d8b?auto=format&fit=crop&w=500&q=80" alt=""></div><h4>SEO & Copywriting</h4><p>Research keywords and write copy to improve visibility and performance.</p></div>
+        <div class="wcard"><div class="thumb"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=500&q=80" alt=""></div><h4>Communication Strategy</h4><p>Tailored strategies to help brands connect clearly with their audience.</p></div>
+        <div class="wcard"><div class="thumb"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500&q=80" alt=""></div><h4>Meta Ads Campaigns</h4><p>Plan, manage and optimise Facebook & Instagram ad campaigns for reach and conversions.</p></div>
+        <div class="wcard"><div class="thumb"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=500&q=80" alt=""></div><h4>Content Planning</h4><p>Produce and organise strategic content that keeps audiences engaged.</p></div>
+      </div>
+    </section>
+
+    <section class="panel reveal" id="case">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px"><h2 class="sec-h">CASE STUDY</h2><span class="dots"><i></i><i></i><i></i></span></div>
+      <div class="case-item web">
+        <div class="info"><div class="lab">Website 01</div><p>A strong brand doesn't just look good, it speaks clearly. I audited the existing web presence, identified gaps in messaging and rebuilt the content strategy from the ground up — crafted to convert browsers into buyers.</p></div>
+        <div class="media"><img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=700&q=80" alt="Website redesign"></div>
+      </div>
+      <div class="case-item">
+        <div class="info"><div class="lab">Instagram Feed 02</div><p>A 30-day content calendar built around lifestyle and user-facing storytelling, with a cohesive visual identity — a feed that feels curated, not chaotic.</p></div>
+        <div class="media"><div class="feed">
+          <img src="https://images.unsplash.com/photo-1566150902887-9679ecc155ba?auto=format&fit=crop&w=300&q=70" alt="">
+          <img src="https://images.unsplash.com/photo-1596552639068-99bd471b579c?auto=format&fit=crop&w=300&q=70" alt="">
+          <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=300&q=70" alt="">
+          <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=300&q=70" alt="">
+          <img src="https://images.unsplash.com/photo-1591561954557-26941169b49e?auto=format&fit=crop&w=300&q=70" alt="">
+          <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=300&q=70" alt="">
+          <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=300&q=70" alt="">
+          <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=300&q=70" alt="">
+        </div></div>
+      </div>
+      <div class="case-item">
+        <div class="info"><div class="lab">Video Content 03</div><p>Short-form video is the engine of organic growth. I scripted, directed and delivered a series of Reels & TikToks styled around the brand aesthetic and designed for discoverability.</p></div>
+        <div class="media"><div class="phones">
+          <div class="ph"><img src="https://images.unsplash.com/photo-1739150386419-ee73cd9a1ed8?auto=format&fit=crop&w=300&q=70" alt=""></div>
+          <div class="ph"><img src="https://images.unsplash.com/photo-1673338585546-818cce22e1a5?auto=format&fit=crop&w=300&q=70" alt=""></div>
+          <div class="ph"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=70" alt=""></div>
+        </div></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== PHOTOGRAPHY ===== -->
+  <section class="panel reveal">
+    <div class="photo-head"><span class="add script">Additional</span><h2 class="sec-h">PHOTOGRAPHY</h2><span class="dots" style="margin-left:auto"><i></i><i></i><i></i></span></div>
+    <div class="grid4">
+      <div class="pcard"><div class="im"><img src="https://images.unsplash.com/photo-1493655161922-ef98929de9d8?auto=format&fit=crop&w=400&q=75" alt=""></div><div class="cn">Aria Studio</div><div class="cd">Lifestyle flatlay · product launch</div></div>
+      <div class="pcard"><div class="im"><img src="https://images.unsplash.com/photo-1564327368633-151ef1d45021?auto=format&fit=crop&w=400&q=75" alt=""></div><div class="cn">Brew & Co</div><div class="cd">Café brand · social shoot</div></div>
+      <div class="pcard"><div class="im"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=400&q=75" alt=""></div><div class="cn">Nord Home</div><div class="cd">Interior styling · editorial</div></div>
+      <div class="pcard"><div class="im"><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=400&q=75" alt=""></div><div class="cn">Lume Beauty</div><div class="cd">Cosmetics · campaign</div></div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="panel reveal" id="testi">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px"><h2 class="sec-h">TESTIMONIALS</h2><span class="dots"><i></i><i></i><i></i></span></div>
+    <div class="tgrid">
+      <div class="tc"><div class="qt">"</div><p>Jade transformed our feed completely. Engagement tripled in two months and our brand finally feels consistent everywhere.</p><div class="who2"><img class="av" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&q=70" alt=""><div><b>Sarah Mitchell</b><span>Founder · Bloom Skincare</span></div></div></div>
+      <div class="tc"><div class="qt">"</div><p>Professional, creative and data-driven. Our Meta ads ROAS doubled after Jade restructured the whole funnel.</p><div class="who2"><img class="av" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=70" alt=""><div><b>David Chen</b><span>CMO · Nova Fitness</span></div></div></div>
+      <div class="tc"><div class="qt">"</div><p>The content calendar Jade built runs like clockwork. Best social hire we've ever made, hands down.</p><div class="who2"><img class="av" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=70" alt=""><div><b>Emma Lawson</b><span>Owner · Craft & Co</span></div></div></div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="panel contact reveal" id="contact">
+    <h2>LET'S WORK TOGETHER<span class="burst">✳</span></h2>
+    <p>Ready to take control of your brand's narrative? Let's create something that connects.</p>
+    <button class="cbtn" onclick="alert('Trang mẫu demo — biểu mẫu liên hệ chưa được kết nối.')">Get in touch →</button>
+    <div class="cinfo"><span>✉ hello@jadetan.com</span><span>📞 +44 20 0000 0000</span><span>📍 London, UK</span></div>
+    <div class="socials">
+      <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.2-.4-4.7a2.5 2.5 0 0 0-1.8-1.8C19.2 5 12 5 12 5s-7.2 0-8.8.5A2.5 2.5 0 0 0 1.4 7.3C1 8.8 1 12 1 12s0 3.2.4 4.7a2.5 2.5 0 0 0 1.8 1.8C4.8 19 12 19 12 19s7.2 0 8.8-.5a2.5 2.5 0 0 0 1.8-1.8C23 15.2 23 12 23 12zM9.8 15.3V8.7l5.7 3.3-5.7 3.3z"/></svg></a>
+      <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></a>
+      <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.3 8.3L23 22h-6.6l-5.2-6.8L5.3 22H2l7.8-8.9L1.5 2h6.8l4.7 6.2L18.9 2z"/></svg></a>
+      <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.7l-.4 2.9h-2.3v7A10 10 0 0 0 22 12z"/></svg></a>
+    </div>
+  </section>
+
+</div>
+
+<script>
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
