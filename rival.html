@@ -1,7 +1,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>KAI — Social Media Strategist &amp; Viral Content Creator</title>
-<meta name="description" content="KAI NGUYEN — chiến lược gia mạng xã hội, sáng tạo nội dung viral. Tốc độ. Dữ liệu. Bùng nổ." />
+<title>KEN — Social Media Strategist &amp; Viral Content Creator</title>
+<meta name="description" content="KEN NGUYEN — chiến lược gia mạng xã hội, sáng tạo nội dung viral. Tốc độ. Dữ liệu. Bùng nổ." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -132,8 +132,8 @@ h2.sect{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,5vw,3.4rem)
   mask-image:radial-gradient(120% 100% at 50% 40%,#000 45%,transparent 85%)}
 
 .hero-grid{position:relative;z-index:2;display:grid;
-  grid-template-columns:1fr 1.55fr 1fr;align-items:stretch;
-  gap:clamp(12px,1.8vw,28px);
+  grid-template-columns:1.45fr 1.45fr 1fr;align-items:stretch;
+  gap:clamp(8px,1.2vw,20px);
   padding:clamp(28px,4vw,52px) clamp(20px,2.6vw,40px) 0}
 
 /* ---- LEFT column ---- */
@@ -144,8 +144,8 @@ h2.sect{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,5vw,3.4rem)
 .hero-sys .b{color:var(--violet);text-shadow:0 0 12px rgba(124,92,255,.7)}
 .hero-sys .c{color:var(--cyan);text-shadow:0 0 12px rgba(0,229,255,.6)}
 .hero h1{font-family:var(--disp);font-weight:700;
-  font-size:clamp(2.4rem,4.4vw,3.9rem);line-height:.98;
-  letter-spacing:-.03em;margin-bottom:22px;text-wrap:balance}
+  font-size:clamp(2.4rem,4.4vw,3.9rem);line-height:1.02;
+  letter-spacing:-.03em;margin-bottom:22px}
 .hero h1 .grad-text{filter:drop-shadow(0 0 30px rgba(124,92,255,.55))
   drop-shadow(0 0 48px rgba(0,229,255,.28))}
 .hero-lead{color:var(--ink-dim);font-size:1.02rem;max-width:34ch;margin-bottom:30px}
@@ -172,11 +172,14 @@ h2.sect{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,5vw,3.4rem)
   transform:translateX(-50%);border-radius:50%;z-index:0;pointer-events:none;
   background:radial-gradient(circle,rgba(124,92,255,.55),rgba(0,229,255,.18) 45%,transparent 70%);
   filter:blur(14px);opacity:.9}
-.hero-figure::after{content:"";position:absolute;left:0;right:0;bottom:0;height:40%;z-index:2;
-  pointer-events:none;background:linear-gradient(0deg,#0b0b11 4%,transparent)}
 .hero-figure img{position:relative;z-index:1;width:100%;max-width:none;
-  max-height:clamp(480px,62vw,820px);object-fit:contain;object-position:bottom center;
-  filter:drop-shadow(0 30px 60px rgba(0,0,0,.6))}
+  height:100%;max-height:clamp(560px,80vw,1040px);object-fit:cover;object-position:top center;
+  /* fade mọi mép để khối ảnh (nền đen) tan vào trang, hết vô duyên */
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 12% 82%,transparent 100%),
+    linear-gradient(to right,transparent 0,#000 14% 86%,transparent 100%);
+  -webkit-mask-composite:source-in;mask-composite:intersect;
+  mask-image:linear-gradient(to bottom,transparent 0,#000 12% 82%,transparent 100%),
+    linear-gradient(to right,transparent 0,#000 14% 86%,transparent 100%)}
 
 /* ---- RIGHT column: 3 service blocks ---- */
 .hero-svcs{display:flex;flex-direction:column;justify-content:center;gap:22px;
@@ -401,7 +404,7 @@ h2.sect{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,5vw,3.4rem)
 <!-- NAV -->
 <header class="nav" id="nav">
   <div class="nav-in">
-    <a href="#top" class="logo">KAI</a>
+    <a href="#top" class="logo">KEN</a>
     <nav class="nav-links">
       <a href="#about">About</a>
       <a href="#services">Services</a>
@@ -431,7 +434,7 @@ h2.sect{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,5vw,3.4rem)
         <!-- LEFT: title, lead, CTA, stats -->
         <div class="hero-left">
           <div class="hero-sys reveal" data-d="1"><span class="b">[ viral_engine v2.0 ]</span><span class="c">// ONLINE</span></div>
-          <h1 class="reveal" data-d="1">Tôi là KAI —<br><span class="grad-text">Viral là chuyện của tôi.</span></h1>
+          <h1 class="reveal" data-d="1">Tôi là KEN<br><span class="grad-text">Viral là<br>Chuyện Của Tôi.</span></h1>
           <p class="hero-lead reveal" data-d="2">Social Media Strategist &amp; Viral Content Creator. Tôi không làm nội dung đẹp — tôi làm nội dung bùng nổ, đo bằng lượt xem và doanh thu.</p>
           <div class="hero-cta reveal" data-d="2">
             <a href="#contact" class="btn btn-neon">Bắt đầu chiến dịch</a>
@@ -446,7 +449,7 @@ h2.sect{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,5vw,3.4rem)
 
         <!-- CENTER: cut-out portrait -->
         <div class="hero-figure reveal" data-d="2">
-          <img src="rival-img/kai-cutout.png" alt="KAI Nguyen — Social Media Strategist" loading="eager" />
+          <img src="rival-img/kai-cutout.png" alt="KEN Nguyen — Social Media Strategist" loading="eager" />
         </div>
 
         <!-- RIGHT: 3 services -->
@@ -500,7 +503,7 @@ h2.sect{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,5vw,3.4rem)
   <div class="wrap">
     <div class="about-grid">
       <div class="about-visual reveal">
-        <img src="rival-img/about.jpg" alt="Chân dung KAI Nguyen" loading="lazy" />
+        <img src="rival-img/about.jpg" alt="Chân dung KEN Nguyen" loading="lazy" />
         <div class="corner">STATUS: <b>ONLINE</b> · đang chạy 7 chiến dịch · uptime 99.9%</div>
       </div>
       <div class="about reveal" data-d="1">
@@ -712,17 +715,17 @@ h2.sect{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,5vw,3.4rem)
     <div class="quotes">
       <div class="quote reveal" data-d="1">
         <div class="mark">"</div>
-        <p>KAI không hứa hẹn màu mè. Anh ấy đưa dashboard ra, chỉ vào con số và nói "tuần sau nó sẽ ở đây". Rồi nó ở đúng đó. Đáng sợ theo kiểu tốt nhất.</p>
+        <p>KEN không hứa hẹn màu mè. Anh ấy đưa dashboard ra, chỉ vào con số và nói "tuần sau nó sẽ ở đây". Rồi nó ở đúng đó. Đáng sợ theo kiểu tốt nhất.</p>
         <div class="who"><div class="av">L</div><div><b>Linh Trần</b><span>Founder · Glow Skincare</span></div></div>
       </div>
       <div class="quote reveal" data-d="2">
         <div class="mark">"</div>
-        <p>Chúng tôi cháy hàng lô đầu trong 3 ngày. Ba ngày. Trước khi gặp KAI tôi còn không tin mạng xã hội bán được đồ. Giờ tôi không dám tưởng tượng thiếu anh ấy.</p>
+        <p>Chúng tôi cháy hàng lô đầu trong 3 ngày. Ba ngày. Trước khi gặp KEN tôi còn không tin mạng xã hội bán được đồ. Giờ tôi không dám tưởng tượng thiếu anh ấy.</p>
         <div class="who"><div class="av">H</div><div><b>Huy Phạm</b><span>CEO · North Street</span></div></div>
       </div>
       <div class="quote reveal" data-d="3">
         <div class="mark">"</div>
-        <p>Ai cũng bảo SaaS B2B không thể viral. KAI làm nó viral trong 3 tuần và cắt CAC hơn một nửa. Anh ấy đọc thuật toán như tôi đọc code.</p>
+        <p>Ai cũng bảo SaaS B2B không thể viral. KEN làm nó viral trong 3 tuần và cắt CAC hơn một nửa. Anh ấy đọc thuật toán như tôi đọc code.</p>
         <div class="who"><div class="av">M</div><div><b>Minh Đỗ</b><span>Co-founder · Flowstack</span></div></div>
       </div>
     </div>
@@ -750,9 +753,9 @@ h2.sect{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,5vw,3.4rem)
 <!-- FOOTER -->
 <footer class="footer">
   <div class="wrap footer-in">
-    <a href="#top" class="logo">KAI</a>
+    <a href="#top" class="logo">KEN</a>
     <span class="tagline">Speed. Data. Virality.</span>
-    <span class="cp">© 2026 KAI NGUYEN — Viral Content Studio</span>
+    <span class="cp">© 2026 KEN NGUYEN — Viral Content Studio</span>
   </div>
 </footer>
 
