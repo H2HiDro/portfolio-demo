@@ -1,0 +1,704 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KAI ⚡ — Social Media Strategist &amp; Viral Content Creator</title>
+<meta name="description" content="KAI NGUYEN — chiến lược gia mạng xã hội, sáng tạo nội dung viral. Tốc độ. Dữ liệu. Bùng nổ." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#0a0a0f;
+  --bg-2:#101018;
+  --bg-3:#14141f;
+  --ink:#f4f5fb;
+  --ink-dim:#a7a9c0;
+  --ink-faint:#6f7192;
+  --line:rgba(255,255,255,.08);
+  --line-2:rgba(255,255,255,.14);
+  --violet:#7c5cff;
+  --cyan:#00e5ff;
+  --magenta:#ff2d78;
+  --glass:rgba(255,255,255,.03);
+  --grad:linear-gradient(115deg,var(--violet),var(--cyan) 55%,var(--magenta));
+  --grad-vm:linear-gradient(120deg,var(--violet),var(--magenta));
+  --shadow-neon:0 0 0 1px rgba(124,92,255,.25),0 10px 40px -10px rgba(124,92,255,.5);
+  --maxw:1200px;
+  --sans:"Be Vietnam Pro",system-ui,-apple-system,sans-serif;
+  --disp:"Space Grotesk",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  position:relative;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--magenta);color:#fff}
+
+/* ============ BACKGROUND FX ============ */
+.bg-fx{position:fixed;inset:0;z-index:-2;pointer-events:none}
+.bg-fx .grid{
+  position:absolute;inset:-2px;
+  background-image:
+    linear-gradient(rgba(124,92,255,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,229,255,.05) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 30%,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 30%,transparent 75%);
+}
+.bg-fx .blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;animation:drift 22s ease-in-out infinite}
+.bg-fx .b1{width:520px;height:520px;background:radial-gradient(circle,#7c5cff,transparent 70%);top:-160px;left:-120px}
+.bg-fx .b2{width:480px;height:480px;background:radial-gradient(circle,#00e5ff,transparent 70%);top:40%;right:-160px;animation-delay:-7s}
+.bg-fx .b3{width:420px;height:420px;background:radial-gradient(circle,#ff2d78,transparent 70%);bottom:-140px;left:30%;animation-delay:-14s}
+@keyframes drift{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(40px,-30px) scale(1.08)}
+  66%{transform:translate(-30px,30px) scale(.94)}
+}
+.scanlines{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;
+  background:repeating-linear-gradient(to bottom,transparent 0 2px,rgba(0,0,0,.14) 2px 3px);
+  mix-blend-mode:overlay}
+.noise{position:fixed;inset:0;z-index:1000;pointer-events:none;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ============ LAYOUT ============ */
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+section{position:relative;padding:110px 0}
+.eyebrow{
+  font-family:var(--mono);font-size:12px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--cyan);display:inline-flex;align-items:center;gap:10px;margin-bottom:22px}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
+h2.sect{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,5vw,3.4rem);line-height:1.04;letter-spacing:-.02em}
+.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ============ NAV ============ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:900;transition:.35s}
+.nav-in{display:flex;align-items:center;justify-content:space-between;
+  height:70px;padding:0 24px;max-width:var(--maxw);margin:0 auto}
+.nav.scrolled{background:rgba(10,10,15,.72);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.logo{font-family:var(--disp);font-weight:700;font-size:1.35rem;letter-spacing:-.02em;display:flex;align-items:center;gap:2px}
+.logo .z{color:var(--cyan);text-shadow:0 0 14px var(--cyan);animation:flick 5s infinite}
+@keyframes flick{0%,92%,100%{opacity:1}94%{opacity:.4}96%{opacity:1}}
+.nav-links{display:flex;align-items:center;gap:30px}
+.nav-links a{font-size:.9rem;color:var(--ink-dim);position:relative;transition:.2s;font-weight:500}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--grad);transition:.25s}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{width:100%}
+.btn{font-family:var(--disp);font-weight:600;font-size:.9rem;padding:12px 22px;border-radius:12px;
+  display:inline-flex;align-items:center;gap:8px;cursor:pointer;border:none;transition:.25s;white-space:nowrap}
+.btn-neon{background:var(--grad-vm);color:#fff;box-shadow:var(--shadow-neon);background-size:180% 180%}
+.btn-neon:hover{background-position:100% 0;transform:translateY(-2px);box-shadow:0 0 0 1px rgba(255,45,120,.4),0 14px 44px -8px rgba(255,45,120,.6)}
+.btn-ghost{background:var(--glass);color:var(--ink);border:1px solid var(--line-2)}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 22px -6px var(--cyan)}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:1px solid var(--line-2);
+  border-radius:10px;padding:10px;cursor:pointer}
+.burger span{width:20px;height:2px;background:var(--ink);transition:.25s;border-radius:2px}
+.nav.open .burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav.open .burger span:nth-child(2){opacity:0}
+.nav.open .burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.drawer{position:fixed;inset:70px 0 auto 0;background:rgba(10,10,15,.97);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--line);padding:24px;display:none;flex-direction:column;gap:6px;z-index:899;
+  transform:translateY(-12px);opacity:0;transition:.28s}
+.drawer.show{display:flex;transform:translateY(0);opacity:1}
+.drawer a{padding:14px 12px;font-family:var(--disp);font-size:1.15rem;border-bottom:1px solid var(--line);color:var(--ink-dim)}
+.drawer a:last-of-type{border:none}
+.drawer .btn{margin-top:14px;justify-content:center}
+
+/* ============ HERO ============ */
+.hero{padding:150px 0 90px;min-height:100vh;display:flex;align-items:center}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;width:100%}
+.hero .tag{font-family:var(--mono);font-size:12.5px;letter-spacing:.2em;color:var(--ink-dim);
+  border:1px solid var(--line-2);border-radius:100px;padding:8px 16px;display:inline-flex;gap:9px;align-items:center;
+  background:var(--glass);margin-bottom:26px}
+.hero .tag .dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-family:var(--disp);font-weight:700;font-size:clamp(2.5rem,6.4vw,5rem);line-height:.98;
+  letter-spacing:-.03em;margin-bottom:26px}
+.hero h1 .burst{position:relative;display:inline-block}
+.hero h1 .burst .grad-text{filter:drop-shadow(0 0 26px rgba(124,92,255,.5))}
+.hero p.lead{font-size:clamp(1.02rem,1.6vw,1.2rem);color:var(--ink-dim);max-width:520px;margin-bottom:34px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:40px}
+.hero-cta .btn{padding:15px 26px;font-size:.95rem}
+.hero-stats{display:flex;gap:30px;flex-wrap:wrap}
+.hero-stats .st{}
+.hero-stats .st b{font-family:var(--disp);font-size:clamp(1.5rem,3vw,2rem);font-weight:700;display:block;line-height:1}
+.hero-stats .st span{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--ink-faint);text-transform:uppercase}
+.hero-visual{position:relative}
+.hero-frame{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:3/4;
+  border:1px solid var(--line-2);box-shadow:0 30px 80px -30px rgba(124,92,255,.6)}
+.hero-frame::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(160deg,transparent 40%,rgba(10,10,15,.5));mix-blend-mode:multiply}
+.hero-frame::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),inset 0 0 90px rgba(0,229,255,.16)}
+.hero-frame img{width:100%;height:100%;object-fit:cover;filter:saturate(1.1) contrast(1.05)}
+.hero-badge{position:absolute;z-index:3;background:rgba(10,10,15,.78);backdrop-filter:blur(10px);
+  border:1px solid var(--line-2);border-radius:14px;padding:12px 16px;box-shadow:0 12px 40px -12px #000}
+.hero-badge b{font-family:var(--disp);font-size:1.35rem;display:block;line-height:1}
+.hero-badge span{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--ink-faint);text-transform:uppercase}
+.hero-badge.hb1{top:22px;left:-18px}
+.hero-badge.hb2{bottom:26px;right:-18px}
+.hero-badge.hb2 b{color:var(--cyan);text-shadow:0 0 16px rgba(0,229,255,.6)}
+.hero-badge.hb1 b{color:var(--magenta);text-shadow:0 0 16px rgba(255,45,120,.6)}
+
+/* ============ MARQUEE ============ */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg,rgba(124,92,255,.08),rgba(0,229,255,.05),rgba(255,45,120,.08));
+  padding:20px 0;overflow:hidden;white-space:nowrap;position:relative}
+.marquee-track{display:inline-flex;gap:0;animation:scrollx 26s linear infinite;will-change:transform}
+.marquee-track span{font-family:var(--disp);font-weight:700;font-size:1.5rem;letter-spacing:.02em;padding:0 26px;
+  text-transform:uppercase;color:var(--ink)}
+.marquee-track span i{color:var(--cyan);font-style:normal;padding:0 20px;text-shadow:0 0 12px var(--cyan)}
+.marquee-track span:nth-child(even){color:transparent;-webkit-text-stroke:1px var(--ink-faint)}
+@keyframes scrollx{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ============ ABOUT ============ */
+.about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.about-visual{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/5;border:1px solid var(--line-2)}
+.about-visual img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05)}
+.about-visual::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 80px rgba(124,92,255,.28);
+  border-radius:20px;pointer-events:none}
+.about-visual .corner{position:absolute;bottom:16px;left:16px;right:16px;z-index:2;
+  background:rgba(10,10,15,.72);backdrop-filter:blur(10px);border:1px solid var(--line-2);
+  border-radius:12px;padding:14px 16px;font-family:var(--mono);font-size:12px;color:var(--ink-dim)}
+.about-visual .corner b{color:var(--cyan)}
+.about h2{margin-bottom:24px}
+.about .story p{color:var(--ink-dim);margin-bottom:18px;font-size:1.03rem}
+.about .story p strong{color:var(--ink)}
+.manifesto{margin:30px 0 6px;padding:22px 24px;border-radius:16px;background:var(--glass);
+  border:1px solid var(--line-2);border-left:3px solid var(--magenta)}
+.manifesto q{font-family:var(--disp);font-weight:600;font-size:1.2rem;line-height:1.35;display:block;quotes:none}
+.beliefs{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:26px}
+.beliefs li{font-family:var(--mono);font-size:13px;color:var(--ink-dim);padding:12px 14px;
+  border:1px solid var(--line);border-radius:11px;background:var(--bg-2);display:flex;gap:10px;align-items:flex-start}
+.beliefs li b{color:var(--cyan);flex-shrink:0}
+
+/* ============ SERVICES ============ */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
+.svc{position:relative;padding:28px;border-radius:18px;background:var(--bg-2);
+  border:1px solid var(--line);overflow:hidden;transition:.3s}
+.svc::before{content:"";position:absolute;inset:0;border-radius:18px;padding:1px;background:var(--grad);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:.3s}
+.svc:hover{transform:translateY(-6px);background:var(--bg-3)}
+.svc:hover::before{opacity:1}
+.svc .no{font-family:var(--mono);font-size:12px;color:var(--ink-faint);letter-spacing:.1em}
+.svc .ic{font-size:1.7rem;margin:8px 0 14px}
+.svc h3{font-family:var(--disp);font-weight:600;font-size:1.25rem;margin-bottom:10px}
+.svc p{color:var(--ink-dim);font-size:.95rem;margin-bottom:14px}
+.svc ul{list-style:none;display:flex;flex-wrap:wrap;gap:7px}
+.svc ul li{font-family:var(--mono);font-size:11px;color:var(--cyan);border:1px solid rgba(0,229,255,.25);
+  border-radius:100px;padding:5px 10px;background:rgba(0,229,255,.05)}
+
+/* ============ WORK ============ */
+.case{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:64px}
+.case:first-of-type{margin-top:52px}
+.case.rev .case-media{order:2}
+.case-media{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3;border:1px solid var(--line-2)}
+.case-media img{width:100%;height:100%;object-fit:cover;filter:saturate(1.08) contrast(1.04);transition:.5s}
+.case:hover .case-media img{transform:scale(1.05)}
+.case-media::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 70px rgba(124,92,255,.3);pointer-events:none}
+.case-media .badge{position:absolute;top:14px;left:14px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.1em;text-transform:uppercase;background:rgba(10,10,15,.8);backdrop-filter:blur(8px);
+  border:1px solid var(--line-2);border-radius:8px;padding:7px 12px;color:var(--cyan)}
+.case-body .cat{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--magenta)}
+.case-body h3{font-family:var(--disp);font-weight:700;font-size:clamp(1.5rem,3vw,2.1rem);margin:8px 0 16px;line-height:1.05}
+.case-body .desc{color:var(--ink-dim);margin-bottom:12px}
+.case-body .how{color:var(--ink-dim);font-size:.95rem;margin-bottom:24px;padding-left:16px;border-left:2px solid var(--line-2)}
+.case-body .how b{color:var(--ink)}
+.case-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.cm{background:var(--bg-2);border:1px solid var(--line);border-radius:14px;padding:16px 14px;text-align:center}
+.cm b{font-family:var(--disp);font-weight:700;font-size:clamp(1.4rem,3.2vw,1.9rem);display:block;line-height:1;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cm span{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);margin-top:6px;display:block}
+
+/* ============ RESULTS COUNTER ============ */
+.results{background:linear-gradient(180deg,transparent,rgba(124,92,255,.05),transparent)}
+.metrics-band{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:52px}
+.metric{text-align:center;padding:34px 18px;border-radius:20px;background:var(--glass);
+  border:1px solid var(--line-2);position:relative;overflow:hidden}
+.metric::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:60%;height:2px;
+  background:var(--grad);filter:blur(1px)}
+.metric .num{font-family:var(--disp);font-weight:700;font-size:clamp(2.2rem,5vw,3.4rem);line-height:1;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 22px rgba(0,229,255,.35))}
+.metric .num .suf{font-size:.55em;-webkit-text-fill-color:var(--cyan)}
+.metric .lbl{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim);margin-top:12px}
+
+/* ============ SKILLS ============ */
+.chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:44px}
+.chip{font-family:var(--mono);font-size:13px;padding:11px 18px;border-radius:100px;
+  background:var(--bg-2);border:1px solid var(--line-2);color:var(--ink-dim);transition:.25s;cursor:default}
+.chip:hover{color:var(--ink);border-color:var(--violet);box-shadow:0 0 20px -6px var(--violet);transform:translateY(-2px)}
+.chip .b{color:var(--magenta)}
+
+/* ============ TESTIMONIALS ============ */
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
+.quote{padding:28px;border-radius:18px;background:var(--bg-2);border:1px solid var(--line);position:relative}
+.quote .mark{font-family:var(--disp);font-size:3rem;line-height:.6;color:var(--violet);opacity:.4}
+.quote p{color:var(--ink);font-size:1.02rem;margin:8px 0 22px}
+.quote .who{display:flex;align-items:center;gap:12px}
+.quote .av{width:42px;height:42px;border-radius:50%;background:var(--grad-vm);display:grid;place-items:center;
+  font-family:var(--disp);font-weight:700;color:#fff;flex-shrink:0}
+.quote .who b{font-family:var(--disp);font-size:.95rem;display:block}
+.quote .who span{font-family:var(--mono);font-size:11px;color:var(--ink-faint)}
+
+/* ============ CONTACT ============ */
+.contact{text-align:center;padding:120px 0}
+.contact-card{position:relative;border-radius:28px;padding:70px 30px;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 0%,rgba(124,92,255,.16),transparent 60%),var(--bg-2);
+  border:1px solid var(--line-2)}
+.contact-card::before{content:"";position:absolute;inset:0;border-radius:28px;padding:1px;background:var(--grad);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;opacity:.6}
+.contact h2{font-family:var(--disp);font-weight:700;font-size:clamp(2.2rem,6vw,4rem);line-height:1;letter-spacing:-.02em;margin-bottom:20px}
+.contact p{color:var(--ink-dim);max-width:520px;margin:0 auto 34px;font-size:1.08rem}
+.contact .mail{font-family:var(--disp);font-size:clamp(1.2rem,3vw,1.7rem);color:var(--cyan);
+  text-shadow:0 0 20px rgba(0,229,255,.4);display:inline-block;margin-bottom:30px;transition:.2s}
+.contact .mail:hover{text-shadow:0 0 30px rgba(0,229,255,.7)}
+.socials{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.socials a{font-family:var(--mono);font-size:13px;padding:11px 20px;border-radius:100px;
+  border:1px solid var(--line-2);color:var(--ink-dim);transition:.25s;background:var(--glass)}
+.socials a:hover{color:var(--ink);border-color:var(--magenta);box-shadow:0 0 20px -6px var(--magenta)}
+
+/* ============ FOOTER ============ */
+.footer{border-top:1px solid var(--line);padding:44px 0}
+.footer-in{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.footer .logo{font-size:1.15rem}
+.footer .tagline{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan)}
+.footer .cp{font-family:var(--mono);font-size:12px;color:var(--ink-faint)}
+
+/* ============ REVEAL ============ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal[data-d="1"]{transition-delay:.08s}
+.reveal[data-d="2"]{transition-delay:.16s}
+.reveal[data-d="3"]{transition-delay:.24s}
+.reveal[data-d="4"]{transition-delay:.32s}
+.reveal[data-d="5"]{transition-delay:.4s}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:940px){
+  .nav-links{display:none}
+  .burger{display:flex}
+  .hero-grid,.about-grid,.case,.case.rev .case-media{grid-template-columns:1fr}
+  .case.rev .case-media{order:0}
+  .hero-visual{max-width:400px;margin:0 auto;order:-1}
+  .svc-grid,.quotes{grid-template-columns:1fr 1fr}
+  .metrics-band{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  section{padding:78px 0}
+  .wrap{padding:0 18px}
+  .svc-grid,.quotes,.metrics-band,.beliefs,.case-metrics{grid-template-columns:1fr}
+  .case-metrics{grid-template-columns:repeat(3,1fr)}
+  .hero{padding:120px 0 60px;min-height:auto}
+  .hero-badge.hb1{left:8px}
+  .hero-badge.hb2{right:8px}
+  .hero-stats{gap:22px}
+  .nav-in{padding:0 18px}
+  .contact-card{padding:48px 20px}
+  .marquee-track span{font-size:1.2rem}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+
+<div class="bg-fx" aria-hidden="true">
+  <div class="grid"></div>
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+</div>
+<div class="scanlines" aria-hidden="true"></div>
+<div class="noise" aria-hidden="true"></div>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a href="#top" class="logo">KAI<span class="z">⚡</span></a>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#results">Results</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="btn btn-neon" style="margin-left:auto">Bắt đầu chiến dịch</a>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="drawer" id="drawer">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#work">Work</a>
+    <a href="#results">Results</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="btn btn-neon">Bắt đầu chiến dịch</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="tag reveal"><span class="dot"></span>SOCIAL MEDIA STRATEGIST · VIRAL CONTENT</span>
+        <h1 class="reveal" data-d="1">TÔI KHÔNG LÀM<br>NỘI DUNG ĐẸP.<br><span class="burst"><span class="grad-text">TÔI LÀM NỘI DUNG<br>BÙNG NỔ.</span></span></h1>
+        <p class="lead reveal" data-d="2">Xin chào, tôi là <strong style="color:var(--ink)">KAI</strong> — chiến lược gia mạng xã hội bị ám ảnh bởi thuật toán, dữ liệu và tốc độ lan truyền. Tôi biến brand vô danh thành hiện tượng chỉ trong vài tuần.</p>
+        <div class="hero-cta reveal" data-d="3">
+          <a href="#work" class="btn btn-neon">Xem case study viral →</a>
+          <a href="#contact" class="btn btn-ghost">Book một cuộc gọi</a>
+        </div>
+        <div class="hero-stats reveal" data-d="4">
+          <div class="st"><b class="grad-text">2.4B+</b><span>Lượt xem tạo ra</span></div>
+          <div class="st"><b class="grad-text">850K+</b><span>Follower kéo về</span></div>
+          <div class="st"><b class="grad-text">12x</b><span>ROAS trung bình</span></div>
+        </div>
+      </div>
+      <div class="hero-visual reveal" data-d="2">
+        <div class="hero-frame">
+          <img src="rival-img/hero.jpg" alt="KAI Nguyen giữa biển đèn neon" loading="eager" />
+        </div>
+        <div class="hero-badge hb1"><b>#1</b><span>Trending trong 6h</span></div>
+        <div class="hero-badge hb2"><b>+318%</b><span>Reach 30 ngày</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>VIRAL <i>·</i> GROWTH <i>·</i> ALGORITHM <i>·</i> SPEED <i>·</i> DATA <i>·</i> TREND <i>·</i> HOOK <i>·</i> SCALE <i>·</i></span>
+    <span>VIRAL <i>·</i> GROWTH <i>·</i> ALGORITHM <i>·</i> SPEED <i>·</i> DATA <i>·</i> TREND <i>·</i> HOOK <i>·</i> SCALE <i>·</i></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <img src="rival-img/about.jpg" alt="Chân dung KAI Nguyen" loading="lazy" />
+        <div class="corner">STATUS: <b>ONLINE</b> · đang chạy 7 chiến dịch · uptime 99.9%</div>
+      </div>
+      <div class="about reveal" data-d="1">
+        <span class="eyebrow">// ABOUT — DÒNG LỆNH CỦA TÔI</span>
+        <h2 class="sect">Tôi lớn lên trên<br><span class="grad-text">bảng xếp hạng trending.</span></h2>
+        <div class="story">
+          <p>Tôi bắt đầu từ con số 0 — một chiếc điện thoại, một tài khoản trống và nỗi ám ảnh: <strong>tại sao clip này viral còn clip kia thì chìm?</strong> Tôi mổ xẻ từng cú hook, từng giây retention, từng khung giờ đăng, cho tới khi tôi đọc được thuật toán như đọc bản đồ.</p>
+          <p>Video đầu tiên của tôi chạm mốc 10 triệu view sau 48 giờ. Video thứ mười, tôi đã biết chính xác <strong>tại sao</strong>. Giờ tôi làm điều đó cho các brand trẻ, startup và D2C — không phải bằng may mắn, mà bằng <strong>dữ liệu, tốc độ và sự táo bạo</strong>.</p>
+        </div>
+        <div class="manifesto">
+          <q>Nội dung đẹp mà không ai xem thì vô nghĩa. Tôi không tô vẽ — tôi làm cho người ta phải dừng ngón tay lại.</q>
+        </div>
+        <ul class="beliefs">
+          <li><b>›</b> Hook 3 giây quan trọng hơn 3 giờ chăm chút.</li>
+          <li><b>›</b> Data không nói dối. Cảm tính thì có.</li>
+          <li><b>›</b> Trend hôm nay, doanh thu ngày mai.</li>
+          <li><b>›</b> Tốc độ là lợi thế không thể sao chép.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <span class="eyebrow reveal">// WHAT I DO — VŨ KHÍ CỦA TÔI</span>
+    <h2 class="sect reveal" data-d="1">Sáu cách tôi làm <span class="grad-text">brand của bạn nổ.</span></h2>
+    <div class="svc-grid">
+      <div class="svc reveal" data-d="1">
+        <div class="no">01</div><div class="ic">🚀</div>
+        <h3>Viral Content Strategy</h3>
+        <p>Bản đồ nội dung được thiết kế để lan truyền, không phải để đăng cho có. Mỗi post có một nhiệm vụ.</p>
+        <ul><li>Hook engineering</li><li>Retention curve</li><li>Content pillar</li></ul>
+      </div>
+      <div class="svc reveal" data-d="2">
+        <div class="no">02</div><div class="ic">📈</div>
+        <h3>Growth Hacking</h3>
+        <p>Kéo follower thật bằng chiến thuật thật. Không mua bot, không ảo — chỉ tăng trưởng bền và nhanh.</p>
+        <ul><li>Loop viral</li><li>A/B testing</li><li>Funnel</li></ul>
+      </div>
+      <div class="svc reveal" data-d="3">
+        <div class="no">03</div><div class="ic">🎬</div>
+        <h3>Short-form Video Factory</h3>
+        <p>Dây chuyền sản xuất Reels &amp; TikTok tốc độ cao. Đủ số lượng để test, đủ chất lượng để nổ.</p>
+        <ul><li>Scripting</li><li>Editing</li><li>Batch 30/tháng</li></ul>
+      </div>
+      <div class="svc reveal" data-d="1">
+        <div class="no">04</div><div class="ic">⚡</div>
+        <h3>Trend-jacking</h3>
+        <p>Bắt trend trong vài giờ, không phải vài ngày. Khi đối thủ còn họp, brand bạn đã lên top.</p>
+        <ul><li>Real-time radar</li><li>Rapid response</li><li>Sound trend</li></ul>
+      </div>
+      <div class="svc reveal" data-d="2">
+        <div class="no">05</div><div class="ic">🎯</div>
+        <h3>Paid Ads Scaling</h3>
+        <p>Đổ dầu vào lửa. Khi một nội dung đã chứng minh viral, tôi scale nó tới ROAS hai chữ số.</p>
+        <ul><li>Meta / TikTok Ads</li><li>Creative testing</li><li>Scaling</li></ul>
+      </div>
+      <div class="svc reveal" data-d="3">
+        <div class="no">06</div><div class="ic">📊</div>
+        <h3>Data &amp; Analytics</h3>
+        <p>Mọi quyết định đều dựa trên số. Tôi đọc dashboard như đọc tương lai của brand bạn.</p>
+        <ul><li>Attribution</li><li>Dashboard</li><li>Insight report</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="wrap">
+    <span class="eyebrow reveal">// SELECTED WORK — BẰNG CHỨNG BẰNG SỐ</span>
+    <h2 class="sect reveal" data-d="1">Không kể chuyện.<br><span class="grad-text">Chỉ đưa số liệu.</span></h2>
+
+    <!-- Case 1 -->
+    <div class="case reveal">
+      <div class="case-media">
+        <img src="case-1.jpg" alt="Chiến dịch short-form cho brand D2C" loading="lazy" />
+        <span class="badge">CASE 01</span>
+      </div>
+      <div class="case-body">
+        <span class="cat">D2C · Skincare startup</span>
+        <h3>Từ 0 tới cháy hàng trong 21 ngày</h3>
+        <p class="desc">Một brand skincare mới toanh, không ai biết đến, ngân sách nhỏ. Nhiệm vụ: tạo tiếng vang trước khi mở bán.</p>
+        <p class="how"><b>Cách làm:</b> Dựng dây chuyền 40 clip short-form quanh 3 hook đã test, cưỡi 2 trend sound đúng thời điểm, rồi scale clip thắng bằng paid ads.</p>
+        <div class="case-metrics">
+          <div class="cm"><b>68M</b><span>Views / 21 ngày</span></div>
+          <div class="cm"><b>SOLD OUT</b><span>Lô đầu tiên</span></div>
+          <div class="cm"><b>9.4x</b><span>ROAS</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 2 -->
+    <div class="case rev reveal">
+      <div class="case-media">
+        <img src="case-2.jpg" alt="Chiến dịch streetwear neon" loading="lazy" />
+        <span class="badge">CASE 02</span>
+      </div>
+      <div class="case-body">
+        <span class="cat">Streetwear · Local brand</span>
+        <h3>Biến drop thành sự kiện được chờ đợi</h3>
+        <p class="desc">Brand streetwear muốn mỗi lần ra bộ sưu tập là một hiện tượng, không phải một thông báo bị lướt qua.</p>
+        <p class="how"><b>Cách làm:</b> Hệ thống teaser đếm ngược, UGC challenge có thưởng, và một hook "mở hộp" quay chậm khiến người xem phải xem lại.</p>
+        <div class="case-metrics">
+          <div class="cm"><b>+240K</b><span>Follower mới</span></div>
+          <div class="cm"><b>3 phút</b><span>Cháy drop</span></div>
+          <div class="cm"><b>15x</b><span>Engagement</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 3 -->
+    <div class="case reveal">
+      <div class="case-media">
+        <img src="case-3.jpg" alt="Creator brand cà phê" loading="lazy" />
+        <span class="badge">CASE 03</span>
+      </div>
+      <div class="case-body">
+        <span class="cat">F&amp;B · Chuỗi cà phê</span>
+        <h3>Một chiếc ly viral, ba chi nhánh mới</h3>
+        <p class="desc">Chuỗi cà phê nhỏ với ngân sách marketing gần như bằng 0, cần được cả thành phố nói về.</p>
+        <p class="how"><b>Cách làm:</b> Thiết kế một "signature moment" cực dễ quay, biến khách hàng thành người sản xuất nội dung, kích hoạt vòng lặp viral tự chạy.</p>
+        <div class="case-metrics">
+          <div class="cm"><b>112M</b><span>Views tự nhiên</span></div>
+          <div class="cm"><b>+3</b><span>Chi nhánh mở</span></div>
+          <div class="cm"><b>0đ</b><span>Chi phí ads</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 4 -->
+    <div class="case rev reveal">
+      <div class="case-media">
+        <img src="case-4.jpg" alt="Studio setup neon" loading="lazy" />
+        <span class="badge">CASE 04</span>
+      </div>
+      <div class="case-body">
+        <span class="cat">Tech · SaaS startup</span>
+        <h3>Làm cho sản phẩm "chán" trở nên gây nghiện</h3>
+        <p class="desc">Một SaaS B2B khô khan, khó kể chuyện, khó viral. Ai cũng bảo "ngành này không hợp mạng xã hội".</p>
+        <p class="how"><b>Cách làm:</b> Biến pain point của người dùng thành meme, dựng series "1 phút hack năng suất", và để dữ liệu thực chứng minh giá trị.</p>
+        <div class="case-metrics">
+          <div class="cm"><b>41M</b><span>Views</span></div>
+          <div class="cm"><b>6.200</b><span>Sign-up mới</span></div>
+          <div class="cm"><b>-58%</b><span>Chi phí CAC</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section id="results" class="results">
+  <div class="wrap">
+    <span class="eyebrow reveal">// BY THE NUMBERS — TỔNG KẾT</span>
+    <h2 class="sect reveal" data-d="1">Sự nghiệp của tôi, <span class="grad-text">tính bằng con số.</span></h2>
+    <div class="metrics-band">
+      <div class="metric reveal" data-d="1">
+        <div class="num" data-target="2.4" data-dec="1" data-suf="B+"><span class="counter">0</span><span class="suf">B+</span></div>
+        <div class="lbl">Tổng lượt xem tạo ra</div>
+      </div>
+      <div class="metric reveal" data-d="2">
+        <div class="num" data-target="850" data-dec="0" data-suf="K+"><span class="counter">0</span><span class="suf">K+</span></div>
+        <div class="lbl">Follower kéo về</div>
+      </div>
+      <div class="metric reveal" data-d="3">
+        <div class="num" data-target="12" data-dec="0" data-suf="x"><span class="counter">0</span><span class="suf">x</span></div>
+        <div class="lbl">ROAS trung bình</div>
+      </div>
+      <div class="metric reveal" data-d="4">
+        <div class="num" data-target="400" data-dec="0" data-suf="+"><span class="counter">0</span><span class="suf">+</span></div>
+        <div class="lbl">Chiến dịch đã chạy</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <span class="eyebrow reveal">// STACK — CÔNG CỤ &amp; KỸ NĂNG</span>
+    <h2 class="sect reveal" data-d="1">Vũ khí <span class="grad-text">tôi luôn mang theo.</span></h2>
+    <div class="chips">
+      <div class="chip reveal"><span class="b">›</span> TikTok Algorithm</div>
+      <div class="chip reveal"><span class="b">›</span> Meta Ads</div>
+      <div class="chip reveal"><span class="b">›</span> Growth Hacking</div>
+      <div class="chip reveal"><span class="b">›</span> Trend Analysis</div>
+      <div class="chip reveal"><span class="b">›</span> Hook Engineering</div>
+      <div class="chip reveal"><span class="b">›</span> CapCut</div>
+      <div class="chip reveal"><span class="b">›</span> Data Studio</div>
+      <div class="chip reveal"><span class="b">›</span> Short-form Video</div>
+      <div class="chip reveal"><span class="b">›</span> Reels Strategy</div>
+      <div class="chip reveal"><span class="b">›</span> A/B Testing</div>
+      <div class="chip reveal"><span class="b">›</span> UGC Campaign</div>
+      <div class="chip reveal"><span class="b">›</span> Funnel Design</div>
+      <div class="chip reveal"><span class="b">›</span> Attribution</div>
+      <div class="chip reveal"><span class="b">›</span> Copywriting sắc</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="wrap">
+    <span class="eyebrow reveal">// FOUNDERS SAY — NGƯỜI TA NÓI GÌ</span>
+    <h2 class="sect reveal" data-d="1">Founder không khen suông.<br><span class="grad-text">Họ khen bằng doanh thu.</span></h2>
+    <div class="quotes">
+      <div class="quote reveal" data-d="1">
+        <div class="mark">"</div>
+        <p>KAI không hứa hẹn màu mè. Anh ấy đưa dashboard ra, chỉ vào con số và nói "tuần sau nó sẽ ở đây". Rồi nó ở đúng đó. Đáng sợ theo kiểu tốt nhất.</p>
+        <div class="who"><div class="av">L</div><div><b>Linh Trần</b><span>Founder · Glow Skincare</span></div></div>
+      </div>
+      <div class="quote reveal" data-d="2">
+        <div class="mark">"</div>
+        <p>Chúng tôi cháy hàng lô đầu trong 3 ngày. Ba ngày. Trước khi gặp KAI tôi còn không tin mạng xã hội bán được đồ. Giờ tôi không dám tưởng tượng thiếu anh ấy.</p>
+        <div class="who"><div class="av">H</div><div><b>Huy Phạm</b><span>CEO · North Street</span></div></div>
+      </div>
+      <div class="quote reveal" data-d="3">
+        <div class="mark">"</div>
+        <p>Ai cũng bảo SaaS B2B không thể viral. KAI làm nó viral trong 3 tuần và cắt CAC hơn một nửa. Anh ấy đọc thuật toán như tôi đọc code.</p>
+        <div class="who"><div class="av">M</div><div><b>Minh Đỗ</b><span>Co-founder · Flowstack</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="contact-card reveal">
+      <span class="eyebrow" style="justify-content:center">// LET'S GO</span>
+      <h2>READY TO<br><span class="grad-text">GO VIRAL?</span></h2>
+      <p>Brand của bạn xứng đáng được cả internet nhìn thấy. Gửi cho tôi một dòng — tôi sẽ gửi lại một kế hoạch để bùng nổ.</p>
+      <a href="mailto:hello@kaiviral.com" class="mail">hello@kaiviral.com</a>
+      <div class="socials">
+        <a href="#">TikTok</a>
+        <a href="#">Instagram</a>
+        <a href="#">YouTube</a>
+        <a href="#">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap footer-in">
+    <a href="#top" class="logo">KAI<span class="z">⚡</span></a>
+    <span class="tagline">Speed. Data. Virality.</span>
+    <span class="cp">© 2026 KAI NGUYEN — Viral Content Studio</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var nav=document.getElementById('nav');
+  var burger=document.getElementById('burger');
+  var drawer=document.getElementById('drawer');
+
+  // nav scroll state
+  var onScroll=function(){ nav.classList.toggle('scrolled', window.scrollY>20); };
+  onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
+
+  // mobile drawer
+  burger.addEventListener('click',function(){
+    var open=nav.classList.toggle('open');
+    drawer.classList.toggle('show',open);
+  });
+  drawer.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){ nav.classList.remove('open'); drawer.classList.remove('show'); });
+  });
+
+  var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  // reveal on scroll
+  var reveals=document.querySelectorAll('.reveal');
+  if(reduce){ reveals.forEach(function(r){r.classList.add('in');}); }
+  else{
+    var ro=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } });
+    },{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+    reveals.forEach(function(r){ ro.observe(r); });
+  }
+
+  // count-up metrics
+  var nums=document.querySelectorAll('.metric .num');
+  var fmt=function(v,dec){
+    if(dec>0) return v.toFixed(dec);
+    return Math.round(v).toLocaleString('en-US');
+  };
+  var run=function(el){
+    var target=parseFloat(el.getAttribute('data-target'));
+    var dec=parseInt(el.getAttribute('data-dec'),10)||0;
+    var out=el.querySelector('.counter');
+    if(reduce){ out.textContent=fmt(target,dec); return; }
+    var dur=1600, start=null;
+    var step=function(ts){
+      if(!start) start=ts;
+      var p=Math.min((ts-start)/dur,1);
+      var e=1-Math.pow(1-p,3); // easeOutCubic
+      out.textContent=fmt(target*e,dec);
+      if(p<1) requestAnimationFrame(step); else out.textContent=fmt(target,dec);
+    };
+    requestAnimationFrame(step);
+  };
+  var no=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ run(e.target); no.unobserve(e.target); } });
+  },{threshold:.5});
+  nums.forEach(function(n){ no.observe(n); });
+})();
+</script>
