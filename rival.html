@@ -1,6 +1,6 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>KAI ⚡ — Social Media Strategist &amp; Viral Content Creator</title>
+<title>KAI — Social Media Strategist &amp; Viral Content Creator</title>
 <meta name="description" content="KAI NGUYEN — chiến lược gia mạng xã hội, sáng tạo nội dung viral. Tốc độ. Dữ liệu. Bùng nổ." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -83,13 +83,13 @@ h2.sect{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,5vw,3.4rem)
 
 /* ============ NAV ============ */
 .nav{position:fixed;top:0;left:0;right:0;z-index:900;transition:.35s}
-.nav-in{display:flex;align-items:center;justify-content:space-between;
+.nav-in{display:flex;align-items:center;gap:40px;
   height:70px;padding:0 24px;max-width:var(--maxw);margin:0 auto}
 .nav.scrolled{background:rgba(10,10,15,.72);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
 .logo{font-family:var(--disp);font-weight:700;font-size:1.35rem;letter-spacing:-.02em;display:flex;align-items:center;gap:2px}
 .logo .z{color:var(--cyan);text-shadow:0 0 14px var(--cyan);animation:flick 5s infinite}
 @keyframes flick{0%,92%,100%{opacity:1}94%{opacity:.4}96%{opacity:1}}
-.nav-links{display:flex;align-items:center;gap:30px}
+.nav-links{display:flex;align-items:center;gap:30px;margin-left:auto}
 .nav-links a{font-size:.9rem;color:var(--ink-dim);position:relative;transition:.2s;font-weight:500}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--grad);transition:.25s}
 .nav-links a:hover{color:var(--ink)}
@@ -114,52 +114,111 @@ h2.sect{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,5vw,3.4rem)
 .drawer a:last-of-type{border:none}
 .drawer .btn{margin-top:14px;justify-content:center}
 
-/* ============ HERO ============ */
-.hero{padding:150px 0 90px;min-height:100vh;display:flex;align-items:center}
-.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;width:100%}
-.hero .tag{font-family:var(--mono);font-size:12.5px;letter-spacing:.2em;color:var(--ink-dim);
-  border:1px solid var(--line-2);border-radius:100px;padding:8px 16px;display:inline-flex;gap:9px;align-items:center;
-  background:var(--glass);margin-bottom:26px}
-.hero .tag .dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);animation:pulse 1.8s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.hero h1{font-family:var(--disp);font-weight:700;font-size:clamp(2.5rem,6.4vw,5rem);line-height:.98;
-  letter-spacing:-.03em;margin-bottom:26px}
-.hero h1 .burst{position:relative;display:inline-block}
-.hero h1 .burst .grad-text{filter:drop-shadow(0 0 26px rgba(124,92,255,.5))}
-.hero p.lead{font-size:clamp(1.02rem,1.6vw,1.2rem);color:var(--ink-dim);max-width:520px;margin-bottom:34px}
-.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:40px}
-.hero-cta .btn{padding:15px 26px;font-size:.95rem}
-.hero-stats{display:flex;gap:30px;flex-wrap:wrap}
-.hero-stats .st{}
-.hero-stats .st b{font-family:var(--disp);font-size:clamp(1.5rem,3vw,2rem);font-weight:700;display:block;line-height:1}
-.hero-stats .st span{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--ink-faint);text-transform:uppercase}
-.hero-visual{position:relative}
-.hero-frame{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:3/4;
-  border:1px solid var(--line-2);box-shadow:0 30px 80px -30px rgba(124,92,255,.6)}
-.hero-frame::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-  background:linear-gradient(160deg,transparent 40%,rgba(10,10,15,.5));mix-blend-mode:multiply}
-.hero-frame::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),inset 0 0 90px rgba(0,229,255,.16)}
-.hero-frame img{width:100%;height:100%;object-fit:cover;filter:saturate(1.1) contrast(1.05)}
-.hero-badge{position:absolute;z-index:3;background:rgba(10,10,15,.78);backdrop-filter:blur(10px);
-  border:1px solid var(--line-2);border-radius:14px;padding:12px 16px;box-shadow:0 12px 40px -12px #000}
-.hero-badge b{font-family:var(--disp);font-size:1.35rem;display:block;line-height:1}
-.hero-badge span{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--ink-faint);text-transform:uppercase}
-.hero-badge.hb1{top:22px;left:-18px}
-.hero-badge.hb2{bottom:26px;right:-18px}
-.hero-badge.hb2 b{color:var(--cyan);text-shadow:0 0 16px rgba(0,229,255,.6)}
-.hero-badge.hb1 b{color:var(--magenta);text-shadow:0 0 16px rgba(255,45,120,.6)}
+/* ============ HERO (3-column showcase card / cut-out portrait) ============ */
+.hero{position:relative;padding:calc(70px + clamp(20px,4vh,40px)) 0 clamp(40px,6vh,72px);
+  display:flex;align-items:center}
+.hero-wrap{width:100%;max-width:1560px;margin:0 auto;padding:0 clamp(20px,4vw,56px)}
 
-/* ============ MARQUEE ============ */
+/* full-bleed showcase (no boxed card) */
+.hero-card{position:relative;overflow:visible;
+  background:
+    radial-gradient(90% 70% at 50% 4%,rgba(124,92,255,.10),transparent 62%)}
+/* faint neon grid inside the card */
+.hero-card::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(124,92,255,.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,229,255,.05) 1px,transparent 1px);
+  background-size:56px 56px;
+  -webkit-mask-image:radial-gradient(120% 100% at 50% 40%,#000 45%,transparent 85%);
+  mask-image:radial-gradient(120% 100% at 50% 40%,#000 45%,transparent 85%)}
+
+.hero-grid{position:relative;z-index:2;display:grid;
+  grid-template-columns:1fr 1.55fr 1fr;align-items:stretch;
+  gap:clamp(12px,1.8vw,28px);
+  padding:clamp(28px,4vw,52px) clamp(20px,2.6vw,40px) 0}
+
+/* ---- LEFT column ---- */
+.hero-left{display:flex;flex-direction:column;
+  padding-bottom:clamp(36px,4.4vw,56px)}
+.hero-sys{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--ink-faint);
+  margin-bottom:22px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.hero-sys .b{color:var(--violet);text-shadow:0 0 12px rgba(124,92,255,.7)}
+.hero-sys .c{color:var(--cyan);text-shadow:0 0 12px rgba(0,229,255,.6)}
+.hero h1{font-family:var(--disp);font-weight:700;
+  font-size:clamp(2.4rem,4.4vw,3.9rem);line-height:.98;
+  letter-spacing:-.03em;margin-bottom:22px;text-wrap:balance}
+.hero h1 .grad-text{filter:drop-shadow(0 0 30px rgba(124,92,255,.55))
+  drop-shadow(0 0 48px rgba(0,229,255,.28))}
+.hero-lead{color:var(--ink-dim);font-size:1.02rem;max-width:34ch;margin-bottom:30px}
+.hero-cta{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:auto}
+.hero-cta .btn{padding:15px 26px;font-size:.96rem}
+.hero-link{font-family:var(--disp);font-weight:600;font-size:.95rem;color:var(--ink);
+  display:inline-flex;align-items:center;gap:8px;transition:.22s}
+.hero-link .arw{color:var(--cyan);transition:transform .22s}
+.hero-link:hover{color:var(--cyan)}
+.hero-link:hover .arw{transform:translate(3px,-3px)}
+/* stats stacked at the bottom of left column */
+.hero-stats{display:flex;flex-wrap:wrap;gap:clamp(16px,2vw,30px);margin-top:38px}
+.hero-stats .st{min-width:78px}
+.hero-stats .st b{font-family:var(--disp);font-size:clamp(1.7rem,2.6vw,2.3rem);font-weight:700;display:block;line-height:1}
+.hero-stats .st span{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--ink-faint);
+  text-transform:uppercase;margin-top:8px;display:block}
+
+/* ---- CENTER column: cut-out portrait, bottom-aligned ---- */
+.hero-figure{position:relative;display:flex;align-items:flex-end;justify-content:center;
+  align-self:stretch;min-height:clamp(360px,44vw,540px)}
+/* neon glow behind the person */
+.hero-figure::before{content:"";position:absolute;left:50%;bottom:6%;
+  width:clamp(280px,30vw,440px);height:clamp(280px,30vw,440px);
+  transform:translateX(-50%);border-radius:50%;z-index:0;pointer-events:none;
+  background:radial-gradient(circle,rgba(124,92,255,.55),rgba(0,229,255,.18) 45%,transparent 70%);
+  filter:blur(14px);opacity:.9}
+.hero-figure::after{content:"";position:absolute;left:0;right:0;bottom:0;height:40%;z-index:2;
+  pointer-events:none;background:linear-gradient(0deg,#0b0b11 4%,transparent)}
+.hero-figure img{position:relative;z-index:1;width:100%;max-width:none;
+  max-height:clamp(480px,62vw,820px);object-fit:contain;object-position:bottom center;
+  filter:drop-shadow(0 30px 60px rgba(0,0,0,.6))}
+
+/* ---- RIGHT column: 3 service blocks ---- */
+.hero-svcs{display:flex;flex-direction:column;justify-content:center;gap:22px;
+  padding-bottom:clamp(36px,4.4vw,56px)}
+.hero-svc{display:flex;gap:16px;align-items:flex-start}
+.hero-svc .ic{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;
+  border:1px solid var(--line-2);background:rgba(124,92,255,.08);color:var(--cyan)}
+.hero-svc .ic svg{width:20px;height:20px;stroke:currentColor;stroke-width:1.6;fill:none}
+.hero-svc h3{font-family:var(--disp);font-weight:600;font-size:1.08rem;letter-spacing:-.01em;
+  margin-bottom:6px}
+.hero-svc:nth-child(1) h3{color:var(--violet)}
+.hero-svc:nth-child(2) h3{color:var(--cyan)}
+.hero-svc:nth-child(3) h3{color:var(--magenta)}
+.hero-svc p{color:var(--ink-dim);font-size:.92rem;line-height:1.55}
+
+/* ============ MARQUEE (dual-row data ticker, opposing directions) ============ */
 .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
   background:linear-gradient(90deg,rgba(124,92,255,.08),rgba(0,229,255,.05),rgba(255,45,120,.08));
-  padding:20px 0;overflow:hidden;white-space:nowrap;position:relative}
-.marquee-track{display:inline-flex;gap:0;animation:scrollx 26s linear infinite;will-change:transform}
-.marquee-track span{font-family:var(--disp);font-weight:700;font-size:1.5rem;letter-spacing:.02em;padding:0 26px;
-  text-transform:uppercase;color:var(--ink)}
-.marquee-track span i{color:var(--cyan);font-style:normal;padding:0 20px;text-shadow:0 0 12px var(--cyan)}
-.marquee-track span:nth-child(even){color:transparent;-webkit-text-stroke:1px var(--ink-faint)}
+  overflow:hidden;position:relative}
+.marquee::before,.marquee::after{content:"";position:absolute;top:0;bottom:0;width:90px;z-index:3;pointer-events:none}
+.marquee::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
+.marquee::after{right:0;background:linear-gradient(270deg,var(--bg),transparent)}
+.marquee-row{overflow:hidden;white-space:nowrap;position:relative}
+.marquee-row+.marquee-row{border-top:1px solid var(--line)}
+.marquee-track{display:inline-flex;align-items:center;gap:0;will-change:transform}
+.mq-a{animation:scrollx 30s linear infinite}
+.mq-b{animation:scrollx-rev 34s linear infinite}
+.marquee-track span{display:inline-flex;align-items:center;font-family:var(--disp);font-weight:700;
+  font-size:1.35rem;letter-spacing:.03em;padding:14px 24px;text-transform:uppercase;color:var(--ink);white-space:nowrap}
+.marquee-track span i{font-style:normal;padding:0 16px;color:var(--ink-faint)}
+/* top row: solid glowing text; bottom row: outlined text */
+.mq-a span{color:var(--ink)}
+.mq-a span em{font-style:normal;color:var(--cyan);text-shadow:0 0 12px var(--cyan);padding:0 4px}
+.mq-b span{color:transparent;-webkit-text-stroke:1px var(--ink-faint)}
+.mq-b span em{font-style:normal;-webkit-text-stroke:1px var(--magenta);color:transparent;
+  filter:drop-shadow(0 0 8px rgba(255,45,120,.6));padding:0 4px}
+/* neon symbols */
+.mq-up{color:var(--cyan);text-shadow:0 0 10px var(--cyan);font-style:normal;padding:0 6px 0 2px}
+.mq-b .mq-up{color:var(--magenta);text-shadow:0 0 10px var(--magenta)}
+.mq-dot{color:var(--violet);text-shadow:0 0 10px var(--violet);font-style:normal;padding:0 4px}
 @keyframes scrollx{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes scrollx-rev{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 
 /* ============ ABOUT ============ */
 .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
@@ -191,7 +250,7 @@ h2.sect{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,5vw,3.4rem)
   -webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:.3s}
 .svc:hover{transform:translateY(-6px);background:var(--bg-3)}
 .svc:hover::before{opacity:1}
-.svc .no{font-family:var(--mono);font-size:12px;color:var(--ink-faint);letter-spacing:.1em}
+.svc .no{font-family:var(--mono);font-size:12px;color:var(--ink-faint);letter-spacing:.1em;margin-bottom:16px;display:block}
 .svc .ic{font-size:1.7rem;margin:8px 0 14px}
 .svc h3{font-family:var(--disp);font-weight:600;font-size:1.25rem;margin-bottom:10px}
 .svc p{color:var(--ink-dim);font-size:.95rem;margin-bottom:14px}
@@ -290,9 +349,17 @@ h2.sect{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,5vw,3.4rem)
 @media(max-width:940px){
   .nav-links{display:none}
   .burger{display:flex}
-  .hero-grid,.about-grid,.case,.case.rev .case-media{grid-template-columns:1fr}
+  .about-grid,.case,.case.rev .case-media{grid-template-columns:1fr}
   .case.rev .case-media{order:0}
-  .hero-visual{max-width:400px;margin:0 auto;order:-1}
+  /* hero: 2 columns — copy + portrait on top row, services full width below */
+  .hero-grid{grid-template-columns:1fr 1fr;
+    grid-template-areas:"left figure" "svcs svcs"}
+  .hero-left{grid-area:left}
+  .hero-figure{grid-area:figure}
+  .hero-svcs{grid-area:svcs;flex-direction:row;padding-bottom:clamp(28px,4vw,44px);
+    border-top:1px solid var(--line);padding-top:30px;margin-top:10px}
+  .hero-svc{flex:1}
+  .hero h1{font-size:clamp(2.2rem,5.4vw,3.2rem)}
   .svc-grid,.quotes{grid-template-columns:1fr 1fr}
   .metrics-band{grid-template-columns:1fr 1fr}
 }
@@ -301,13 +368,22 @@ h2.sect{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,5vw,3.4rem)
   .wrap{padding:0 18px}
   .svc-grid,.quotes,.metrics-band,.beliefs,.case-metrics{grid-template-columns:1fr}
   .case-metrics{grid-template-columns:repeat(3,1fr)}
-  .hero{padding:120px 0 60px;min-height:auto}
-  .hero-badge.hb1{left:8px}
-  .hero-badge.hb2{right:8px}
-  .hero-stats{gap:22px}
+  /* hero: single column stacked — title, portrait, services */
+  .hero{padding-top:calc(70px + 16px)}
+  .hero-grid{grid-template-columns:1fr;grid-template-areas:"left" "figure" "svcs";
+    padding:26px 20px 0;gap:8px}
+  .hero-left{padding-bottom:8px}
+  .hero h1{font-size:clamp(2.1rem,8.5vw,2.8rem);letter-spacing:-.02em}
+  .hero-lead{max-width:none}
+  .hero-cta{gap:14px}
+  .hero-stats{margin-top:30px;gap:22px}
+  .hero-figure{min-height:0;margin:6px 0}
+  .hero-figure img{max-height:min(58vh,460px)}
+  .hero-svcs{flex-direction:column;gap:20px;
+    border-top:1px solid var(--line);padding-top:26px;padding-bottom:32px}
   .nav-in{padding:0 18px}
   .contact-card{padding:48px 20px}
-  .marquee-track span{font-size:1.2rem}
+  .marquee-track span{font-size:1.05rem;padding:11px 16px}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
@@ -325,7 +401,7 @@ h2.sect{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,5vw,3.4rem)
 <!-- NAV -->
 <header class="nav" id="nav">
   <div class="nav-in">
-    <a href="#top" class="logo">KAI<span class="z">⚡</span></a>
+    <a href="#top" class="logo">KAI</a>
     <nav class="nav-links">
       <a href="#about">About</a>
       <a href="#services">Services</a>
@@ -348,28 +424,56 @@ h2.sect{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,5vw,3.4rem)
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <div class="wrap">
-    <div class="hero-grid">
-      <div class="hero-copy">
-        <span class="tag reveal"><span class="dot"></span>SOCIAL MEDIA STRATEGIST · VIRAL CONTENT</span>
-        <h1 class="reveal" data-d="1">TÔI KHÔNG LÀM<br>NỘI DUNG ĐẸP.<br><span class="burst"><span class="grad-text">TÔI LÀM NỘI DUNG<br>BÙNG NỔ.</span></span></h1>
-        <p class="lead reveal" data-d="2">Xin chào, tôi là <strong style="color:var(--ink)">KAI</strong> — chiến lược gia mạng xã hội bị ám ảnh bởi thuật toán, dữ liệu và tốc độ lan truyền. Tôi biến brand vô danh thành hiện tượng chỉ trong vài tuần.</p>
-        <div class="hero-cta reveal" data-d="3">
-          <a href="#work" class="btn btn-neon">Xem case study viral →</a>
-          <a href="#contact" class="btn btn-ghost">Book một cuộc gọi</a>
+  <div class="hero-wrap">
+    <div class="hero-card">
+      <div class="hero-grid">
+
+        <!-- LEFT: title, lead, CTA, stats -->
+        <div class="hero-left">
+          <div class="hero-sys reveal" data-d="1"><span class="b">[ viral_engine v2.0 ]</span><span class="c">// ONLINE</span></div>
+          <h1 class="reveal" data-d="1">Tôi là KAI —<br><span class="grad-text">Viral là chuyện của tôi.</span></h1>
+          <p class="hero-lead reveal" data-d="2">Social Media Strategist &amp; Viral Content Creator. Tôi không làm nội dung đẹp — tôi làm nội dung bùng nổ, đo bằng lượt xem và doanh thu.</p>
+          <div class="hero-cta reveal" data-d="2">
+            <a href="#contact" class="btn btn-neon">Bắt đầu chiến dịch</a>
+            <a href="#work" class="hero-link">Xem case study <span class="arw">&#8599;</span></a>
+          </div>
+          <div class="hero-stats reveal" data-d="3">
+            <div class="st"><b class="grad-text">2.4B+</b><span>Lượt xem tạo ra</span></div>
+            <div class="st"><b class="grad-text">850K+</b><span>Follower kéo về</span></div>
+            <div class="st"><b class="grad-text">12x</b><span>ROAS trung bình</span></div>
+          </div>
         </div>
-        <div class="hero-stats reveal" data-d="4">
-          <div class="st"><b class="grad-text">2.4B+</b><span>Lượt xem tạo ra</span></div>
-          <div class="st"><b class="grad-text">850K+</b><span>Follower kéo về</span></div>
-          <div class="st"><b class="grad-text">12x</b><span>ROAS trung bình</span></div>
+
+        <!-- CENTER: cut-out portrait -->
+        <div class="hero-figure reveal" data-d="2">
+          <img src="rival-img/kai-cutout.png" alt="KAI Nguyen — Social Media Strategist" loading="eager" />
         </div>
-      </div>
-      <div class="hero-visual reveal" data-d="2">
-        <div class="hero-frame">
-          <img src="rival-img/hero.jpg" alt="KAI Nguyen giữa biển đèn neon" loading="eager" />
+
+        <!-- RIGHT: 3 services -->
+        <div class="hero-svcs">
+          <div class="hero-svc reveal" data-d="3">
+            <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg></span>
+            <div>
+              <h3>Viral Content Strategy</h3>
+              <p>Bắt trend đúng nhịp, đóng gói thông điệp để nội dung tự lan — không phụ thuộc may rủi.</p>
+            </div>
+          </div>
+          <div class="hero-svc reveal" data-d="4">
+            <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 20V10m6 10V4m6 16v-7m6 7V8"/></svg></span>
+            <div>
+              <h3>Growth Hacking</h3>
+              <p>Thử nghiệm A/B liên tục, tối ưu funnel và attribution để kéo follower chất, ra chuyển đổi thật.</p>
+            </div>
+          </div>
+          <div class="hero-svc reveal" data-d="5">
+            <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H4z"/><path d="m10 8 5 2-5 2z"/></svg></span>
+            <div>
+              <h3>Short-form Video</h3>
+              <p>Reels &amp; TikTok với hook 3 giây, dựng nhịp giữ chân — nội dung sinh ra để được xem hết.</p>
+            </div>
+          </div>
         </div>
-        <div class="hero-badge hb1"><b>#1</b><span>Trending trong 6h</span></div>
-        <div class="hero-badge hb2"><b>+318%</b><span>Reach 30 ngày</span></div>
+
       </div>
     </div>
   </div>
@@ -377,9 +481,17 @@ h2.sect{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,5vw,3.4rem)
 
 <!-- MARQUEE -->
 <div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span>VIRAL <i>·</i> GROWTH <i>·</i> ALGORITHM <i>·</i> SPEED <i>·</i> DATA <i>·</i> TREND <i>·</i> HOOK <i>·</i> SCALE <i>·</i></span>
-    <span>VIRAL <i>·</i> GROWTH <i>·</i> ALGORITHM <i>·</i> SPEED <i>·</i> DATA <i>·</i> TREND <i>·</i> HOOK <i>·</i> SCALE <i>·</i></span>
+  <div class="marquee-row">
+    <div class="marquee-track mq-a">
+      <span>VIRAL <span class="mq-up">▲</span> <em>2.4B</em> VIEWS <i class="mq-dot">●</i> GROWTH <span class="mq-up">▲</span> <em>850K</em> <i class="mq-dot">●</i> ROAS <em>12x</em> <i class="mq-dot">●</i> REACH <span class="mq-up">▲</span> <em>318%</em> <i class="mq-dot">●</i> </span>
+      <span>VIRAL <span class="mq-up">▲</span> <em>2.4B</em> VIEWS <i class="mq-dot">●</i> GROWTH <span class="mq-up">▲</span> <em>850K</em> <i class="mq-dot">●</i> ROAS <em>12x</em> <i class="mq-dot">●</i> REACH <span class="mq-up">▲</span> <em>318%</em> <i class="mq-dot">●</i> </span>
+    </div>
+  </div>
+  <div class="marquee-row">
+    <div class="marquee-track mq-b">
+      <span>ALGORITHM <span class="mq-up">▲</span> SPEED <i>/</i> HOOK <em>3s</em> <i>/</i> TREND <span class="mq-up">▲</span> <em>#1</em> <i>/</i> SCALE <span class="mq-up">▲</span> <em>318%</em> <i>/</i> DATA <i>/</i> RETENTION <em>92%</em> <i>/</i> </span>
+      <span>ALGORITHM <span class="mq-up">▲</span> SPEED <i>/</i> HOOK <em>3s</em> <i>/</i> TREND <span class="mq-up">▲</span> <em>#1</em> <i>/</i> SCALE <span class="mq-up">▲</span> <em>318%</em> <i>/</i> DATA <i>/</i> RETENTION <em>92%</em> <i>/</i> </span>
+    </div>
   </div>
 </div>
 
@@ -419,37 +531,37 @@ h2.sect{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,5vw,3.4rem)
     <h2 class="sect reveal" data-d="1">Sáu cách tôi làm <span class="grad-text">brand của bạn nổ.</span></h2>
     <div class="svc-grid">
       <div class="svc reveal" data-d="1">
-        <div class="no">01</div><div class="ic">🚀</div>
+        <div class="no">01</div>
         <h3>Viral Content Strategy</h3>
         <p>Bản đồ nội dung được thiết kế để lan truyền, không phải để đăng cho có. Mỗi post có một nhiệm vụ.</p>
         <ul><li>Hook engineering</li><li>Retention curve</li><li>Content pillar</li></ul>
       </div>
       <div class="svc reveal" data-d="2">
-        <div class="no">02</div><div class="ic">📈</div>
+        <div class="no">02</div>
         <h3>Growth Hacking</h3>
         <p>Kéo follower thật bằng chiến thuật thật. Không mua bot, không ảo — chỉ tăng trưởng bền và nhanh.</p>
         <ul><li>Loop viral</li><li>A/B testing</li><li>Funnel</li></ul>
       </div>
       <div class="svc reveal" data-d="3">
-        <div class="no">03</div><div class="ic">🎬</div>
+        <div class="no">03</div>
         <h3>Short-form Video Factory</h3>
         <p>Dây chuyền sản xuất Reels &amp; TikTok tốc độ cao. Đủ số lượng để test, đủ chất lượng để nổ.</p>
         <ul><li>Scripting</li><li>Editing</li><li>Batch 30/tháng</li></ul>
       </div>
       <div class="svc reveal" data-d="1">
-        <div class="no">04</div><div class="ic">⚡</div>
+        <div class="no">04</div>
         <h3>Trend-jacking</h3>
         <p>Bắt trend trong vài giờ, không phải vài ngày. Khi đối thủ còn họp, brand bạn đã lên top.</p>
         <ul><li>Real-time radar</li><li>Rapid response</li><li>Sound trend</li></ul>
       </div>
       <div class="svc reveal" data-d="2">
-        <div class="no">05</div><div class="ic">🎯</div>
+        <div class="no">05</div>
         <h3>Paid Ads Scaling</h3>
         <p>Đổ dầu vào lửa. Khi một nội dung đã chứng minh viral, tôi scale nó tới ROAS hai chữ số.</p>
         <ul><li>Meta / TikTok Ads</li><li>Creative testing</li><li>Scaling</li></ul>
       </div>
       <div class="svc reveal" data-d="3">
-        <div class="no">06</div><div class="ic">📊</div>
+        <div class="no">06</div>
         <h3>Data &amp; Analytics</h3>
         <p>Mọi quyết định đều dựa trên số. Tôi đọc dashboard như đọc tương lai của brand bạn.</p>
         <ul><li>Attribution</li><li>Dashboard</li><li>Insight report</li></ul>
@@ -638,7 +750,7 @@ h2.sect{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,5vw,3.4rem)
 <!-- FOOTER -->
 <footer class="footer">
   <div class="wrap footer-in">
-    <a href="#top" class="logo">KAI<span class="z">⚡</span></a>
+    <a href="#top" class="logo">KAI</a>
     <span class="tagline">Speed. Data. Virality.</span>
     <span class="cp">© 2026 KAI NGUYEN — Viral Content Studio</span>
   </div>
