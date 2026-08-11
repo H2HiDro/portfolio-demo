@@ -1,0 +1,414 @@
+<title>Apex Arc — Designing Spaces That Inspire & Endure</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Apex Arc is an award-winning architecture studio transforming visions into timeless architecture — blending innovative design with functional excellence across residential, commercial and urban projects.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Apex Arc — Designing Spaces That Inspire & Endure">
+<meta property="og:description" content="We transform visions into timeless architecture, blending innovative design with functional excellence.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1726471760435-1646fa0c02ef?auto=format&fit=crop&w=1200&q=80">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --white:#ffffff;
+    --paper:#f4f4f4;
+    --paper2:#eeeeee;
+    --ink:#111111;
+    --ink-soft:#3a3a3a;
+    --muted:#7a7a7a;
+    --line:#e4e4e4;
+    --radius:16px;
+    --radius-lg:22px;
+    --maxw:1200px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    background:var(--white);
+    color:var(--ink);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .eyebrow{
+    font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--muted);display:inline-flex;align-items:center;gap:9px;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ink)}
+  h1,h2,h3{letter-spacing:-.02em;line-height:1.08;font-weight:800}
+  .sec-title{font-size:clamp(28px,4.2vw,50px)}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    font-weight:700;font-size:15px;border-radius:999px;padding:15px 26px;
+    border:1.5px solid var(--ink);cursor:pointer;transition:transform .35s var(--ease),background .35s var(--ease),color .35s var(--ease),box-shadow .35s var(--ease);
+    background:var(--ink);color:var(--white);white-space:nowrap;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(17,17,17,.22)}
+  .btn .dot{width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block}
+  .btn--ghost{background:transparent;color:var(--ink)}
+  .btn--ghost:hover{background:var(--ink);color:var(--white)}
+
+  /* NAV */
+  header.nav{
+    position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);
+    backdrop-filter:saturate(160%) blur(12px);border-bottom:1px solid var(--line);
+  }
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .logo{display:flex;align-items:center;gap:11px;font-weight:800;font-size:20px;letter-spacing:-.02em}
+  .logo .mark{
+    width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;
+    display:grid;place-items:center;font-size:16px;
+  }
+  .menu{display:flex;align-items:center;gap:30px;list-style:none}
+  .menu a{font-size:15px;font-weight:600;color:var(--ink-soft);position:relative;transition:color .25s}
+  .menu a::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;background:var(--ink);transition:width .3s var(--ease)}
+  .menu a:hover{color:var(--ink)}
+  .menu a:hover::after{width:100%}
+  .nav-cta{display:inline-flex}
+  .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
+  .burger span{width:24px;height:2px;background:var(--ink);border-radius:2px}
+
+  /* HERO */
+  .hero{padding:22px 0 0}
+  .hero-card{
+    position:relative;border-radius:var(--radius-lg);overflow:hidden;
+    min-height:min(78vh,660px);display:flex;
+  }
+  .hero-card img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    transition:transform 1.2s var(--ease);
+  }
+  .hero-card:hover img{transform:scale(1.04)}
+  .hero-card::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(17,17,17,.05) 0%,rgba(17,17,17,.10) 45%,rgba(17,17,17,.72) 100%);
+  }
+  .hero-copy{position:relative;z-index:2;margin-top:auto;padding:clamp(26px,4vw,52px);max-width:720px;color:#fff}
+  .hero-copy .eyebrow{color:rgba(255,255,255,.85)}
+  .hero-copy .eyebrow::before{background:#fff}
+  .hero-copy h1{font-size:clamp(32px,6vw,68px);margin:16px 0 16px}
+  .hero-copy p{font-size:clamp(15px,1.5vw,19px);color:rgba(255,255,255,.9);max-width:560px;margin-bottom:26px}
+  .hero-copy .btn{background:var(--ink);border-color:var(--ink)}
+  .hero-copy .btn:hover{background:#fff;color:var(--ink);border-color:#fff}
+
+  /* ABOUT */
+  .about{padding:clamp(64px,9vw,120px) 0}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px);align-items:start}
+  .about-left h2{font-size:clamp(26px,3.6vw,44px);margin:18px 0 22px}
+  .about-left p{color:var(--ink-soft);font-size:17px;max-width:460px}
+  .about-left .btn{margin-top:30px}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .stat{background:var(--paper);border-radius:var(--radius);padding:26px 24px;transition:transform .4s var(--ease),background .4s var(--ease)}
+  .stat:hover{transform:translateY(-4px);background:var(--paper2)}
+  .stat .num{font-size:clamp(34px,4.4vw,52px);font-weight:800;letter-spacing:-.03em;line-height:1}
+  .stat .lbl{margin-top:12px;color:var(--ink-soft);font-size:14.5px;font-weight:500}
+  .partners{
+    margin-top:clamp(44px,6vw,72px);border-top:1px solid var(--line);padding-top:34px;
+    display:flex;flex-wrap:wrap;align-items:center;gap:clamp(28px,6vw,64px);justify-content:center;
+  }
+  .partners span{font-size:clamp(20px,2.8vw,30px);font-weight:800;color:#c8c8c8;letter-spacing:-.01em;transition:color .3s}
+  .partners span:hover{color:#9a9a9a}
+  .partners .p2{font-weight:600;font-style:italic}
+
+  /* SERVICES */
+  .services{padding:clamp(56px,8vw,104px) 0;background:var(--paper)}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:clamp(30px,4vw,52px)}
+  .sec-head .sec-title{margin-top:14px;max-width:620px}
+  .slider-ctrl{display:flex;gap:12px}
+  .rbtn{
+    width:52px;height:52px;border-radius:50%;border:1.5px solid var(--ink);background:#fff;color:var(--ink);
+    display:grid;place-items:center;cursor:pointer;font-size:19px;transition:background .3s,color .3s,transform .3s var(--ease);
+  }
+  .rbtn:hover{background:var(--ink);color:#fff;transform:translateY(-2px)}
+  .svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  /* scroll mode kicks in only when arrows are used / on narrow screens */
+  .svc-grid.scrollable{
+    grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(240px,1fr);
+    overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:6px;
+  }
+  .svc-grid.scrollable::-webkit-scrollbar{display:none}
+  .svc-grid.scrollable .card{scroll-snap-align:start}
+  .card{background:#fff;border-radius:var(--radius);overflow:hidden;transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+  .card:hover{transform:translateY(-6px);box-shadow:0 20px 44px rgba(17,17,17,.12)}
+  .card-img{position:relative;aspect-ratio:4/5;overflow:hidden}
+  .card-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+  .card:hover .card-img img{transform:scale(1.07)}
+  .card-num{
+    position:absolute;top:14px;left:14px;background:rgba(255,255,255,.92);color:var(--ink);
+    font-weight:800;font-size:13px;letter-spacing:.04em;padding:7px 12px;border-radius:999px;
+  }
+  .card-body{padding:20px 20px 24px}
+  .card-body h3{font-size:19px;font-weight:800;margin-bottom:8px}
+  .card-body p{color:var(--muted);font-size:14.5px}
+
+  /* PORTFOLIO */
+  .portfolio{padding:clamp(64px,9vw,120px) 0}
+  .pf-head{max-width:640px;margin-bottom:clamp(30px,4vw,52px)}
+  .pf-head .sec-title{margin:14px 0 16px}
+  .pf-head p{color:var(--ink-soft);font-size:17px}
+  .bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:210px;gap:18px}
+  .tile{position:relative;border-radius:var(--radius);overflow:hidden;transition:transform .45s var(--ease)}
+  .tile img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+  .tile:hover img{transform:scale(1.06)}
+  .tile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(17,17,17,.66) 100%)}
+  .tile .tag{
+    position:absolute;left:16px;bottom:16px;z-index:2;color:#fff;font-weight:700;font-size:16px;
+    display:inline-flex;align-items:center;gap:9px;
+  }
+  .tile .tag::before{content:"";width:8px;height:8px;border-radius:50%;background:#fff}
+  .t-a{grid-column:span 2;grid-row:span 2}
+  .t-b{grid-column:span 2;grid-row:span 1}
+  .t-c{grid-column:span 2;grid-row:span 1}
+  .t-d{grid-column:span 2;grid-row:span 1}
+  .t-e{grid-column:span 2;grid-row:span 1}
+  .pf-more{display:flex;justify-content:center;margin-top:clamp(34px,4vw,52px)}
+
+  /* FOOTER */
+  footer{background:var(--ink);color:#fff;padding:clamp(52px,7vw,80px) 0 30px;border-radius:var(--radius-lg) var(--radius-lg) 0 0;margin-top:8px}
+  .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;align-items:start}
+  .foot-top .logo{color:#fff}
+  .foot-top .logo .mark{background:#fff;color:var(--ink)}
+  .foot-brand p{color:rgba(255,255,255,.65);margin-top:16px;max-width:320px;font-size:15px}
+  .foot-col h4{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:16px;font-weight:700}
+  .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+  .foot-col a{color:rgba(255,255,255,.82);font-size:15px;transition:color .25s}
+  .foot-col a:hover{color:#fff}
+  .foot-bottom{margin-top:clamp(38px,5vw,56px);padding-top:24px;border-top:1px solid rgba(255,255,255,.14);
+    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:rgba(255,255,255,.55);font-size:14px}
+
+  /* REVEAL */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  .stagger>*{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  .stagger.in>*{opacity:1;transform:none}
+  .stagger.in>*:nth-child(2){transition-delay:.08s}
+  .stagger.in>*:nth-child(3){transition-delay:.16s}
+  .stagger.in>*:nth-child(4){transition-delay:.24s}
+
+  /* RESPONSIVE */
+  @media(max-width:960px){
+    .svc-grid{grid-template-columns:repeat(2,1fr)}
+    .bento{grid-template-columns:repeat(2,1fr);grid-auto-rows:180px}
+    .t-a{grid-column:span 2;grid-row:span 2}
+    .foot-top{grid-template-columns:1fr 1fr}
+    .foot-brand{grid-column:1 / -1}
+  }
+  @media(max-width:760px){
+    .menu,.nav-cta{display:none}
+    .burger{display:flex}
+    .about-grid{grid-template-columns:1fr}
+    .hero-copy p{margin-bottom:22px}
+  }
+  @media(max-width:560px){
+    .wrap{padding:0 18px}
+    .stats{grid-template-columns:1fr 1fr}
+    .svc-grid{grid-template-columns:1fr}
+    .bento{grid-template-columns:1fr;grid-auto-rows:200px}
+    .t-a,.t-b,.t-c,.t-d,.t-e{grid-column:span 1;grid-row:span 1}
+    .partners{gap:26px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important}
+    .reveal,.stagger>*{opacity:1!important;transform:none!important;transition:none!important}
+    .hero-card img,.card-img img,.tile img{transition:none!important}
+    html{scroll-behavior:auto}
+  }
+</style>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="#top" aria-label="Apex Arc home">
+      <span class="mark">&#9650;</span>Apex Arc
+    </a>
+    <nav>
+      <ul class="menu">
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#services">Our Services</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#services">Process</a></li>
+        <li><a href="#contacts">Contacts</a></li>
+      </ul>
+    </nav>
+    <a class="btn nav-cta" href="#contacts">Let's Talk <span class="dot"></span></a>
+    <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-card reveal">
+        <img src="https://images.unsplash.com/photo-1726471760435-1646fa0c02ef?auto=format&fit=crop&w=1600&q=80" alt="Modern black villa with a swimming pool surrounded by greenery">
+        <div class="hero-copy">
+          <span class="eyebrow">Architecture Studio</span>
+          <h1>Designing Spaces That Inspire &amp; Endure</h1>
+          <p>We transform visions into timeless architecture, blending innovative design with functional excellence.</p>
+          <a class="btn" href="#contacts">Schedule a Free Consultation <span class="dot"></span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="about-left reveal">
+          <span class="eyebrow">About Company</span>
+          <h2>About Company</h2>
+          <p>At Apex Architects, we believe that architecture is more than just buildings; it's about creating environments that enhance human experience.</p>
+          <a class="btn btn--ghost" href="#portfolio">Discover Our Story <span class="dot"></span></a>
+        </div>
+        <div class="stats stagger">
+          <div class="stat"><div class="num">25+</div><div class="lbl">Years of Excellence in Architecture &amp; Design</div></div>
+          <div class="stat"><div class="num">500+</div><div class="lbl">Projects Successfully Completed</div></div>
+          <div class="stat"><div class="num">98%</div><div class="lbl">Our Client Retention Rate</div></div>
+          <div class="stat"><div class="num">15+</div><div class="lbl">Countries with Our Projects</div></div>
+        </div>
+      </div>
+      <div class="partners reveal">
+        <span class="p1">CNBC</span>
+        <span class="p2">officernd</span>
+        <span class="p1">Arconic</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="reveal">
+          <span class="eyebrow">What We Do</span>
+          <h2 class="sec-title">Services we provide</h2>
+        </div>
+        <div class="slider-ctrl reveal" aria-hidden="true">
+          <button class="rbtn" id="svcPrev" aria-label="Previous">&#8592;</button>
+          <button class="rbtn" id="svcNext" aria-label="Next">&#8594;</button>
+        </div>
+      </div>
+      <div class="svc-grid stagger" id="svcGrid">
+        <article class="card">
+          <div class="card-img"><span class="card-num">01</span>
+            <img src="https://images.unsplash.com/photo-1608619769165-25647672335f?auto=format&fit=crop&w=800&q=80" alt="Concrete modern building at dusk">
+          </div>
+          <div class="card-body"><h3>Arch Design</h3><p>From initial concept development and schematic design</p></div>
+        </article>
+        <article class="card">
+          <div class="card-img"><span class="card-num">02</span>
+            <img src="https://images.unsplash.com/photo-1724582586529-62622e50c0b3?auto=format&fit=crop&w=800&q=80" alt="Minimalist modern living room interior">
+          </div>
+          <div class="card-body"><h3>Interior Design</h3><p>Creating cohesive interior spaces that reflect your style</p></div>
+        </article>
+        <article class="card">
+          <div class="card-img"><span class="card-num">03</span>
+            <img src="https://images.unsplash.com/photo-1560698862-c340d3c8bf38?auto=format&fit=crop&w=800&q=80" alt="Modern city office towers at dusk">
+          </div>
+          <div class="card-body"><h3>Urban Planning</h3><p>Designing the spaces between buildings &amp; outdoors</p></div>
+        </article>
+        <article class="card">
+          <div class="card-img"><span class="card-num">04</span>
+            <img src="https://images.unsplash.com/photo-1608303588026-884930af2559?auto=format&fit=crop&w=800&q=80" alt="Architects reviewing blueprints on a table">
+          </div>
+          <div class="card-body"><h3>Project Manage</h3><p>Overseeing &amp; control the entire construction process</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="portfolio" id="portfolio">
+    <div class="wrap">
+      <div class="pf-head reveal">
+        <span class="eyebrow">Selected Works</span>
+        <h2 class="sec-title">Our Portfolio of Pioneering Design</h2>
+        <p>Explore our selected works that demonstrate our commitment to design excellence, innovation, and client satisfaction</p>
+      </div>
+      <div class="bento stagger">
+        <div class="tile t-a"><img src="https://images.unsplash.com/photo-1709548145082-04d0cde481d4?auto=format&fit=crop&w=1000&q=80" alt="Dimly lit restaurant interior"><span class="tag">Commercial Restaurant</span></div>
+        <div class="tile t-b"><img src="https://images.unsplash.com/photo-1779700314631-1f18b467e0a7?auto=format&fit=crop&w=900&q=80" alt="Sleek minimalist office corridor"><span class="tag">New York Office</span></div>
+        <div class="tile t-c"><img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=900&q=80" alt="Luxury hotel bedroom"><span class="tag">Hotel Rooms</span></div>
+        <div class="tile t-d"><img src="https://images.unsplash.com/photo-1768385957522-dc4f8af49af3?auto=format&fit=crop&w=900&q=80" alt="Dark modern residential building at dusk"><span class="tag">Private House</span></div>
+      </div>
+      <div class="pf-more reveal">
+        <a class="btn btn--ghost" href="#top">See More Projects <span class="dot"></span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer id="contacts">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="logo" href="#top"><span class="mark">&#9650;</span>Apex Arc</a>
+        <p>We transform visions into timeless architecture, blending innovative design with functional excellence.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Studio</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Our Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#services">Process</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Contacts</h4>
+        <ul>
+          <li><a href="mailto:hello@apexarc.studio">hello@apexarc.studio</a></li>
+          <li><a href="tel:+12125550188">+1 (212) 555-0188</a></li>
+          <li><a href="#top">140 Design Ave, New York</a></li>
+          <li><a href="#contacts">Schedule a Consultation</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 Apex Arc. All rights reserved.</span>
+      <span>Designing Spaces That Inspire &amp; Endure</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.reveal,.stagger');
+  function showAll(){els.forEach(function(el){el.classList.add('in')});}
+  if(!('IntersectionObserver' in window)){ showAll(); return; }
+  try{
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    },{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(el){io.observe(el)});
+  }catch(err){ showAll(); }
+  // Safety fallback: never leave content hidden.
+  setTimeout(showAll, 3000);
+})();
+
+// Services slider control (horizontal scroll on smaller viewports / progressive nudge)
+(function(){
+  var grid=document.getElementById('svcGrid'),
+      prev=document.getElementById('svcPrev'),
+      next=document.getElementById('svcNext');
+  if(!grid||!prev||!next) return;
+  function step(dir){
+    grid.classList.add('scrollable'); // switch to scroll mode on first interaction
+    var card=grid.querySelector('.card');
+    var amt=card?card.getBoundingClientRect().width+20:320;
+    grid.scrollBy({left:dir*amt,behavior:'smooth'});
+  }
+  next.addEventListener('click',function(){step(1)});
+  prev.addEventListener('click',function(){step(-1)});
+})();
+</script>

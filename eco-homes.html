@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Эко Дома — Энергоэффективные эко-проекты в Москве и области</title>
+<meta name="description" content="Эко Дома — современные энергоэффективные загородные дома и виллы из экологичных материалов. Каталог эко-проектов в Москве и Подмосковье: Green Valley, ЭкоПарк Жуковка, Солнечный Лес и другие.">
+<meta name="theme-color" content="#e8e6df">
+<meta property="og:title" content="Эко Дома — экологичные дома в Москве и области">
+<meta property="og:description" content="Современные энергоэффективные решения, экологичные материалы и комфорт для вашей семьи.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap&subset=cyrillic,cyrillic-ext,latin" rel="stylesheet">
+<style>
+  :root{
+    --cream:#e8e6df;
+    --cream-2:#ecebe5;
+    --paper:#f4f3ee;
+    --card:#fbfaf6;
+    --ink:#1a1a1a;
+    --ink-soft:#54544c;
+    --muted:#9a9a8e;
+    --forest:#4a5a1e;
+    --forest-2:#3d5016;
+    --forest-deep:#2f3d10;
+    --line:#d8d6cc;
+    --radius-xl:28px;
+    --radius-lg:22px;
+    --radius-md:16px;
+    --radius-pill:100px;
+    --shadow:0 20px 50px -24px rgba(40,45,20,.35);
+    --shadow-soft:0 10px 30px -18px rgba(40,45,20,.4);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Manrope","Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:none;background:none}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+  .eyebrow{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--forest)}
+
+  /* ---------- NAV ---------- */
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(232,230,223,.82);backdrop-filter:saturate(1.2) blur(14px);border-bottom:1px solid rgba(216,214,204,.6)}
+  .nav-inner{display:flex;align-items:center;gap:24px;height:74px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.24rem;letter-spacing:-.01em;white-space:nowrap}
+  .logo .leaf{width:30px;height:30px;flex:0 0 auto}
+  .nav-menu{display:flex;align-items:center;gap:28px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+  .nav-menu a{font-size:.94rem;font-weight:500;color:var(--ink-soft);transition:color .2s;position:relative;white-space:nowrap}
+  .nav-menu a:hover{color:var(--forest)}
+  .nav-menu a.calc{display:inline-flex;align-items:center;gap:7px;color:var(--forest);font-weight:600}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:var(--radius-pill);font-weight:600;transition:transform .25s ease,background .25s,color .25s,box-shadow .25s;line-height:1}
+  .btn:active{transform:scale(.97)}
+  .btn-outline{border:1.5px solid var(--forest);color:var(--forest);padding:12px 22px;font-size:.92rem;background:transparent;white-space:nowrap}
+  .btn-outline:hover{background:var(--forest);color:#fff}
+  .btn-solid{background:var(--forest);color:#fdfdf8;padding:18px 34px;font-size:1.02rem;box-shadow:var(--shadow-soft)}
+  .btn-solid:hover{background:var(--forest-2);transform:translateY(-2px)}
+  .nav-cta{margin-left:auto}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:26px 0 12px}
+  .hero-card{position:relative;border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow);isolation:isolate}
+  .hero-card img{width:100%;height:clamp(440px,62vh,660px);object-fit:cover;transform:scale(1.02);transition:transform 8s ease}
+  .hero-card:hover img{transform:scale(1.08)}
+  .hero-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,25,10,.05) 0%,rgba(20,25,10,.08) 40%,rgba(20,25,10,.72) 100%)}
+  .hero-copy{position:absolute;left:0;bottom:0;z-index:2;padding:clamp(28px,4vw,56px);max-width:760px}
+  .hero-copy .eyebrow{color:#dfe6c4;margin-bottom:16px}
+  .hero-copy h1{color:#fff;font-size:clamp(2.8rem,7vw,5.6rem);line-height:.98;font-weight:800;letter-spacing:-.03em;margin-bottom:18px}
+  .hero-copy p{color:rgba(255,255,255,.9);font-size:clamp(1rem,1.6vw,1.22rem);max-width:540px;font-weight:400}
+  .hero-actions{margin-top:26px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .hero-stats{display:flex;gap:8px;color:rgba(255,255,255,.85);font-size:.9rem;align-items:center;flex-wrap:wrap}
+  .hero-stats b{color:#fff;font-weight:700}
+  .hero-stats .dot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.6)}
+
+  /* ---------- SECTION HEAD ---------- */
+  section.block{padding:74px 0}
+  .sec-head{margin-bottom:34px}
+  .sec-head h2{font-size:clamp(2rem,4.4vw,3.3rem);font-weight:800;letter-spacing:-.025em;line-height:1.04}
+  .sec-head h2 .dim{color:var(--muted);font-weight:700}
+  .sec-head p.sub{margin-top:14px;color:var(--ink-soft);max-width:600px;font-size:1.04rem}
+
+  /* ---------- FILTERS ---------- */
+  .filters{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px;box-shadow:var(--shadow-soft)}
+  .filter-row{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;align-items:end}
+  .field{display:flex;flex-direction:column;gap:8px;min-width:0}
+  .field label{font-size:.78rem;font-weight:600;color:var(--ink-soft);letter-spacing:.02em}
+  .select{position:relative}
+  .select select{appearance:none;-webkit-appearance:none;width:100%;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:13px 40px 13px 15px;font-size:.95rem;font-weight:500;color:var(--ink);cursor:pointer;transition:border-color .2s}
+  .select select:focus{outline:none;border-color:var(--forest)}
+  .select::after{content:"";position:absolute;right:16px;top:50%;width:9px;height:9px;border-right:2px solid var(--forest);border-bottom:2px solid var(--forest);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+  .price-head{display:flex;justify-content:space-between;align-items:baseline}
+  .price-val{font-size:.86rem;font-weight:700;color:var(--forest)}
+  .range-wrap{padding:9px 2px 4px}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:5px;border-radius:5px;background:linear-gradient(90deg,var(--forest) 0%,var(--forest) var(--fill,60%),var(--line) var(--fill,60%),var(--line) 100%);outline:none;cursor:pointer}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;background:var(--forest);border:3px solid #fff;box-shadow:0 2px 6px rgba(40,45,20,.4);cursor:pointer;transition:transform .15s}
+  input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
+  input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--forest);border:3px solid #fff;box-shadow:0 2px 6px rgba(40,45,20,.4);cursor:pointer}
+  .seg{display:flex;gap:8px}
+  .seg button{flex:1;padding:12px 6px;border-radius:11px;background:var(--paper);border:1px solid var(--line);font-size:.9rem;font-weight:600;color:var(--ink-soft);transition:all .2s}
+  .seg button.on,.seg button:hover{background:var(--forest);border-color:var(--forest);color:#fff}
+
+  .chip-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+  .chip{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:var(--radius-pill);background:var(--paper);border:1px solid var(--line);font-size:.9rem;font-weight:600;color:var(--ink-soft);transition:all .2s}
+  .chip:hover{border-color:var(--forest);color:var(--forest)}
+  .chip.on{background:var(--forest);border-color:var(--forest);color:#fff}
+  .chip .cdot{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.7}
+  .reset{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-size:.9rem;font-weight:600;color:var(--ink-soft);padding:8px 4px;transition:color .2s}
+  .reset:hover{color:var(--forest-2)}
+  .count-note{margin-top:16px;font-size:.9rem;color:var(--muted);font-weight:500}
+  .count-note b{color:var(--forest)}
+
+  /* ---------- BIG CARDS ---------- */
+  .big-cards{display:flex;flex-direction:column;gap:26px;margin-top:34px}
+  .big-card{display:grid;grid-template-columns:1fr 1.02fr;background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-soft);transition:box-shadow .3s,transform .3s}
+  .big-card:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
+  .big-card .info{padding:clamp(26px,3vw,42px);display:flex;flex-direction:column}
+  .badge{align-self:flex-start;display:inline-flex;align-items:center;gap:7px;padding:7px 15px;border-radius:var(--radius-pill);background:rgba(74,90,30,.1);color:var(--forest-2);font-size:.76rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:18px}
+  .badge.alt{background:rgba(74,90,30,.1)}
+  .badge .bdot{width:6px;height:6px;border-radius:50%;background:var(--forest)}
+  .big-card h3{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:800;letter-spacing:-.02em;line-height:1.05}
+  .loc{display:flex;align-items:center;gap:7px;color:var(--ink-soft);font-size:.98rem;font-weight:500;margin-top:8px}
+  .loc svg{flex:0 0 auto}
+  .big-card .desc{margin-top:16px;color:var(--ink-soft);font-size:1rem;line-height:1.6}
+  .price-tag{margin-top:20px;font-size:.86rem;color:var(--muted);font-weight:600}
+  .price-tag b{display:block;font-size:2rem;color:var(--ink);font-weight:800;letter-spacing:-.02em;margin-top:2px}
+  .types{margin-top:22px;border-top:1px solid var(--line);padding-top:6px}
+  .types .trow{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+  .types .trow:last-child{border-bottom:none}
+  .types .tname{color:var(--ink-soft);font-weight:500}
+  .types .tprice{font-weight:700;color:var(--ink);white-space:nowrap}
+  .card-foot{margin-top:auto;padding-top:24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .foot-note{font-size:.9rem;color:var(--muted);font-weight:600}
+  .btn-mini{background:var(--forest);color:#fff;padding:13px 24px;border-radius:var(--radius-pill);font-size:.94rem;font-weight:600;transition:background .2s,transform .2s}
+  .btn-mini:hover{background:var(--forest-2);transform:translateY(-2px)}
+  .big-card .media{position:relative;overflow:hidden;min-height:320px}
+  .big-card .media img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
+  .big-card:hover .media img{transform:scale(1.06)}
+
+  /* ---------- SMALL CARDS ---------- */
+  .small-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:30px}
+  .s-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-soft);transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column}
+  .s-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .s-media{position:relative;overflow:hidden;aspect-ratio:16/11}
+  .s-media img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
+  .s-card:hover .s-media img{transform:scale(1.07)}
+  .s-badge{position:absolute;top:14px;left:14px;padding:6px 13px;border-radius:var(--radius-pill);background:rgba(251,250,246,.94);color:var(--forest-2);font-size:.72rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;backdrop-filter:blur(4px)}
+  .s-body{padding:22px 22px 24px;display:flex;flex-direction:column;flex:1}
+  .s-body h4{font-size:1.28rem;font-weight:800;letter-spacing:-.015em}
+  .s-body .loc{margin-top:7px;font-size:.9rem}
+  .s-price{margin-top:auto;padding-top:18px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+  .s-price .amt{font-size:1.5rem;font-weight:800;letter-spacing:-.02em}
+  .s-price .amt span{font-size:.8rem;color:var(--muted);font-weight:600;display:block}
+  .s-price .go{width:44px;height:44px;flex:0 0 auto;border-radius:50%;background:var(--paper);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--forest);transition:all .25s}
+  .s-card:hover .s-price .go{background:var(--forest);border-color:var(--forest);color:#fff;transform:rotate(-45deg)}
+
+  .see-all{text-align:center;margin-top:44px}
+  .see-all a{display:inline-flex;align-items:center;gap:9px;font-size:1.05rem;font-weight:700;color:var(--forest-2);border-bottom:2px solid var(--forest-2);padding-bottom:4px;transition:gap .2s,color .2s}
+  .see-all a:hover{gap:15px;color:var(--forest)}
+  .no-results{display:none;text-align:center;padding:60px 20px;color:var(--muted);font-size:1.1rem;font-weight:600}
+  .no-results.show{display:block}
+
+  /* ---------- BANNER ---------- */
+  .banner{padding:20px 0 40px}
+  .banner-card{position:relative;border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow);isolation:isolate}
+  .banner-card img{width:100%;height:clamp(360px,50vh,540px);object-fit:cover;transition:transform 8s ease}
+  .banner-card:hover img{transform:scale(1.05)}
+  .banner-card::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(20,25,10,.55) 0%,rgba(20,25,10,.15) 45%,rgba(20,25,10,.05) 100%)}
+  .banner-tag{position:absolute;top:22px;left:22px;z-index:2;padding:9px 18px;border-radius:var(--radius-pill);background:rgba(251,250,246,.92);color:var(--forest-2);font-size:.82rem;font-weight:700;letter-spacing:.03em;backdrop-filter:blur(6px)}
+  .banner-copy{position:absolute;left:0;bottom:0;z-index:2;padding:clamp(28px,4vw,52px);max-width:640px}
+  .banner-copy h2{color:#fff;font-size:clamp(1.9rem,4vw,3rem);font-weight:800;letter-spacing:-.02em;line-height:1.05}
+  .banner-copy p{color:rgba(255,255,255,.9);margin-top:14px;font-size:1.05rem;max-width:460px}
+  .banner-copy .btn{margin-top:24px}
+  .btn-cream{background:var(--cream);color:var(--forest-2);padding:16px 30px;font-size:1rem;box-shadow:var(--shadow-soft)}
+  .btn-cream:hover{background:#fff;transform:translateY(-2px)}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--forest-deep);color:#e7e9d8;padding:64px 0 30px;border-radius:var(--radius-xl) var(--radius-xl) 0 0;margin-top:10px}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px}
+  .foot-brand .logo{color:#fff;font-size:1.4rem}
+  .foot-brand .leaf path{fill:#c7d68c!important;stroke:#c7d68c!important}
+  .foot-brand p{margin-top:16px;color:rgba(231,233,216,.72);font-size:.95rem;max-width:280px;line-height:1.6}
+  .foot-col h5{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:#c7d68c;font-weight:700;margin-bottom:16px}
+  .foot-col a,.foot-col p{display:block;color:rgba(231,233,216,.78);font-size:.95rem;margin-bottom:11px;transition:color .2s}
+  .foot-col a:hover{color:#fff}
+  .foot-col .big{font-size:1.15rem;font-weight:700;color:#fff}
+  .foot-bottom{margin-top:48px;padding-top:24px;border-top:1px solid rgba(231,233,216,.14);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.86rem;color:rgba(231,233,216,.6)}
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.22,.61,.36,1),transform .8s cubic-bezier(.22,.61,.36,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:980px){
+    .nav-menu{display:none}
+    .filter-row{grid-template-columns:repeat(2,1fr)}
+    .big-card{grid-template-columns:1fr}
+    .big-card .media{min-height:280px;order:2}
+    .big-card .info{order:1}
+    .foot-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:680px){
+    .wrap{padding:0 16px}
+    .nav-cta .btn-outline{padding:10px 16px;font-size:.85rem}
+    .hero-card img{height:clamp(400px,72vh,560px)}
+    section.block{padding:52px 0}
+    .filters{padding:16px}
+    .filter-row{grid-template-columns:1fr;gap:14px}
+    .small-grid{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr}
+    .price-tag b{font-size:1.7rem}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    .reveal{opacity:1!important;transform:none!important}
+    .hero-card img,.banner-card img,.big-card .media img,.s-media img{transform:none!important}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#" class="logo" aria-label="Эко Дома">
+      <svg class="leaf" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path d="M27 5C13 4 6 11 6 22c0 2 .5 4 1.4 5.6C10 21 15 17 22 15c-5 3-9 7-11 13 2 1 4 1.4 6 1.4C27 29 30 19 27 5Z" fill="#4a5a1e"/>
+      </svg>
+      Эко&nbsp;Дома
+    </a>
+    <nav class="nav-menu" aria-label="Главное меню">
+      <a href="#hero">Главная</a>
+      <a href="#catalog">Каталог объектов</a>
+      <a href="#about">О компании</a>
+      <a href="#contacts">Контакты</a>
+      <a href="#calc" class="calc">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2.5" stroke="currentColor" stroke-width="1.8"/><rect x="7.5" y="5" width="9" height="3.4" rx="1" stroke="currentColor" stroke-width="1.6"/><circle cx="8.4" cy="12.6" r="1.1" fill="currentColor"/><circle cx="12" cy="12.6" r="1.1" fill="currentColor"/><circle cx="15.6" cy="12.6" r="1.1" fill="currentColor"/><circle cx="8.4" cy="16.4" r="1.1" fill="currentColor"/><circle cx="12" cy="16.4" r="1.1" fill="currentColor"/><circle cx="15.6" cy="16.4" r="1.1" fill="currentColor"/></svg>
+        Калькулятор ипотеки
+      </a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#contacts" class="btn btn-outline">Задать вопрос</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="wrap">
+    <div class="hero-card reveal">
+      <img src="https://images.unsplash.com/photo-1721932423849-e9033192b190?auto=format&fit=crop&w=1600&q=80" alt="Светлая гостиная эко-дома с большими окнами, панорамным видом на зелень и комнатными растениями">
+      <div class="hero-copy">
+        <div class="eyebrow">Экологичное жильё нового поколения</div>
+        <h1>Эко&nbsp;Дома</h1>
+        <p>Современные энергоэффективные решения, экологичные материалы и комфорт для вашей семьи.</p>
+        <div class="hero-actions">
+          <a href="#catalog" class="btn btn-solid">Посмотреть каталог</a>
+          <div class="hero-stats">
+            <span><b>28</b> эко-проектов</span>
+            <span class="dot"></span>
+            <span><b>A+</b> класс энергоэффективности</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATALOG -->
+<section class="block" id="catalog">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Каталог объектов</div>
+      <h2 style="margin-top:12px">Эко-проекты <span class="dim">в Москве и области</span></h2>
+      <p class="sub">Загородные посёлки и виллы из натуральных материалов — рядом с лесом, с чистым воздухом и продуманной инфраструктурой.</p>
+    </div>
+
+    <!-- FILTERS -->
+    <div class="filters reveal">
+      <div class="filter-row">
+        <div class="field">
+          <label for="f-type">Тип недвижимости</label>
+          <div class="select">
+            <select id="f-type">
+              <option value="all">Все типы</option>
+              <option value="house">Загородный дом</option>
+              <option value="villa">Вилла</option>
+              <option value="penthouse">Пентхаус</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-loc">Расположение</label>
+          <div class="select">
+            <select id="f-loc">
+              <option value="all">Район, округ, метро</option>
+              <option>Раменский район</option>
+              <option>Новая Москва</option>
+              <option>Истринский район</option>
+              <option>Одинцовский район</option>
+              <option>Балашиха</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <div class="price-head">
+            <label for="f-price">Стоимость (млн ₽)</label>
+            <span class="price-val">от 9.0 — до <span id="price-out">125.0</span></span>
+          </div>
+          <div class="range-wrap">
+            <input type="range" id="f-price" min="9" max="125" step="0.1" value="125" aria-label="Максимальная стоимость, млн рублей">
+          </div>
+        </div>
+        <div class="field">
+          <label>Срок сдачи</label>
+          <div class="seg" id="f-term" role="group" aria-label="Срок сдачи">
+            <button type="button" data-term="ready">Готов</button>
+            <button type="button" data-term="2025">2025</button>
+            <button type="button" data-term="2026">2026</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="chip-bar">
+        <button type="button" class="chip" data-tag="zagorod"><span class="cdot"></span>Загород</button>
+        <button type="button" class="chip" data-tag="start"><span class="cdot"></span>Старт продаж</button>
+        <button type="button" class="chip" data-tag="keys"><span class="cdot"></span>С ключами</button>
+        <button type="button" class="chip" data-tag="premium"><span class="cdot"></span>Premium дом</button>
+        <button type="button" class="reset" id="reset">Сбросить фильтры <span aria-hidden="true">×</span></button>
+      </div>
+      <div class="count-note">Показано объектов: <b id="count">5</b> из 5</div>
+    </div>
+
+    <!-- BIG CARDS -->
+    <div class="big-cards">
+
+      <article class="big-card reveal" data-type="villa house" data-loc="Раменский район" data-price="15.8" data-term="ready" data-tags="premium zagorod start">
+        <div class="info">
+          <span class="badge"><span class="bdot"></span>Premium дом</span>
+          <h3>Green Valley</h3>
+          <div class="loc">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z" stroke="#4a5a1e" stroke-width="1.7"/><circle cx="12" cy="10" r="2.4" stroke="#4a5a1e" stroke-width="1.7"/></svg>
+            Подмосковье, Раменский район
+          </div>
+          <p class="desc">Клубный посёлок среди хвойного леса. Дома из клеёного бруса с панорамным остеклением, рекуперацией воздуха и солнечными панелями.</p>
+          <div class="price-tag">Стоимость<b>от 15,8 млн ₽</b></div>
+          <div class="types">
+            <div class="trow"><span class="tname">1-этажные дома от 150 м²</span><span class="tprice">от 15,8 млн ₽</span></div>
+            <div class="trow"><span class="tname">2-этажные дома от 210 м²</span><span class="tprice">от 21,5 млн ₽</span></div>
+            <div class="trow"><span class="tname">Виллы от 280 м²</span><span class="tprice">от 32,0 млн ₽</span></div>
+          </div>
+          <div class="card-foot">
+            <a href="#catalog" class="btn-mini">Подробнее о проекте</a>
+            <span class="foot-note">Старт продаж 02.10.2024</span>
+          </div>
+        </div>
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1782753307964-fe0a8f69f5bb?auto=format&fit=crop&w=1100&q=80" alt="Green Valley — современные деревянные дома с тёмными кровлями среди зелёных деревьев" loading="lazy">
+        </div>
+      </article>
+
+      <article class="big-card reveal" data-type="house penthouse" data-loc="Новая Москва" data-price="19.3" data-term="2025" data-tags="premium zagorod">
+        <div class="info">
+          <span class="badge"><span class="bdot"></span>Premium дом</span>
+          <h3>ЭкоПарк Жуковка</h3>
+          <div class="loc">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z" stroke="#4a5a1e" stroke-width="1.7"/><circle cx="12" cy="10" r="2.4" stroke="#4a5a1e" stroke-width="1.7"/></svg>
+            Новая Москва, деревня Жуковка
+          </div>
+          <p class="desc">Эко-квартал с зелёными кровлями и собственным парком. Энергоэффективные дома класса A+ и видовые пентхаусы с террасами.</p>
+          <div class="price-tag">Стоимость<b>от 19,3 млн ₽</b></div>
+          <div class="types">
+            <div class="trow"><span class="tname">1-этажные дома от 170 м²</span><span class="tprice">от 19,3 млн ₽</span></div>
+            <div class="trow"><span class="tname">2-этажные дома от 240 м²</span><span class="tprice">от 26,7 млн ₽</span></div>
+            <div class="trow"><span class="tname">Пентхаусы от 300 м²</span><span class="tprice">от 40,0 млн ₽</span></div>
+          </div>
+          <div class="card-foot">
+            <a href="#catalog" class="btn-mini">Подробнее о проекте</a>
+            <span class="foot-note">Срок сдачи: 2025</span>
+          </div>
+        </div>
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1774685110718-c5b4fe026144?auto=format&fit=crop&w=1100&q=80" alt="ЭкоПарк Жуковка — современный многоуровневый дом с балконами и озеленённой кровлей в вечернем свете" loading="lazy">
+        </div>
+      </article>
+
+    </div>
+
+    <!-- SMALL CARDS -->
+    <div class="small-grid" id="small-grid">
+
+      <article class="s-card reveal" data-type="house" data-loc="Истринский район" data-price="13.2" data-term="2026" data-tags="start zagorod">
+        <div class="s-media">
+          <span class="s-badge">Старт продаж</span>
+          <img src="https://images.unsplash.com/photo-1595877244574-e90ce41ce089?auto=format&fit=crop&w=800&q=80" alt="Солнечный Лес — деревянный дом среди залитого солнцем леса" loading="lazy">
+        </div>
+        <div class="s-body">
+          <h4>Солнечный Лес</h4>
+          <div class="loc">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z" stroke="#4a5a1e" stroke-width="1.7"/><circle cx="12" cy="10" r="2.4" stroke="#4a5a1e" stroke-width="1.7"/></svg>
+            Истринский район, 40 км от МКАД
+          </div>
+          <div class="s-price">
+            <div class="amt"><span>Стоимость</span>от 13,2 млн ₽</div>
+            <span class="go" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </div>
+      </article>
+
+      <article class="s-card reveal" data-type="house" data-loc="Одинцовский район" data-price="9.9" data-term="2026" data-tags="zagorod">
+        <div class="s-media">
+          <span class="s-badge">Загород</span>
+          <img src="https://images.unsplash.com/photo-1759182519481-2b1c7797db13?auto=format&fit=crop&w=800&q=80" alt="Лесной уют — дом с большими стеклянными окнами с видом на лес" loading="lazy">
+        </div>
+        <div class="s-body">
+          <h4>Лесной уют</h4>
+          <div class="loc">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z" stroke="#4a5a1e" stroke-width="1.7"/><circle cx="12" cy="10" r="2.4" stroke="#4a5a1e" stroke-width="1.7"/></svg>
+            Одинцовский район, посёлок Лесной
+          </div>
+          <div class="s-price">
+            <div class="amt"><span>Стоимость</span>от 9,9 млн ₽</div>
+            <span class="go" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </div>
+      </article>
+
+      <article class="s-card reveal" data-type="villa house" data-loc="Балашиха" data-price="10.2" data-term="ready" data-tags="keys zagorod">
+        <div class="s-media">
+          <span class="s-badge">С ключами</span>
+          <img src="https://images.unsplash.com/photo-1760643451158-d848ba9e9b1d?auto=format&fit=crop&w=800&q=80" alt="EcoVillage Балашиха — современная белая вилла на зелёной лужайке среди деревьев" loading="lazy">
+        </div>
+        <div class="s-body">
+          <h4>EcoVillage Балашиха</h4>
+          <div class="loc">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11Z" stroke="#4a5a1e" stroke-width="1.7"/><circle cx="12" cy="10" r="2.4" stroke="#4a5a1e" stroke-width="1.7"/></svg>
+            Балашиха, 15 км от Москвы
+          </div>
+          <div class="s-price">
+            <div class="amt"><span>Стоимость</span>от 10,2 млн ₽</div>
+            <span class="go" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="no-results" id="no-results">По выбранным фильтрам объектов не найдено. Попробуйте сбросить фильтры.</div>
+
+    <div class="see-all reveal">
+      <a href="#catalog">Посмотреть все эко-проекты
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- BANNER -->
+<section class="banner" id="about">
+  <div class="wrap">
+    <div class="banner-card reveal">
+      <span class="banner-tag">ЭкоПарк Жуковка</span>
+      <img src="https://images.unsplash.com/photo-1764080400538-4487aa44172f?auto=format&fit=crop&w=1600&q=80" alt="Эко-посёлок среди хвойного леса на закате с тёплым светом окон">
+      <div class="banner-copy">
+        <h2>Жизнь в гармонии с природой</h2>
+        <p>Посёлки Эко Дома расположены среди леса — тишина, чистый воздух и продуманная инфраструктура в 30 минутах от города.</p>
+        <a href="#contacts" class="btn btn-cream">Записаться на просмотр</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contacts">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo">
+          <svg class="leaf" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><path d="M27 5C13 4 6 11 6 22c0 2 .5 4 1.4 5.6C10 21 15 17 22 15c-5 3-9 7-11 13 2 1 4 1.4 6 1.4C27 29 30 19 27 5Z"/></svg>
+          Эко&nbsp;Дома
+        </div>
+        <p>Экологичные энергоэффективные дома и посёлки в Москве и Подмосковье. Строим бережно к природе и к вашему бюджету.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Меню</h5>
+        <a href="#hero">Главная</a>
+        <a href="#catalog">Каталог объектов</a>
+        <a href="#about">О компании</a>
+        <a href="#calc">Калькулятор ипотеки</a>
+      </div>
+      <div class="foot-col">
+        <h5>Проекты</h5>
+        <a href="#catalog">Green Valley</a>
+        <a href="#catalog">ЭкоПарк Жуковка</a>
+        <a href="#catalog">Солнечный Лес</a>
+        <a href="#catalog">EcoVillage Балашиха</a>
+      </div>
+      <div class="foot-col">
+        <h5>Контакты</h5>
+        <p class="big">+7 (495) 120-90-05</p>
+        <a href="mailto:info@eco-doma.ru">info@eco-doma.ru</a>
+        <p>Москва, Пресненская наб., 12<br>ежедневно 9:00 — 21:00</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2024 Эко Дома. Все права защищены.</span>
+      <span>Политика конфиденциальности · Согласие на обработку данных</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- FILTERS ---------- */
+  var typeSel = document.getElementById('f-type');
+  var locSel  = document.getElementById('f-loc');
+  var price   = document.getElementById('f-price');
+  var priceOut= document.getElementById('price-out');
+  var countEl = document.getElementById('count');
+  var noRes   = document.getElementById('no-results');
+  var reset   = document.getElementById('reset');
+  var chips   = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  var termBtns= Array.prototype.slice.call(document.querySelectorAll('#f-term button'));
+  var cards   = Array.prototype.slice.call(document.querySelectorAll('.big-card, .s-card'));
+  var totalCards = cards.length;
+
+  var state = { type:'all', loc:'all', price:125, term:null, tags:[] };
+
+  function fmt(n){ return (Math.round(n*10)/10).toFixed(1); }
+
+  function paintRange(){
+    var pct = ((price.value - price.min) / (price.max - price.min)) * 100;
+    price.style.setProperty('--fill', pct + '%');
+    priceOut.textContent = fmt(price.value);
+  }
+
+  function apply(){
+    var shown = 0;
+    cards.forEach(function(card){
+      var cType = (card.getAttribute('data-type')||'').split(/\s+/);
+      var cLoc  = card.getAttribute('data-loc')||'';
+      var cPrice= parseFloat(card.getAttribute('data-price')||'0');
+      var cTerm = card.getAttribute('data-term')||'';
+      var cTags = (card.getAttribute('data-tags')||'').split(/\s+/);
+
+      var ok = true;
+      if(state.type !== 'all' && cType.indexOf(state.type) === -1) ok = false;
+      if(state.loc  !== 'all' && cLoc !== state.loc) ok = false;
+      if(cPrice > state.price) ok = false;
+      if(state.term && cTerm !== state.term) ok = false;
+      if(state.tags.length){
+        for(var i=0;i<state.tags.length;i++){
+          if(cTags.indexOf(state.tags[i]) === -1){ ok = false; break; }
+        }
+      }
+      card.style.display = ok ? '' : 'none';
+      if(ok) shown++;
+    });
+    countEl.textContent = shown;
+    noRes.classList.toggle('show', shown === 0);
+  }
+
+  typeSel.addEventListener('change', function(){ state.type = this.value; apply(); });
+  locSel.addEventListener('change',  function(){ state.loc  = this.value === 'Район, округ, метро' ? 'all' : this.value; if(this.selectedIndex===0) state.loc='all'; apply(); });
+  price.addEventListener('input', function(){ state.price = parseFloat(this.value); paintRange(); apply(); });
+
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      var tag = this.getAttribute('data-tag');
+      this.classList.toggle('on');
+      var idx = state.tags.indexOf(tag);
+      if(this.classList.contains('on')){ if(idx===-1) state.tags.push(tag); }
+      else { if(idx>-1) state.tags.splice(idx,1); }
+      apply();
+    });
+  });
+
+  termBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var t = this.getAttribute('data-term');
+      if(state.term === t){ state.term = null; this.classList.remove('on'); }
+      else {
+        state.term = t;
+        termBtns.forEach(function(b){ b.classList.remove('on'); });
+        this.classList.add('on');
+      }
+      apply();
+    });
+  });
+
+  reset.addEventListener('click', function(){
+    state = { type:'all', loc:'all', price:125, term:null, tags:[] };
+    typeSel.selectedIndex = 0;
+    locSel.selectedIndex = 0;
+    price.value = 125;
+    chips.forEach(function(c){ c.classList.remove('on'); });
+    termBtns.forEach(function(b){ b.classList.remove('on'); });
+    paintRange();
+    apply();
+  });
+
+  paintRange();
+  apply();
+
+  /* ---------- SCROLL REVEAL (safe with fallback) ---------- */
+  var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  function showAll(){ reveals.forEach(function(el){ el.classList.add('in'); }); }
+
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold:0.12, rootMargin:'0px 0px -8% 0px' });
+    reveals.forEach(function(el){ io.observe(el); });
+    // Safety net: never leave content hidden
+    setTimeout(showAll, 3000);
+  } else {
+    showAll();
+  }
+})();
+</script>
+</body>
+</html>

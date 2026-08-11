@@ -1,0 +1,498 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pigma — Sustainable Luxury Villas in Thailand</title>
+<meta name="description" content="Pigma develops sustainable luxury villas and resort residences across Phuket and Koh Samui — regenerative design, ocean views, and enduring investment value." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Pigma — Sustainable Luxury in Thailand" />
+<meta property="og:description" content="Sustainable luxury villas and resort residences in Phuket & Koh Samui. Request the 2026 brochure." />
+<meta property="og:image" content="https://images.unsplash.com/photo-1729808641871-8d8b5ade6bbe?auto=format&fit=crop&w=1200&q=80" />
+<meta name="theme-color" content="#f2f1e8" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --cream:#f2f1e8;
+    --cream-2:#eeede2;
+    --cream-3:#e7e6d8;
+    --olive:#4a5535;
+    --olive-deep:#3c4629;
+    --olive-2:#59663c;
+    --ink:#2e2c24;
+    --ink-soft:#565243;
+    --terra:#c26a3d;
+    --line:rgba(46,44,36,.14);
+    --shadow:0 30px 70px -30px rgba(46,44,36,.35);
+    --serif:"Fraunces",Georgia,serif;
+    --sans:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    --r-lg:42px;
+    --r-xl:64px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .wrap{width:min(1240px,92vw);margin-inline:auto}
+
+  h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.02;letter-spacing:-.01em;color:var(--olive)}
+  .eyebrow{
+    font-family:var(--sans);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:600;
+  }
+
+  /* ---------- pill / buttons ---------- */
+  .pill{
+    display:inline-flex;align-items:center;gap:.6em;
+    padding:.85em 1.5em;border-radius:999px;
+    font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    background:var(--olive);color:var(--cream);
+    border:1px solid var(--olive);
+    cursor:pointer;transition:transform .35s cubic-bezier(.2,.7,.3,1),background .35s,box-shadow .35s;
+    will-change:transform;
+  }
+  .pill:hover{background:var(--olive-deep);transform:translateY(-3px);box-shadow:0 16px 30px -14px rgba(60,70,41,.7)}
+  .pill--ghost{background:transparent;color:var(--olive);border-color:var(--line)}
+  .pill--ghost:hover{background:var(--cream-3);color:var(--olive);box-shadow:none}
+  .pill .arrow{transition:transform .35s}
+  .pill:hover .arrow{transform:translateX(4px)}
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(242,241,232,.78);
+    backdrop-filter:saturate(140%) blur(14px);
+    -webkit-backdrop-filter:saturate(140%) blur(14px);
+    border-bottom:1px solid transparent;
+    transition:border-color .4s,background .4s;
+  }
+  header.nav.scrolled{border-color:var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:78px}
+  .logo{font-family:var(--serif);font-size:1.75rem;font-weight:600;color:var(--olive);letter-spacing:-.02em}
+  .logo span{color:var(--terra)}
+  .menu{display:flex;gap:2.1rem;font-size:.92rem;font-weight:500;color:var(--ink-soft)}
+  .menu a{position:relative;padding:.2em 0;transition:color .3s}
+  .menu a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:1.5px;background:var(--olive);transition:width .35s}
+  .menu a:hover{color:var(--olive)}
+  .menu a:hover::after{width:100%}
+  .nav-cta{display:flex;align-items:center;gap:1rem}
+  .year-pill{padding:.7em 1.35em;font-size:.85rem;letter-spacing:.12em}
+  .burger{display:none;background:none;border:1px solid var(--line);border-radius:12px;padding:.6em .7em;cursor:pointer}
+  .burger span{display:block;width:20px;height:2px;background:var(--olive);margin:4px 0;transition:.3s}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;padding:clamp(2rem,6vw,5.5rem) 0 clamp(3rem,7vw,6rem)}
+  .hero-head{position:relative;z-index:3;text-align:center;margin-bottom:-2.4rem}
+  .hero-head h1{
+    font-size:clamp(2.9rem,11.5vw,10rem);
+    text-transform:uppercase;font-weight:500;letter-spacing:-.02em;
+    color:var(--olive);
+  }
+  .hero-head h1 .l2{display:block}
+  .hero-sub{
+    max-width:34rem;margin:1.4rem auto 0;color:var(--ink-soft);font-size:1.02rem;
+  }
+  .hero-figure{
+    position:relative;margin-top:2.6rem;
+    border-radius:clamp(90px,16vw,220px) clamp(40px,7vw,120px);
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    aspect-ratio:16/8.6;
+  }
+  .hero-figure::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(46,44,36,.05),rgba(46,44,36,.28));
+    pointer-events:none;
+  }
+  .hero-figure img{width:100%;height:100%;object-fit:cover;transform:scale(1.03);transition:transform 8s ease}
+  .hero:hover .hero-figure img{transform:scale(1.08)}
+  .hero-cta{
+    position:absolute;left:50%;bottom:clamp(1.6rem,4vw,3rem);transform:translateX(-50%);
+    z-index:4;
+  }
+  .hero-cta .pill{padding:1.05em 1.9em;font-size:.9rem;background:var(--cream);color:var(--olive);border-color:transparent;box-shadow:var(--shadow)}
+  .hero-cta .pill:hover{background:#fff;transform:translate(-0,-3px)}
+  .hero-badge{
+    position:absolute;top:clamp(1.4rem,4vw,2.6rem);right:clamp(1.4rem,4vw,3rem);z-index:4;
+    background:rgba(242,241,232,.9);backdrop-filter:blur(6px);
+    border-radius:24px;padding:1rem 1.2rem;text-align:left;max-width:14rem;box-shadow:var(--shadow)
+  }
+  .hero-badge b{font-family:var(--serif);font-size:1.5rem;color:var(--olive);display:block;line-height:1}
+  .hero-badge small{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+
+  /* ---------- section shell ---------- */
+  section{padding:clamp(3.5rem,8vw,7rem) 0}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin-bottom:2.6rem}
+  .sec-head .lead{max-width:34rem}
+  .sec-head h2{font-size:clamp(2.2rem,5.5vw,3.8rem)}
+  .sec-head p{margin-top:.9rem;color:var(--ink-soft)}
+
+  /* ---------- properties bento ---------- */
+  .bento{
+    display:grid;grid-template-columns:repeat(6,1fr);
+    grid-auto-rows:clamp(150px,17vw,215px);
+    gap:clamp(.9rem,1.4vw,1.4rem);
+  }
+  .cell{
+    border-radius:var(--r-lg);overflow:hidden;position:relative;
+    background:var(--cream-2);
+  }
+  .cell.img img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.3,1)}
+  .cell.img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(46,44,36,.3));opacity:.8}
+  .cell.img:hover img{transform:scale(1.07)}
+  .cell.img .tag{
+    position:absolute;left:1.1rem;bottom:1.1rem;z-index:2;color:var(--cream);
+    font-family:var(--serif);font-size:1.15rem;
+  }
+  .cell.img .tag small{display:block;font-family:var(--sans);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;opacity:.85;font-weight:600;margin-bottom:.2rem}
+  .card{
+    padding:clamp(1.3rem,1.8vw,1.9rem);display:flex;flex-direction:column;justify-content:space-between;
+    border:1px solid var(--line);background:var(--cream-2);
+  }
+  .card .ba{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+  .card p{font-size:.92rem;color:var(--ink-soft);margin-top:.55rem}
+  .card .stat{font-family:var(--serif);font-size:clamp(2.4rem,4.6vw,3.6rem);color:var(--olive);line-height:1;margin-top:auto}
+  .card .stat b{font-weight:600}
+  .card .stat span{display:block;font-family:var(--sans);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;margin-top:.4rem}
+  .card.dark{background:var(--olive);border-color:var(--olive)}
+  .card.dark .ba,.card.dark p,.card.dark .stat span{color:rgba(242,241,232,.75)}
+  .card.dark .stat{color:var(--cream)}
+
+  /* grid placement (desktop) */
+  .c1{grid-column:span 2;grid-row:span 2}
+  .c2{grid-column:span 2}
+  .c3{grid-column:span 2;grid-row:span 2}
+  .c4{grid-column:span 2}
+  .c5{grid-column:span 2}
+  .c6{grid-column:span 2;grid-row:span 2}
+  .c7{grid-column:span 2}
+  .c8{grid-column:span 2}
+
+  /* ---------- locations + testimonials ---------- */
+  .duo{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(1.2rem,2.4vw,2.2rem);align-items:stretch}
+  .panel{background:var(--cream-2);border:1px solid var(--line);border-radius:var(--r-xl);padding:clamp(1.6rem,3vw,2.6rem);display:flex;flex-direction:column}
+  .panel h2{font-size:clamp(2rem,4.5vw,3.2rem);margin-bottom:.4rem}
+  .panel .muted{color:var(--ink-soft);max-width:26rem}
+
+  /* map */
+  .map{
+    position:relative;margin-top:1.6rem;flex:1;min-height:280px;border-radius:34px;overflow:hidden;
+    background:
+      radial-gradient(120% 90% at 20% 10%, #e9e8da 0%, #e2e1d1 55%, #dad9c7 100%);
+    border:1px solid var(--line);
+  }
+  .map svg{position:absolute;inset:0;width:100%;height:100%}
+  .map .coast{fill:none;stroke:rgba(74,85,53,.28);stroke-width:2.4;stroke-dasharray:2 7;stroke-linecap:round}
+  .map .land{fill:rgba(74,85,53,.10);stroke:rgba(74,85,53,.35);stroke-width:1.4}
+  .pin{position:absolute;transform:translate(-50%,-100%);z-index:2;text-align:center}
+  .pin .dot{width:16px;height:16px;border-radius:50%;margin:0 auto;position:relative;box-shadow:0 4px 10px rgba(46,44,36,.35)}
+  .pin .dot::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:1px solid currentColor;opacity:.4;animation:ping 2.6s ease-out infinite}
+  .pin.olive .dot{background:var(--olive);color:var(--olive)}
+  .pin.terra .dot{background:var(--terra);color:var(--terra)}
+  .pin b{display:inline-block;margin-top:.5rem;font-family:var(--serif);font-size:.95rem;color:var(--ink);background:rgba(242,241,232,.85);padding:.1em .6em;border-radius:8px}
+  @keyframes ping{0%{transform:scale(1);opacity:.5}70%,100%{transform:scale(2.4);opacity:0}}
+  .loc-foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:1.4rem}
+  .loc-foot .places{font-family:var(--serif);font-size:1.25rem;color:var(--olive)}
+
+  /* testimonial cta panel */
+  .cta-panel{
+    background:linear-gradient(160deg,var(--olive-2),var(--olive-deep));
+    border:none;color:var(--cream);position:relative;overflow:hidden;justify-content:space-between;min-height:420px;
+  }
+  .cta-panel::before{
+    content:"";position:absolute;width:120%;height:60%;left:-10%;bottom:-18%;
+    background:radial-gradient(60% 100% at 50% 0%,rgba(242,241,232,.12),transparent 70%);
+  }
+  .cta-panel .eyebrow{color:rgba(242,241,232,.7)}
+  .quote{font-family:var(--serif);font-size:clamp(1.1rem,2.2vw,1.5rem);line-height:1.35;color:rgba(242,241,232,.92);max-width:24rem;position:relative;z-index:2}
+  .quote-by{margin-top:1rem;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(242,241,232,.65);font-weight:600;position:relative;z-index:2}
+  .invest{
+    font-family:var(--serif);font-weight:500;text-transform:uppercase;
+    font-size:clamp(3rem,9vw,6.2rem);line-height:.92;letter-spacing:-.02em;color:var(--cream);
+    position:relative;z-index:2;margin-top:1.4rem;
+  }
+  .cta-panel .pill{background:var(--cream);color:var(--olive-deep);border-color:var(--cream);align-self:flex-start;position:relative;z-index:2;margin-top:1.4rem}
+  .cta-panel .pill:hover{background:#fff}
+
+  /* ---------- footer ---------- */
+  footer{padding:clamp(3rem,6vw,5rem) 0 2.5rem;border-top:1px solid var(--line);margin-top:1rem}
+  .foot-top{display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap;align-items:flex-start}
+  .foot-brand{max-width:22rem}
+  .foot-brand .logo{font-size:2rem}
+  .foot-brand p{color:var(--ink-soft);margin-top:.7rem;font-size:.95rem}
+  .foot-cols{display:flex;gap:clamp(2rem,6vw,5rem);flex-wrap:wrap}
+  .foot-col h4{font-family:var(--sans);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.9rem}
+  .foot-col a{display:block;color:var(--ink);font-size:.95rem;padding:.28em 0;transition:color .3s}
+  .foot-col a:hover{color:var(--olive)}
+  .foot-bottom{margin-top:2.6rem;padding-top:1.4rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.82rem;color:var(--ink-soft)}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- responsive ---------- */
+  @media(max-width:940px){
+    .menu,.nav-cta .year-pill{display:none}
+    .burger{display:block}
+    .bento{grid-template-columns:repeat(2,1fr);grid-auto-rows:minmax(160px,auto)}
+    .c1,.c2,.c3,.c4,.c5,.c6,.c7,.c8{grid-column:span 1;grid-row:auto}
+    .c1,.c3,.c6{grid-row:span 2}
+    .duo{grid-template-columns:1fr}
+  }
+  @media(max-width:560px){
+    .bento{grid-template-columns:1fr}
+    .c1,.c3,.c6{grid-row:auto}
+    .cell.img,.card{min-height:220px}
+    .hero-badge{display:none}
+    .hero-figure{border-radius:60px 26px;aspect-ratio:4/4.4}
+    .sec-head{align-items:flex-start}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none;transition:none}
+    .hero-figure img,.cell.img img{transition:none}
+  }
+</style>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="#top">Pigma<span>.</span></a>
+    <nav class="menu">
+      <a href="#top">Home</a>
+      <a href="#about">About</a>
+      <a href="#villas">Villas</a>
+      <a href="#company">Company</a>
+      <a href="#partner">Partner</a>
+    </nav>
+    <div class="nav-cta">
+      <span class="pill year-pill">2026</span>
+      <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" id="about">
+    <div class="wrap">
+      <div class="hero-head reveal">
+        <p class="eyebrow" style="margin-bottom:1.2rem">Pigma Development · Est. 2016</p>
+        <h1>Sustainable Luxury<span class="l2">In Thailand</span></h1>
+        <p class="hero-sub">Regeneratively designed villas and resort residences, rooted in the landscapes of Phuket and Koh Samui — where architecture, nature, and lasting value live as one.</p>
+      </div>
+
+      <figure class="hero-figure reveal">
+        <img src="https://images.unsplash.com/photo-1729808641871-8d8b5ade6bbe?auto=format&fit=crop&w=1600&q=80"
+             alt="Aerial view of a tropical Thai luxury villa resort with an infinity pool set beside a palm-lined beach and turquoise ocean" />
+        <div class="hero-badge">
+          <b>28+</b>
+          <small>Sustainable villas delivered</small>
+        </div>
+        <div class="hero-cta">
+          <a class="pill" href="#partner">Request Brochure <span class="arrow">→</span></a>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- PROPERTIES -->
+  <section id="villas">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="lead">
+          <p class="eyebrow">Portfolio</p>
+          <h2>Our Properties</h2>
+          <p>A collection of low-impact residences that give more than they take. Each home is measured not only in square metres, but in restored land, saved energy, and long-term returns.</p>
+        </div>
+        <a class="pill pill--ghost" href="#villas">◍ Existing <span class="arrow">→</span></a>
+      </div>
+
+      <div class="bento">
+        <!-- big hero cell -->
+        <div class="cell img c1 reveal">
+          <img src="https://images.unsplash.com/photo-1713843841925-6af6ed0df472?auto=format&fit=crop&w=1000&q=80"
+               alt="Infinity pool overlooking the ocean at a cliffside villa" loading="lazy" />
+          <div class="tag"><small>Phuket · Cliff Residence</small>The Horizon Villa</div>
+        </div>
+
+        <!-- stat card -->
+        <div class="cell card c2 reveal">
+          <span class="ba">Before-After</span>
+          <p>Passive cooling and cross-ventilation cut the reliance on air conditioning across the estate.</p>
+          <div class="stat"><b>60%</b><span>Sustainability</span></div>
+        </div>
+
+        <!-- image -->
+        <div class="cell img c3 reveal">
+          <img src="https://images.unsplash.com/photo-1778640331184-dc4c3e2608e1?auto=format&fit=crop&w=1000&q=80"
+               alt="Modern villa living room with floor-to-ceiling glass opening onto a jungle plunge pool" loading="lazy" />
+          <div class="tag"><small>Interior · Living</small>Canopy Suite</div>
+        </div>
+
+        <!-- stat card -->
+        <div class="cell card c4 reveal">
+          <span class="ba">Before-After</span>
+          <p>On-site solar and battery storage return surplus energy to the local grid year-round.</p>
+          <div class="stat"><b>210%</b><span>Sustainability</span></div>
+        </div>
+
+        <!-- image -->
+        <div class="cell img c5 reveal">
+          <img src="https://images.unsplash.com/photo-1782413263988-11f7178cf385?auto=format&fit=crop&w=1000&q=80"
+               alt="Palm-lined villa garden and reflecting pool at golden sunset" loading="lazy" />
+          <div class="tag"><small>Koh Samui · Garden</small>Palm Court</div>
+        </div>
+
+        <!-- image tall -->
+        <div class="cell img c6 reveal">
+          <img src="https://images.unsplash.com/photo-1719391083606-da1dd6454a68?auto=format&fit=crop&w=1000&q=80"
+               alt="Stone-edged infinity pool with an uninterrupted view of the sea" loading="lazy" />
+          <div class="tag"><small>Phuket · Ocean Edge</small>The Reef Villa</div>
+        </div>
+
+        <!-- dark stat card -->
+        <div class="cell card dark c7 reveal">
+          <span class="ba">Before-After</span>
+          <p>Reforested plots and rainwater harvesting regenerate the site's native ecology.</p>
+          <div class="stat"><b>310%</b><span>Sustainability</span></div>
+        </div>
+
+        <!-- stat card -->
+        <div class="cell card c8 reveal">
+          <span class="ba">Before-After</span>
+          <p>Locally sourced timber and lime finishes lower embodied carbon at every stage.</p>
+          <div class="stat"><b>510%</b><span>Sustainability</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATIONS + TESTIMONIALS -->
+  <section id="company">
+    <div class="wrap">
+      <div class="duo">
+
+        <!-- Locations -->
+        <div class="panel reveal">
+          <p class="eyebrow">Where we build</p>
+          <h2>Locations</h2>
+          <p class="muted">Two islands, one philosophy. Our estates sit within protected coastlines, minutes from the water yet held gently within the land.</p>
+
+          <div class="map" aria-hidden="true">
+            <svg viewBox="0 0 500 340" preserveAspectRatio="none">
+              <path class="coast" d="M20,60 C120,30 180,110 250,90 C340,64 400,140 480,110" />
+              <path class="coast" d="M10,220 C110,190 170,260 260,240 C360,218 420,290 495,255" />
+              <path class="land" d="M120,120 C150,90 210,96 235,130 C262,166 230,220 180,214 C130,208 96,158 120,120 Z" />
+              <path class="land" d="M330,180 C356,158 402,168 414,200 C426,234 396,272 358,266 C318,260 306,204 330,180 Z" />
+            </svg>
+            <div class="pin olive" style="left:34%;top:47%"><div class="dot"></div><b>Phuket</b></div>
+            <div class="pin terra" style="left:74%;top:63%"><div class="dot"></div><b>Koh Samui</b></div>
+          </div>
+
+          <div class="loc-foot">
+            <div class="places">Phuket / Koh Samui</div>
+            <a class="pill pill--ghost" href="#partner">View map <span class="arrow">→</span></a>
+          </div>
+        </div>
+
+        <!-- Testimonials / CTA -->
+        <div class="panel cta-panel reveal">
+          <div>
+            <p class="eyebrow">Testimonials</p>
+            <blockquote class="quote">"Pigma delivered a home that pays us back — in serenity, in the landscape it restored, and in a return we did not expect."</blockquote>
+            <p class="quote-by">— L. Andersson, Owner · The Reef Villa</p>
+          </div>
+          <div>
+            <div class="invest">Invest<br />Today</div>
+            <a class="pill" href="#partner">Book a viewing <span class="arrow">→</span></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="partner">
+    <div class="wrap">
+      <div class="foot-top">
+        <div class="foot-brand">
+          <a class="logo" href="#top">Pigma<span>.</span></a>
+          <p>Sustainable luxury villas and resort residences across Phuket and Koh Samui. Designed to endure — for the land, and for those who invest in it.</p>
+        </div>
+        <div class="foot-cols">
+          <div class="foot-col">
+            <h4>Explore</h4>
+            <a href="#top">Home</a>
+            <a href="#about">About</a>
+            <a href="#villas">Villas</a>
+            <a href="#company">Company</a>
+          </div>
+          <div class="foot-col">
+            <h4>Partner</h4>
+            <a href="#partner">Request Brochure</a>
+            <a href="#partner">Book a viewing</a>
+            <a href="#partner">Investor relations</a>
+            <a href="#partner">Press</a>
+          </div>
+          <div class="foot-col">
+            <h4>Contact</h4>
+            <a href="#">hello@pigma.co</a>
+            <a href="#">+66 76 000 000</a>
+            <a href="#">Phuket, Thailand</a>
+          </div>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 Pigma Development. All rights reserved.</span>
+        <span>Sustainable Luxury in Thailand · Est. 2016</span>
+      </div>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  // nav border on scroll
+  const nav=document.getElementById('nav');
+  const onScroll=()=>nav.classList.toggle('scrolled',window.scrollY>10);
+  onScroll();addEventListener('scroll',onScroll,{passive:true});
+
+  // mobile menu (simple anchor scroll — reveal full menu)
+  const burger=document.getElementById('burger');
+  const menu=document.querySelector('.menu');
+  burger&&burger.addEventListener('click',()=>{
+    const open=menu.style.display==='flex';
+    menu.style.display=open?'':'flex';
+    menu.style.position='absolute';menu.style.flexDirection='column';
+    menu.style.top='78px';menu.style.left='0';menu.style.right='0';
+    menu.style.background='var(--cream)';menu.style.padding='1.2rem 6vw';
+    menu.style.borderBottom='1px solid var(--line)';menu.style.gap='1rem';
+  });
+  menu&&menu.addEventListener('click',e=>{if(e.target.tagName==='A'&&innerWidth<=940){menu.style.display='';}});
+
+  // scroll reveal (an toàn: tự hiện nếu không hỗ trợ IO)
+  const revealEls=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver((es)=>{
+      es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+    },{threshold:.08,rootMargin:'0px 0px -4% 0px'});
+    revealEls.forEach((el,i)=>{
+      el.style.transitionDelay=(Math.min(i%4,3)*70)+'ms';
+      io.observe(el);
+    });
+    // fallback: sau 3.5s hiện hết những gì chưa reveal (phòng lỗi)
+    setTimeout(()=>revealEls.forEach(el=>el.classList.add('in')),3500);
+  } else {
+    revealEls.forEach(el=>el.classList.add('in'));
+  }
+</script>
