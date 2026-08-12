@@ -414,7 +414,12 @@
   .rw-thumb img{width:100%;height:100%;object-fit:cover;object-position:center}
   .rw-thumb:hover{opacity:.9;transform:translateY(-4px)}
   .rw-thumb.active{opacity:1;border-color:var(--ink);transform:translateY(-6px);box-shadow:0 18px 34px -18px rgba(0,0,0,.4)}
-  @media(max-width:560px){.rw-thumb{min-width:64px}}
+  @media(max-width:560px){
+    .rw-thumbs{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;scroll-snap-type:x proximity;
+      -webkit-overflow-scrolling:touch;padding-bottom:6px;scrollbar-width:none}
+    .rw-thumbs::-webkit-scrollbar{display:none}
+    .rw-thumb{flex:0 0 auto;width:82px;min-width:82px;max-width:none;scroll-snap-align:center}
+  }
 </style>
 </head>
 <body>
@@ -594,7 +599,6 @@
       <div class="rw-main">
         <div class="rw-frame">
           <img id="rwImg" src="fashion-img/look-1.jpg" alt="Runway look">
-          <div class="rw-name"><b id="rwName">Look 01 — Camel Tailoring</b><span id="rwPrice">1.290.000₫</span></div>
         </div>
       </div>
       <div class="rw-thumbs" id="rwThumbs">
@@ -1108,7 +1112,6 @@ document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeQuickView()
 (function(){
   const imgs=['fashion-img/look-1.jpg','fashion-img/look-2.jpg','fashion-img/look-3.jpg','fashion-img/look-4.jpg','fashion-img/look-5.jpg'];
   const main=document.getElementById('rwImg'), frame=main&&main.closest('.rw-frame');
-  const nameEl=document.getElementById('rwName'), priceEl=document.getElementById('rwPrice');
   const thumbs=[...document.querySelectorAll('.rw-thumb')];
   if(!main) return;
   function select(i){
@@ -1116,8 +1119,8 @@ document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeQuickView()
     const t=thumbs.find(x=>+x.dataset.i===i); if(!t) return;
     main.style.opacity='0';
     setTimeout(()=>{ main.src=imgs[i]; main.style.opacity='1'; },180);
-    if(nameEl) nameEl.textContent=t.dataset.name;
-    if(priceEl) priceEl.textContent=t.dataset.price;
+    // Mobile: tự lăn thumbnail đang chọn vào giữa hàng ngang
+    if(t.scrollIntoView) t.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
   }
   thumbs.forEach(t=>t.addEventListener('click',()=>select(+t.dataset.i)));
   // Nhấn ảnh chính để chuyển sang look kế tiếp
