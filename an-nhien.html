@@ -46,8 +46,13 @@
   .topbar{background:var(--sand);text-align:center;padding:8px 16px;font-size:.68rem;letter-spacing:.42em;text-transform:uppercase;color:var(--olive);font-weight:500}
 
   /* ---------- NAV ---------- */
-  header.nav{position:sticky;top:0;z-index:60;background:rgba(245,242,234,.86);backdrop-filter:saturate(1.1) blur(14px);border-bottom:1px solid transparent;transition:border-color .3s}
+  header.nav{position:sticky;top:0;z-index:60;background:rgba(245,242,234,.86);backdrop-filter:saturate(1.1) blur(14px);border-bottom:1px solid transparent;transition:background .4s,border-color .4s,color .4s}
   header.nav.scrolled{border-bottom:1px solid var(--line)}
+  header.nav.over{background:transparent;backdrop-filter:none;border-bottom-color:transparent}
+  header.nav.over .logo b,header.nav.over .nav-menu a{color:#fdfbf5}
+  header.nav.over .logo span{color:#e5cf9e}
+  header.nav.over .nav-menu a:hover{color:#e5cf9e}
+  header.nav.over .burger span{background:#fdfbf5}
   .nav-in{display:flex;align-items:center;gap:24px;height:76px}
   .logo{display:flex;flex-direction:column;line-height:1;white-space:nowrap}
   .logo b{font-family:'Cormorant Garamond',serif;font-size:1.72rem;font-weight:600;letter-spacing:.14em}
@@ -66,15 +71,26 @@
 
   /* ---------- HERO ---------- */
   .hero{position:relative}
-  .hero-grid{display:grid;grid-template-columns:1.02fr 1fr;min-height:clamp(560px,80vh,760px);align-items:stretch}
-  .hero-copy{display:flex;flex-direction:column;justify-content:center;padding:clamp(40px,6vw,90px) clamp(32px,5vw,80px) clamp(40px,6vw,90px) max(32px,calc((100vw - 1240px)/2 + 32px))}
-  .hero-copy .eyebrow{margin-bottom:22px}
-  .hero-copy h1{font-size:clamp(3rem,6vw,5.4rem);font-weight:500;margin-bottom:26px}
-  .hero-copy h1 em{font-style:italic;color:var(--gold-2)}
-  .hero-copy p.lead{font-size:1.06rem;color:var(--ink-soft);max-width:440px;margin-bottom:34px;font-weight:300}
-  .hero-media{position:relative;overflow:hidden}
-  .hero-media img{width:100%;height:100%;object-fit:cover;min-height:360px}
-  .hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(233,228,216,.5) 0%,rgba(233,228,216,0) 24%)}
+  /* cinematic full-bleed hero */
+  .hero{min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;margin-top:-108px}
+  .hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;animation:heroZoom 18s ease-out forwards}
+  @keyframes heroZoom{from{transform:scale(1.12)}to{transform:scale(1)}}
+  .hero-bg::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(28,24,16,.32) 0%,rgba(28,24,16,.05) 32%,rgba(28,24,16,.28) 62%,rgba(24,20,12,.82) 100%)}
+  .hero-inner{position:relative;z-index:2;width:100%;padding-bottom:clamp(70px,11vh,130px);padding-top:120px}
+  .hero-inner .eyebrow{color:#e8dcc0;margin-bottom:22px}
+  .hero-inner h1{color:#fdfbf5;font-size:clamp(3.2rem,8vw,7rem);font-weight:500;letter-spacing:.004em;margin-bottom:28px;max-width:16ch;text-shadow:0 2px 40px rgba(0,0,0,.35)}
+  .hero-inner h1 em{font-style:italic;color:#e5cf9e}
+  .hero-inner p.lead{color:rgba(253,251,245,.9);font-size:clamp(1rem,1.5vw,1.24rem);max-width:520px;margin-bottom:38px;font-weight:300}
+  .hero-scroll{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:3;color:rgba(253,251,245,.7);display:flex;flex-direction:column;align-items:center;gap:8px;font-size:.64rem;letter-spacing:.24em;text-transform:uppercase}
+  .hero-scroll .line{width:1px;height:44px;background:linear-gradient(rgba(253,251,245,.7),rgba(253,251,245,0));animation:scrollLine 2.4s ease-in-out infinite}
+  @keyframes scrollLine{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+  .btn-light{background:#fdfbf5;color:var(--olive)}
+  .btn-light:hover{background:#fff}
+  .btn-ghost{border:1px solid rgba(253,251,245,.5);color:#fdfbf5;padding:15px 30px;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;font-weight:500}
+  .btn-ghost:hover{background:rgba(253,251,245,.12);border-color:#fdfbf5}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
 
   /* ---------- FEATURE BAR ---------- */
   .feat-bar{background:var(--cream-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -94,6 +110,38 @@
   .col-copy p{color:var(--ink-soft);margin-bottom:16px;font-weight:300;max-width:440px}
   .col-media{position:relative;border-radius:4px;overflow:hidden;box-shadow:var(--shadow)}
   .col-media img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3.1}
+
+  /* ---------- STATS STRIP ---------- */
+  .stats{background:var(--olive);color:#f0ebde;padding:clamp(56px,7vw,88px) 0}
+  .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;text-align:center}
+  .stat .num{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,5vw,4.6rem);font-weight:500;line-height:1;color:#fff}
+  .stat .num .suf{color:#c9bd97}
+  .stat .lbl{margin-top:10px;font-size:.82rem;letter-spacing:.08em;color:rgba(240,235,222,.72);font-weight:300}
+  .stat+.stat{position:relative}
+  .stat+.stat::before{content:"";position:absolute;left:-15px;top:14%;height:72%;width:1px;background:rgba(240,235,222,.16)}
+
+  /* ---------- GALLERY ---------- */
+  .gallery{background:var(--cream);text-align:center}
+  .gallery h2{font-size:clamp(2.2rem,4.4vw,3.3rem)}
+  .gallery .rule{margin:22px auto 12px}
+  .gallery .sub{color:var(--ink-soft);max-width:520px;margin:0 auto 50px;font-weight:300}
+  .gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:16px}
+  .gal-item{position:relative;overflow:hidden;border-radius:4px}
+  .gal-item img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+  .gal-item:hover img{transform:scale(1.06)}
+  .gal-item .cap{position:absolute;left:18px;bottom:16px;z-index:2;color:#fff;text-align:left;font-family:'Cormorant Garamond',serif;font-size:1.3rem;text-shadow:0 2px 20px rgba(0,0,0,.5);opacity:0;transform:translateY(8px);transition:.4s}
+  .gal-item::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(20,16,10,.55));opacity:0;transition:.4s}
+  .gal-item:hover .cap{opacity:1;transform:none}
+  .gal-item:hover::after{opacity:1}
+  .gal-item.big{grid-column:span 2;grid-row:span 2}
+  .gal-item.wide{grid-column:span 2}
+
+  /* ---------- TESTIMONIAL ---------- */
+  .quote{background:var(--paper);text-align:center}
+  .quote .mark{font-family:'Cormorant Garamond',serif;font-size:5rem;line-height:.5;color:var(--sand);height:44px}
+  .quote blockquote{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3.4vw,2.6rem);font-weight:500;font-style:italic;line-height:1.34;max-width:900px;margin:0 auto 30px;color:var(--ink)}
+  .quote .who{font-size:.86rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:500}
+  .quote .role{font-size:.82rem;color:var(--muted);margin-top:4px;font-weight:300;text-transform:none;letter-spacing:0}
 
   /* ---------- HOLISTIC ---------- */
   .holistic{background:var(--cream-2);text-align:center}
@@ -164,6 +212,11 @@
     .cta-grid{grid-template-columns:1fr}
     .cta-div{display:none}
     .pricing{text-align:center;max-width:340px;margin:0 auto}
+    .stats-row{grid-template-columns:1fr 1fr;gap:40px 20px}
+    .stat+.stat::before{display:none}
+    .gal-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:180px}
+    .gal-item.big{grid-column:span 2;grid-row:span 1}
+    .gal-item.wide{grid-column:span 2}
   }
   @media(max-width:560px){
     .wrap{padding:0 22px}
@@ -171,6 +224,10 @@
     .pillars{grid-template-columns:1fr 1fr}
     .foot-grid{grid-template-columns:1fr}
     .topbar{letter-spacing:.28em;font-size:.6rem}
+    .stats-row{grid-template-columns:1fr 1fr;gap:34px 16px}
+    .gal-grid{grid-template-columns:1fr;grid-auto-rows:220px}
+    .gal-item.big,.gal-item.wide{grid-column:span 1;grid-row:span 1}
+    .hero-inner h1{font-size:clamp(2.6rem,11vw,4rem)}
   }
   @media(prefers-reduced-motion:reduce){
     *{transition:none!important;scroll-behavior:auto!important}
@@ -201,17 +258,21 @@
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <div class="hero-grid">
-    <div class="hero-copy">
+  <div class="hero-bg">
+    <img src="alive-img/hero-cine.jpg" alt="Người phụ nữ đứng lặng ngắm bình minh vàng cam trên đỉnh núi mây phủ" loading="eager">
+  </div>
+  <div class="wrap hero-inner">
+    <div class="reveal in">
       <div class="eyebrow">Riêng tư · Cá nhân · Chuyển hóa</div>
       <h1>Nghỉ dưỡng cao cấp <em>thay đổi</em> cuộc đời bạn</h1>
       <p class="lead">Các khóa nghỉ dưỡng wellness &amp; sức khỏe tinh thần cá nhân hóa, phục hồi cơ thể, tâm trí và năng lượng — giữa những không gian riêng tư, sang trọng bậc nhất.</p>
-      <div><a href="#cta" class="btn btn-solid">Đặt lịch tư vấn riêng</a></div>
-    </div>
-    <div class="hero-media">
-      <img src="alive-img/hero.jpg" alt="Người phụ nữ ngồi thiền trên sàn gỗ nhìn ra rừng núi trong ánh hoàng hôn vàng ấm" loading="eager">
+      <div class="hero-actions">
+        <a href="#cta" class="btn btn-light">Đặt lịch tư vấn riêng</a>
+        <a href="#retreats" class="btn btn-ghost">Khám phá</a>
+      </div>
     </div>
   </div>
+  <div class="hero-scroll"><span>Cuộn xuống</span><span class="line"></span></div>
 </section>
 
 <!-- FEATURE BAR -->
@@ -238,6 +299,18 @@
   </div>
 </div>
 
+<!-- STATS -->
+<section class="stats">
+  <div class="wrap">
+    <div class="stats-row">
+      <div class="stat reveal"><div class="num" data-count="12"></div><div class="lbl">Năm kinh nghiệm chữa lành</div></div>
+      <div class="stat reveal"><div class="num" data-count="850"></div><div class="lbl">Khách hàng đã chuyển hóa</div></div>
+      <div class="stat reveal"><div class="num" data-count="40"><span class="suf">+</span></div><div class="lbl">Chuyên gia &amp; người dẫn dắt</div></div>
+      <div class="stat reveal"><div class="num" data-count="98"><span class="suf">%</span></div><div class="lbl">Khách quay lại &amp; giới thiệu</div></div>
+    </div>
+  </div>
+</section>
+
 <!-- TURNING POINT -->
 <section class="block" id="retreats">
   <div class="wrap">
@@ -253,6 +326,23 @@
       <div class="col-media reveal">
         <img src="alive-img/pool.jpg" alt="Hồ bơi vô cực nhìn ra biển và đồi núi, bóng cây dừa in trên mặt nước" loading="lazy">
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="block gallery" id="locations">
+  <div class="wrap">
+    <div class="eyebrow reveal">Không gian của bạn</div>
+    <h2 class="reveal" style="margin-top:12px">Nơi mọi giác quan được nghỉ ngơi</h2>
+    <div class="rule reveal"></div>
+    <p class="sub reveal">Mỗi khu nghỉ dưỡng riêng tư là một thế giới tách biệt — nơi ánh sáng, hương thơm và sự tĩnh lặng được sắp đặt tỉ mỉ cho hành trình của bạn.</p>
+    <div class="gal-grid reveal">
+      <div class="gal-item big"><img src="alive-img/villa.jpg" alt="Phòng villa riêng với bồn jacuzzi gỗ ấm và ánh sáng tự nhiên"><span class="cap">Villa riêng &amp; jacuzzi gỗ</span></div>
+      <div class="gal-item"><img src="alive-img/onsen.jpg" alt="Bồn tắm thảo mộc với nến ấm"><span class="cap">Trị liệu thảo mộc</span></div>
+      <div class="gal-item"><img src="alive-img/sauna.jpg" alt="Phòng xông hơi gỗ ánh đèn ấm"><span class="cap">Xông hơi &amp; thải độc</span></div>
+      <div class="gal-item wide"><img src="alive-img/pool.jpg" alt="Hồ bơi vô cực nhìn ra biển lúc hoàng hôn"><span class="cap">Hồ bơi vô cực view biển</span></div>
+      <div class="gal-item"><img src="alive-img/hero.jpg" alt="Không gian thiền định giữa thiên nhiên"><span class="cap">Thiền định bình minh</span></div>
     </div>
   </div>
 </section>
@@ -311,6 +401,16 @@
         </ul>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="block quote">
+  <div class="wrap">
+    <div class="mark reveal">”</div>
+    <blockquote class="reveal">Tôi đến trong trạng thái kiệt quệ sau mười năm dựng nghiệp. Rời đi, tôi mang theo một con người khác — bình an, rõ ràng và tràn đầy sức sống. Đây không phải kỳ nghỉ, đây là sự tái sinh.</blockquote>
+    <div class="who reveal">Minh Anh — Nhà sáng lập &amp; CEO</div>
+    <div class="role reveal">Khóa nghỉ dưỡng Elite riêng tư · Đà Lạt</div>
   </div>
 </section>
 
@@ -379,9 +479,12 @@
 (function(){
   "use strict";
   var nav=document.getElementById('nav');
-  window.addEventListener('scroll',function(){
-    if(window.scrollY>8) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
-  },{passive:true});
+  function onScroll(){
+    if(window.scrollY>window.innerHeight-120){ nav.classList.add('scrolled'); nav.classList.remove('over'); }
+    else { nav.classList.remove('scrolled'); nav.classList.add('over'); }
+  }
+  onScroll();
+  window.addEventListener('scroll',onScroll,{passive:true});
 
   var burger=document.querySelector('.burger');
   if(burger) burger.addEventListener('click',function(){
@@ -389,12 +492,31 @@
     if(m) m.scrollIntoView({behavior:'smooth'});
   });
 
+  /* count-up cho stats */
+  function countUp(el){
+    var target=parseInt(el.getAttribute('data-count'),10)||0;
+    var suf=el.querySelector('.suf'); var sufTxt=suf?suf.outerHTML:'';
+    var start=null, dur=1600;
+    function step(ts){
+      if(!start) start=ts;
+      var p=Math.min((ts-start)/dur,1);
+      var eased=1-Math.pow(1-p,3);
+      var val=Math.round(target*eased);
+      el.innerHTML=val.toLocaleString('vi-VN')+sufTxt;
+      if(p<1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
   /* scroll reveal with safe fallback */
   var reveals=[].slice.call(document.querySelectorAll('.reveal'));
-  function showAll(){ reveals.forEach(function(el){ el.classList.add('in'); }); }
+  function showAll(){ reveals.forEach(function(el){ el.classList.add('in'); }); document.querySelectorAll('.num[data-count]').forEach(countUp); }
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(entries){
-      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in');
+        var n=en.target.querySelector?en.target.querySelector('.num[data-count]'):null;
+        if(en.target.classList.contains('stat')&&n&&!n.dataset.done){ n.dataset.done=1; countUp(n); }
+        io.unobserve(en.target); } });
     },{threshold:.1,rootMargin:'0px 0px -8% 0px'});
     reveals.forEach(function(el){ io.observe(el); });
     setTimeout(showAll,3000);
