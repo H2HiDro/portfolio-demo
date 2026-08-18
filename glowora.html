@@ -65,6 +65,25 @@
 
   /* ---------- HERO ---------- */
   .hero{background:linear-gradient(120deg,var(--pink) 0%,var(--pink-2) 55%,#fce9ea 100%);position:relative;overflow:hidden}
+  .hero-decor{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .hb{position:absolute;border-radius:50%;filter:blur(50px);opacity:.55}
+  .hb1{width:340px;height:340px;background:radial-gradient(circle,#f6c2cb,transparent 68%);top:-80px;left:-60px}
+  .hb2{width:300px;height:300px;background:radial-gradient(circle,#fcd9c2,transparent 68%);bottom:-70px;right:38%}
+  .hring{position:absolute;border:1.5px solid rgba(217,138,148,.22);border-radius:50%}
+  .hring1{width:260px;height:260px;right:6%;top:8%}
+  .hring2{width:120px;height:120px;left:44%;bottom:12%}
+  .petal{position:absolute;color:#eeb6bf;opacity:.5}
+  @keyframes floaty{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-20px) rotate(calc(var(--r,0deg) + 8deg))}}
+  .petal.fl{animation:floaty 8s ease-in-out infinite}
+  .petal.fl.s{animation-duration:11s}
+  /* chip đánh giá nổi trên ảnh */
+  .hero-chip{position:absolute;left:-6%;bottom:14%;z-index:4;background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:14px 18px;display:flex;align-items:center;gap:12px;animation:floaty 6s ease-in-out infinite;--r:0deg}
+  .hero-chip .avs{display:flex}
+  .hero-chip .avs img{width:34px;height:34px;border-radius:50%;border:2px solid #fff;object-fit:cover;margin-left:-10px;filter:grayscale(.1)}
+  .hero-chip .avs img:first-child{margin-left:0}
+  .hero-chip .rc b{display:block;font-family:'Playfair Display',serif;font-size:1rem;color:var(--ink);line-height:1}
+  .hero-chip .rc span{font-size:.7rem;color:var(--ink-soft)}
+  .hero-chip .rc .stars{color:var(--gold);font-size:.68rem;letter-spacing:.5px}
   .hero-in{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;min-height:calc(100vh - 74px);padding:40px 0}
   .hero-copy .eyebrow{margin-bottom:16px}
   .hero-copy h1{font-size:clamp(2.8rem,6vw,4.8rem);font-weight:700;margin-bottom:22px;line-height:1.06}
@@ -128,7 +147,8 @@
   .pcard .ph{position:relative;aspect-ratio:1/1;overflow:hidden;background:linear-gradient(160deg,#fdeeee,#f7d9d9)}
   .pcard .ph img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
   .pcard:hover .ph img{transform:scale(1.07)}
-  .wish{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.92);color:var(--ink-soft);display:flex;align-items:center;justify-content:center;transition:.25s}
+  .disc{position:absolute;top:12px;left:12px;z-index:2;background:var(--rose);color:#fff;font-size:.72rem;font-weight:600;padding:5px 11px;border-radius:100px;letter-spacing:.02em}
+  .wish{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.92);color:var(--ink-soft);display:flex;align-items:center;justify-content:center;transition:.25s;z-index:2}
   .wish svg{width:17px;height:17px;stroke-width:1.6;fill:none;stroke:currentColor}
   .wish:hover,.wish.on{color:var(--rose);background:#fff}
   .wish.on svg{fill:currentColor}
@@ -153,8 +173,55 @@
   .news .ok{margin-top:16px;color:var(--rose-2);font-weight:500;font-size:.92rem;display:none}
   .news .ok.show{display:block}
 
+  /* ---------- MARQUEE ---------- */
+  .marquee{background:var(--dark);color:#fff;overflow:hidden;padding:16px 0}
+  .marquee-track{display:flex;gap:44px;white-space:nowrap;width:max-content;animation:scrollX 26s linear infinite}
+  .marquee:hover .marquee-track{animation-play-state:paused}
+  @keyframes scrollX{to{transform:translateX(-50%)}}
+  .marquee-item{display:inline-flex;align-items:center;gap:14px;font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:500;letter-spacing:.01em}
+  .marquee-item .dot{color:var(--rose);font-size:.7rem}
+
+  /* ---------- WHY ---------- */
+  .why{background:linear-gradient(160deg,#fff,var(--pink-2))}
+  .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:12px}
+  .why-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:32px 26px;text-align:center;transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s}
+  .why-card:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+  .why-card .wic{width:60px;height:60px;border-radius:50%;background:var(--pink-2);color:var(--rose-2);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+  .why-card .wic svg{width:30px;height:30px;stroke-width:1.3;fill:none;stroke:currentColor}
+  .why-card h3{font-size:1.14rem;font-weight:600;margin-bottom:8px}
+  .why-card p{color:var(--ink-soft);font-size:.9rem;font-weight:300}
+  .why-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:56px;padding-top:44px;border-top:1px solid var(--line);text-align:center}
+  .wstat .n{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,3rem);font-weight:700;color:var(--rose-2);line-height:1}
+  .wstat small{font-size:.84rem;color:var(--ink-soft)}
+
+  /* ---------- REVIEWS ---------- */
+  .rev-sec{background:#fff}
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .rev{background:var(--pink-2);border:1px solid var(--line);border-radius:var(--r-lg);padding:30px 26px;display:flex;flex-direction:column;gap:14px;transition:transform .4s,box-shadow .4s}
+  .rev:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+  .rev .stars{color:var(--gold);letter-spacing:2px}
+  .rev blockquote{font-family:'Playfair Display',serif;font-size:1.28rem;line-height:1.4;color:var(--ink)}
+  .rev .rby{display:flex;align-items:center;gap:12px;margin-top:auto}
+  .rev .rby img{width:46px;height:46px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+  .rev .rname{font-size:.94rem;font-weight:600}
+  .rev .rrole{font-size:.8rem;color:var(--muted);font-weight:300}
+
+  /* ---------- INSTAGRAM ---------- */
+  .insta{background:linear-gradient(160deg,var(--pink-2),#fff)}
+  .insta .sec-head p{color:var(--ink-soft);font-weight:300;margin-top:8px}
+  .insta .handle{color:var(--rose-2);font-weight:500}
+  .ig-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+  .ig{position:relative;aspect-ratio:1/1;border-radius:var(--r-md);overflow:hidden;background:var(--pink-3)}
+  .ig img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+  .ig:hover img{transform:scale(1.1)}
+  .ig::after{content:"";position:absolute;inset:0;background:rgba(217,138,148,0);transition:background .3s;display:flex}
+  .ig:hover::after{background:rgba(217,138,148,.28)}
+  .ig .igic{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;opacity:0;transform:scale(.7);transition:.3s;z-index:2}
+  .ig:hover .igic{opacity:1;transform:scale(1)}
+  .ig .igic svg{width:28px;height:28px;stroke-width:1.6;fill:none;stroke:currentColor}
+
   /* ---------- FOOTER ---------- */
-  footer{background:var(--dark);color:#e9dde0;padding:64px 0 30px;margin-top:clamp(64px,8vw,104px)}
+  footer{background:var(--dark);color:#e9dde0;padding:64px 0 30px;margin-top:0}
   .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:40px}
   .foot-brand .logo{color:#fff}
   .foot-brand p{margin-top:16px;color:rgba(233,221,224,.66);font-size:.92rem;max-width:280px;font-weight:300}
@@ -178,8 +245,18 @@
     .promo-stats{flex-direction:row;justify-content:space-around}
     .best-grid{grid-template-columns:1fr 1fr}
     .foot-grid{grid-template-columns:1fr 1fr}
+    .why-grid{grid-template-columns:1fr 1fr}
+    .why-stats{grid-template-columns:1fr 1fr;gap:30px}
+    .rev-grid{grid-template-columns:1fr}
+    .ig-grid{grid-template-columns:repeat(3,1fr)}
+    .hero-chip{left:2%;bottom:6%}
   }
   @media(max-width:560px){
+    .why-grid{grid-template-columns:1fr}
+    .why-stats{grid-template-columns:1fr 1fr}
+    .ig-grid{grid-template-columns:1fr 1fr}
+    .hero-chip{padding:10px 12px}
+    .hero-chip .rc b{font-size:.9rem}
     .wrap{padding:0 18px}
     .hero-feats{gap:18px}
     .cat-grid{grid-template-columns:1fr 1fr}
@@ -220,6 +297,13 @@
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-decor">
+    <span class="hb hb1"></span><span class="hb hb2"></span>
+    <span class="hring hring1"></span><span class="hring hring2"></span>
+    <svg class="petal fl" style="width:46px;top:16%;left:40%;--r:-14deg" viewBox="0 0 100 100" fill="currentColor"><path d="M50 6C30 20 20 44 30 70c6 16 24 26 40 20-10-20-16-40-8-64 4 22 6 42 20 58 8-24-2-52-32-78Z"/></svg>
+    <svg class="petal fl s" style="width:32px;bottom:24%;left:8%;--r:20deg" viewBox="0 0 100 100" fill="currentColor"><path d="M50 6C30 20 20 44 30 70c6 16 24 26 40 20-10-20-16-40-8-64 4 22 6 42 20 58 8-24-2-52-32-78Z"/></svg>
+    <svg class="petal fl" style="width:26px;top:26%;right:32%;--r:40deg" viewBox="0 0 100 100" fill="currentColor"><path d="M50 6C30 20 20 44 30 70c6 16 24 26 40 20-10-20-16-40-8-64 4 22 6 42 20 58 8-24-2-52-32-78Z"/></svg>
+  </div>
   <div class="wrap hero-in">
     <div class="hero-copy reveal in">
       <div class="eyebrow">Bộ sưu tập mới</div>
@@ -238,9 +322,29 @@
     <div class="hero-media reveal in">
       <span class="hero-badge"><b>20%</b><span>Ưu đãi khách mới</span></span>
       <img src="glowora-img/products.jpg" alt="Bộ sản phẩm chăm sóc da Glowora tông hồng pastel bày trên nền hồng">
+      <div class="hero-chip">
+        <div class="avs"><img src="glowora-img/av1.jpg" alt=""><img src="glowora-img/av2.jpg" alt=""><img src="glowora-img/av3.jpg" alt=""></div>
+        <div class="rc"><b>4.8</b><div class="stars">★★★★★</div><span>10K+ đánh giá</span></div>
+      </div>
     </div>
   </div>
 </section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">Thành phần tự nhiên <span class="dot">✦</span></span>
+    <span class="marquee-item">Không thử nghiệm động vật <span class="dot">✦</span></span>
+    <span class="marquee-item">Kiểm nghiệm da liễu <span class="dot">✦</span></span>
+    <span class="marquee-item">Miễn phí vận chuyển <span class="dot">✦</span></span>
+    <span class="marquee-item">Đổi trả trong 30 ngày <span class="dot">✦</span></span>
+    <span class="marquee-item">Thành phần tự nhiên <span class="dot">✦</span></span>
+    <span class="marquee-item">Không thử nghiệm động vật <span class="dot">✦</span></span>
+    <span class="marquee-item">Kiểm nghiệm da liễu <span class="dot">✦</span></span>
+    <span class="marquee-item">Miễn phí vận chuyển <span class="dot">✦</span></span>
+    <span class="marquee-item">Đổi trả trong 30 ngày <span class="dot">✦</span></span>
+  </div>
+</div>
 
 <!-- CATEGORIES -->
 <section class="block" id="cats">
@@ -286,7 +390,7 @@
     </div>
     <div class="best-grid">
       <article class="pcard reveal">
-        <div class="ph"><button class="wish" aria-label="Yêu thích"><svg viewBox="0 0 24 24"><path d="M12 21C7 17 3 13 3 8.5 3 6 5 4 7.5 4c1.7 0 3.3 1 4.5 2.5C13.2 5 14.8 4 16.5 4 19 4 21 6 21 8.5c0 4.5-4 8.5-9 12.5Z"/></svg></button><img src="glowora-img/cat-serum.jpg" alt="Serum Vitamin C"></div>
+        <div class="ph"><button class="wish" aria-label="Yêu thích"><svg viewBox="0 0 24 24"><path d="M12 21C7 17 3 13 3 8.5 3 6 5 4 7.5 4c1.7 0 3.3 1 4.5 2.5C13.2 5 14.8 4 16.5 4 19 4 21 6 21 8.5c0 4.5-4 8.5-9 12.5Z"/></svg></button><span class="disc">-25%</span><img src="glowora-img/cat-serum.jpg" alt="Serum Vitamin C"></div>
         <div class="pbody">
           <h4>Serum Vitamin C</h4>
           <div class="rate"><span class="stars">★★★★☆</span> (128)</div>
@@ -294,7 +398,7 @@
         </div>
       </article>
       <article class="pcard reveal">
-        <div class="ph"><button class="wish" aria-label="Yêu thích"><svg viewBox="0 0 24 24"><path d="M12 21C7 17 3 13 3 8.5 3 6 5 4 7.5 4c1.7 0 3.3 1 4.5 2.5C13.2 5 14.8 4 16.5 4 19 4 21 6 21 8.5c0 4.5-4 8.5-9 12.5Z"/></svg></button><img src="glowora-img/cat-moisturizer.jpg" alt="Kem dưỡng ẩm cấp nước"></div>
+        <div class="ph"><button class="wish" aria-label="Yêu thích"><svg viewBox="0 0 24 24"><path d="M12 21C7 17 3 13 3 8.5 3 6 5 4 7.5 4c1.7 0 3.3 1 4.5 2.5C13.2 5 14.8 4 16.5 4 19 4 21 6 21 8.5c0 4.5-4 8.5-9 12.5Z"/></svg></button><span class="disc">-30%</span><img src="glowora-img/cat-moisturizer.jpg" alt="Kem dưỡng ẩm cấp nước"></div>
         <div class="pbody">
           <h4>Kem dưỡng ẩm cấp nước</h4>
           <div class="rate"><span class="stars">★★★★☆</span> (96)</div>
@@ -302,7 +406,7 @@
         </div>
       </article>
       <article class="pcard reveal">
-        <div class="ph"><button class="wish" aria-label="Yêu thích"><svg viewBox="0 0 24 24"><path d="M12 21C7 17 3 13 3 8.5 3 6 5 4 7.5 4c1.7 0 3.3 1 4.5 2.5C13.2 5 14.8 4 16.5 4 19 4 21 6 21 8.5c0 4.5-4 8.5-9 12.5Z"/></svg></button><img src="glowora-img/cat-sunscreen.jpg" alt="Kem chống nắng SPF 50"></div>
+        <div class="ph"><button class="wish" aria-label="Yêu thích"><svg viewBox="0 0 24 24"><path d="M12 21C7 17 3 13 3 8.5 3 6 5 4 7.5 4c1.7 0 3.3 1 4.5 2.5C13.2 5 14.8 4 16.5 4 19 4 21 6 21 8.5c0 4.5-4 8.5-9 12.5Z"/></svg></button><span class="disc">-25%</span><img src="glowora-img/cat-sunscreen.jpg" alt="Kem chống nắng SPF 50"></div>
         <div class="pbody">
           <h4>Kem chống nắng SPF 50</h4>
           <div class="rate"><span class="stars">★★★★☆</span> (74)</div>
@@ -310,13 +414,68 @@
         </div>
       </article>
       <article class="pcard reveal">
-        <div class="ph"><button class="wish" aria-label="Yêu thích"><svg viewBox="0 0 24 24"><path d="M12 21C7 17 3 13 3 8.5 3 6 5 4 7.5 4c1.7 0 3.3 1 4.5 2.5C13.2 5 14.8 4 16.5 4 19 4 21 6 21 8.5c0 4.5-4 8.5-9 12.5Z"/></svg></button><img src="glowora-img/cat-mask.jpg" alt="Mặt nạ đất sét hoa hồng"></div>
+        <div class="ph"><button class="wish" aria-label="Yêu thích"><svg viewBox="0 0 24 24"><path d="M12 21C7 17 3 13 3 8.5 3 6 5 4 7.5 4c1.7 0 3.3 1 4.5 2.5C13.2 5 14.8 4 16.5 4 19 4 21 6 21 8.5c0 4.5-4 8.5-9 12.5Z"/></svg></button><span class="disc">-29%</span><img src="glowora-img/cat-mask.jpg" alt="Mặt nạ đất sét hoa hồng"></div>
         <div class="pbody">
           <h4>Mặt nạ đất sét hoa hồng</h4>
           <div class="rate"><span class="stars">★★★★★</span> (64)</div>
           <div class="prow"><div class="price">499.000₫ <del>699.000₫</del></div><button class="cart" aria-label="Thêm giỏ"><svg viewBox="0 0 24 24"><path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></button></div>
         </div>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="block why">
+  <div class="wrap">
+    <div class="sec-head reveal"><div class="eyebrow" style="justify-content:center;display:flex;margin-bottom:10px">Tại sao chọn Glowora</div><h2>Làn da đẹp bắt đầu từ đây</h2></div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <span class="wic"><svg viewBox="0 0 24 24"><path d="M12 3c4 4 6 7 6 10a6 6 0 0 1-12 0c0-3 2-6 6-10Z"/></svg></span>
+        <h3>Thành phần sạch</h3><p>Chiết xuất thực vật, không paraben, không hương liệu tổng hợp.</p>
+      </div>
+      <div class="why-card reveal">
+        <span class="wic"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/><circle cx="12" cy="12" r="10"/></svg></span>
+        <h3>Hiệu quả đã chứng minh</h3><p>Kiểm nghiệm da liễu, kết quả rõ rệt sau 4 tuần sử dụng.</p>
+      </div>
+      <div class="why-card reveal">
+        <span class="wic"><svg viewBox="0 0 24 24"><path d="M12 21C7 17 3 13 3 8.5 3 6 5 4 7.5 4c1.7 0 3.3 1 4.5 2.5C13.2 5 14.8 4 16.5 4 19 4 21 6 21 8.5c0 4.5-4 8.5-9 12.5Z"/></svg></span>
+        <h3>Nhân ái với động vật</h3><p>Không thử nghiệm trên động vật, thuần chay 100%.</p>
+      </div>
+      <div class="why-card reveal">
+        <span class="wic"><svg viewBox="0 0 24 24"><path d="M3 7h18M6 7l1 13h10l1-13M9 7a3 3 0 0 1 6 0"/></svg></span>
+        <h3>Giao nhanh, đổi dễ</h3><p>Miễn phí vận chuyển toàn quốc, đổi trả trong 30 ngày.</p>
+      </div>
+    </div>
+    <div class="why-stats reveal">
+      <div class="wstat"><div class="n" data-count="10" data-suf="K+">10K+</div><small>Khách hàng hài lòng</small></div>
+      <div class="wstat"><div class="n" data-count="98" data-suf="%">98%</div><small>Sẽ giới thiệu bạn bè</small></div>
+      <div class="wstat"><div class="n" data-count="50" data-suf="+">50+</div><small>Sản phẩm chính hãng</small></div>
+      <div class="wstat"><div class="n" data-count="4" data-suf=".8★">4.8★</div><small>Đánh giá trung bình</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="block rev-sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><div class="eyebrow" style="justify-content:center;display:flex;margin-bottom:10px">Khách hàng yêu thích</div><h2>Được tin dùng mỗi ngày</h2></div>
+    <div class="rev-grid">
+      <div class="rev reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>Sau 3 tuần da mình sáng và mịn hẳn. Serum thấm nhanh, không hề nhờn rít.</blockquote>
+        <div class="rby"><img src="glowora-img/av1.jpg" alt="Hoàng Mai"><div><div class="rname">Hoàng Mai</div><div class="rrole">Da hỗn hợp · 28 tuổi</div></div></div>
+      </div>
+      <div class="rev reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>Cuối cùng cũng có dòng dịu nhẹ cho da nhạy cảm của mình. Hết mẩn đỏ hoàn toàn.</blockquote>
+        <div class="rby"><img src="glowora-img/av2.jpg" alt="Thùy Linh"><div><div class="rname">Thùy Linh</div><div class="rrole">Da nhạy cảm · 34 tuổi</div></div></div>
+      </div>
+      <div class="rev reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>Bao bì xinh, thành phần lành và giá hợp lý. Mình đã mua lại lần thứ ba rồi!</blockquote>
+        <div class="rby"><img src="glowora-img/av3.jpg" alt="Quỳnh Anh"><div><div class="rname">Quỳnh Anh</div><div class="rrole">Da dầu · 25 tuổi</div></div></div>
+      </div>
     </div>
   </div>
 </section>
@@ -333,6 +492,20 @@
         <button type="submit" class="btn btn-dark">Đăng ký</button>
       </form>
       <div class="ok" id="newsOk">✓ Cảm ơn bạn! Mã giảm giá đã được gửi tới email.</div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section class="block insta">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Theo dõi @glowora</h2><p>Chia sẻ khoảnh khắc rạng rỡ của bạn với <span class="handle">#GloworaGlow</span></p></div>
+    <div class="ig-grid reveal">
+      <a class="ig" href="#"><img src="glowora-img/cat-serum.jpg" alt="Instagram Glowora"><span class="igic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span></a>
+      <a class="ig" href="#"><img src="glowora-img/cat-moisturizer.jpg" alt="Instagram Glowora"><span class="igic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span></a>
+      <a class="ig" href="#"><img src="glowora-img/banner.jpg" alt="Instagram Glowora"><span class="igic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span></a>
+      <a class="ig" href="#"><img src="glowora-img/cat-sunscreen.jpg" alt="Instagram Glowora"><span class="igic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span></a>
+      <a class="ig" href="#"><img src="glowora-img/cat-mask.jpg" alt="Instagram Glowora"><span class="igic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span></a>
     </div>
   </div>
 </section>
@@ -394,11 +567,22 @@
     document.getElementById('newsOk').classList.add('show'); f.reset();
   });
 
+  /* count-up */
+  function countUp(el){
+    var target=parseInt(el.getAttribute('data-count'),10)||0;
+    var suf=el.getAttribute('data-suf')||'';
+    var start=null,dur=1500;
+    function step(ts){if(!start)start=ts;var p=Math.min((ts-start)/dur,1);
+      el.textContent=Math.round(target*(1-Math.pow(1-p,3)))+suf;if(p<1)requestAnimationFrame(step);}
+    requestAnimationFrame(step);
+  }
   /* reveal */
   var reveals=[].slice.call(document.querySelectorAll('.reveal'));
-  function showAll(){reveals.forEach(function(el){el.classList.add('in');});}
+  function showAll(){reveals.forEach(function(el){el.classList.add('in');});document.querySelectorAll('.n[data-count]').forEach(countUp);}
   if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -8% 0px'});
+    var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');
+      e.target.querySelectorAll&&e.target.querySelectorAll('.n[data-count]').forEach(function(n){if(!n.dataset.done){n.dataset.done=1;countUp(n);}});
+      io.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -8% 0px'});
     reveals.forEach(function(el){io.observe(el);});
     setTimeout(showAll,3000);
   } else { showAll(); }
