@@ -11,7 +11,7 @@
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#f3f4ec;      /* kem sáng */
@@ -33,11 +33,23 @@
   html{scroll-behavior:smooth}
   body{font-family:'Be Vietnam Pro',system-ui,-apple-system,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   h1,h2,h3{font-weight:600;line-height:1.1;letter-spacing:-.01em}
+  .serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;letter-spacing:0}
+  .serif-it{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:500}
   img{max-width:100%;display:block}
   a{color:inherit;text-decoration:none}
   button{font-family:inherit;cursor:pointer;border:none;background:none}
   .wrap{max-width:1200px;margin:0 auto;padding:0 28px}
-  .eyebrow{font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--sage-2)}
+  .eyebrow{font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--sage-2);display:inline-flex;align-items:center;gap:9px}
+  .eyebrow::before{content:"";width:24px;height:1px;background:var(--sage);display:inline-block;opacity:.7}
+  /* decor */
+  .decor{position:absolute;pointer-events:none;z-index:0}
+  .decor-leaf{color:var(--sage);opacity:.16}
+  .decor-ring{border-radius:50%;border:1px solid var(--sage);opacity:.14}
+  .decor-blur{border-radius:50%;filter:blur(60px);opacity:.5}
+  @keyframes floatY{0%,100%{transform:translateY(0) rotate(var(--rot,0deg))}50%{transform:translateY(-16px) rotate(var(--rot,0deg))}}
+  .float{animation:floatY 7s ease-in-out infinite}
+  .float.slow{animation-duration:10s}
+  section.block{position:relative}
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:var(--r-pill);font-weight:500;transition:transform .25s,background .25s,color .25s,border-color .25s;line-height:1;font-size:.9rem;letter-spacing:.02em}
   .btn:active{transform:scale(.98)}
   .btn-solid{background:var(--forest);color:#f3f4ec;padding:15px 30px}
@@ -91,7 +103,8 @@
   .trust-sep{width:1px;background:rgba(231,236,216,.2)}
 
   /* ---------- SECTIONS ---------- */
-  section.block{padding:clamp(70px,9vw,116px) 0}
+  section.block{padding:clamp(70px,9vw,116px) 0;overflow:hidden}
+  section.block>.wrap{position:relative;z-index:1}
   .bestsellers{background:var(--paper)}
   .two-col{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(40px,6vw,80px);align-items:center}
   .col-copy .eyebrow{margin-bottom:16px}
@@ -133,8 +146,58 @@
   .pcard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(30,38,18,.8))}
   .pcard b{position:absolute;left:16px;bottom:16px;z-index:2;color:#fff;font-weight:500;font-size:.98rem;line-height:1.2}
 
+  /* ---------- PRODUCT GRID ---------- */
+  .shop{background:var(--paper);text-align:center}
+  .shop-head{max-width:600px;margin:0 auto 54px}
+  .shop-head .eyebrow{margin-bottom:14px}
+  .shop-head h2{font-size:clamp(2.1rem,4.4vw,3.2rem)}
+  .shop-head p{color:var(--ink-soft);font-weight:300;margin-top:14px}
+  .prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .pcard-item{text-align:left;background:var(--card);border-radius:var(--r-md);overflow:hidden;border:1px solid var(--line);transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s}
+  .pcard-item:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+  .pcard-item .ph{position:relative;aspect-ratio:7/8;overflow:hidden;background:var(--paper-2)}
+  .pcard-item .ph img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+  .pcard-item:hover .ph img{transform:scale(1.06)}
+  .pcard-item .tag{position:absolute;top:12px;left:12px;background:rgba(243,244,236,.92);color:var(--sage-2);font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:100px;backdrop-filter:blur(4px)}
+  .pcard-item .pbody{padding:18px 20px 22px}
+  .pcard-item h4{font-size:1.08rem;font-weight:600;margin-bottom:3px}
+  .pcard-item .psub{font-size:.82rem;color:var(--muted);font-weight:300;margin-bottom:12px}
+  .pcard-item .prow{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .pcard-item .price{font-weight:600;color:var(--forest);font-size:1.05rem}
+  .pcard-item .add{width:38px;height:38px;border-radius:50%;background:var(--paper-2);color:var(--sage-2);display:flex;align-items:center;justify-content:center;transition:.25s}
+  .pcard-item:hover .add{background:var(--forest);color:#fff;transform:rotate(90deg)}
+  .pcard-item .stars{color:var(--sage);font-size:.78rem;letter-spacing:1px;margin-bottom:10px}
+
+  /* ---------- RITUAL / STEPS ---------- */
+  .ritual{background:var(--paper-2);text-align:center}
+  .ritual-head{max-width:560px;margin:0 auto 56px}
+  .ritual-head .eyebrow{margin-bottom:14px}
+  .ritual-head h2{font-size:clamp(2.1rem,4.4vw,3.2rem)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;counter-reset:step}
+  .step{position:relative;padding:38px 28px 30px;background:var(--card);border-radius:var(--r-md);border:1px solid var(--line);text-align:left}
+  .step::before{counter-increment:step;content:"0" counter(step);position:absolute;top:22px;right:26px;font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:600;color:var(--sage);opacity:.4;line-height:1}
+  .step .sic{width:52px;height:52px;border-radius:50%;background:#e6ead9;color:var(--sage-2);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+  .step .sic svg{width:26px;height:26px;stroke-width:1.4;fill:none;stroke:currentColor}
+  .step h4{font-size:1.24rem;font-weight:600;margin-bottom:8px}
+  .step p{color:var(--ink-soft);font-weight:300;font-size:.92rem}
+
+  /* ---------- TESTIMONIAL ---------- */
+  .reviews{background:var(--paper);text-align:center;position:relative;overflow:hidden}
+  .reviews .decor-leaf{opacity:.1}
+  .reviews-head{max-width:560px;margin:0 auto 50px}
+  .reviews-head .eyebrow{margin-bottom:14px}
+  .reviews-head h2{font-size:clamp(2.1rem,4.4vw,3.2rem)}
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .rev{background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:32px 28px;text-align:left;display:flex;flex-direction:column;gap:14px}
+  .rev .stars{color:var(--sage);letter-spacing:2px;font-size:.9rem}
+  .rev blockquote{font-family:'Cormorant Garamond',serif;font-size:1.34rem;font-style:italic;line-height:1.42;color:var(--ink)}
+  .rev .rby{display:flex;align-items:center;gap:12px;margin-top:auto}
+  .rev .av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--sage),var(--forest));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:.94rem;flex:0 0 auto}
+  .rev .rname{font-size:.92rem;font-weight:600}
+  .rev .rrole{font-size:.8rem;color:var(--muted);font-weight:300}
+
   /* ---------- FOOTER ---------- */
-  footer{background:var(--paper);padding:70px 0 34px;margin-top:clamp(70px,9vw,116px)}
+  footer{background:var(--paper);padding:70px 0 34px;margin-top:0}
   .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:40px}
   .foot-brand .logo{color:var(--forest);font-size:1.7rem}
   .foot-brand p{margin-top:16px;color:var(--ink-soft);font-size:.92rem;max-width:280px;font-weight:300}
@@ -164,6 +227,9 @@
     .benefit-row{grid-template-columns:1fr 1fr;gap:28px}
     .planet-wrap{grid-template-columns:1fr;gap:32px}
     .foot-grid{grid-template-columns:1fr 1fr}
+    .prod-grid{grid-template-columns:1fr 1fr;gap:20px}
+    .steps{grid-template-columns:1fr;gap:20px}
+    .rev-grid{grid-template-columns:1fr;gap:20px}
   }
   @media(max-width:560px){
     .wrap{padding:0 20px}
@@ -207,7 +273,7 @@
   <div class="wrap hero-inner">
     <div class="hero-copy reveal in">
       <div class="eyebrow">Chăm sóc da từ thiên nhiên</div>
-      <h1>Làn da khỏe mạnh.<br>Sự tự tin trong bạn.</h1>
+      <h1>Làn da <span class="serif-it">khỏe mạnh.</span><br>Sự tự tin <span class="serif-it">trong bạn.</span></h1>
       <p class="lead">Mỹ phẩm chăm sóc da sạch lành, hiệu quả — chiết xuất từ thiên nhiên và kiểm chứng bằng khoa học.</p>
       <div class="hero-actions">
         <a href="#products" class="btn btn-light">Mua ngay</a>
@@ -252,11 +318,14 @@
 
 <!-- BESTSELLERS -->
 <section class="block bestsellers" id="products">
+  <span class="decor decor-blur float" style="width:340px;height:340px;background:radial-gradient(circle,rgba(138,154,107,.4),transparent 70%);top:-60px;right:-40px"></span>
+  <span class="decor decor-ring" style="width:220px;height:220px;left:-90px;bottom:40px"></span>
+  <svg class="decor decor-leaf float slow" style="width:80px;top:70px;left:44%;--rot:18deg" viewBox="0 0 100 100" fill="currentColor"><path d="M50 4C22 6 8 30 10 62c0 6 2 12 5 17C22 55 34 44 55 38c-14 8-26 20-30 40 6 3 12 4 18 4C74 82 82 44 50 4Z"/></svg>
   <div class="wrap">
     <div class="two-col">
       <div class="col-copy reveal">
         <div class="eyebrow">Bán chạy nhất</div>
-        <h2>Rạng rỡ tự nhiên.<br>Mỗi ngày.</h2>
+        <h2>Rạng rỡ <span class="serif-it">tự nhiên.</span><br>Mỗi ngày.</h2>
         <p>Những sản phẩm được nghiên cứu tỉ mỉ để cấp ẩm, bảo vệ và đánh thức vẻ rạng rỡ tự nhiên của làn da bạn.</p>
         <a href="#" class="btn btn-solid">Xem sản phẩm bán chạy</a>
       </div>
@@ -268,13 +337,62 @@
   </div>
 </section>
 
+<!-- PRODUCT GRID -->
+<section class="block shop">
+  <div class="wrap">
+    <div class="shop-head reveal">
+      <div class="eyebrow">Bộ sưu tập</div>
+      <h2>Nghi thức chăm da <span class="serif-it">trọn vẹn</span></h2>
+      <p>Bốn bước thiết yếu, công thức từ thực vật — cho làn da khỏe mạnh mỗi ngày.</p>
+    </div>
+    <div class="prod-grid">
+      <article class="pcard-item reveal">
+        <div class="ph"><span class="tag">Bán chạy</span><img src="lumea-img/prod-cleanser.jpg" alt="Sữa rửa mặt làm sạch dịu nhẹ Luméa"></div>
+        <div class="pbody">
+          <div class="stars">★★★★★</div>
+          <h4>Sữa rửa mặt thanh lọc</h4>
+          <div class="psub">Trà xanh · 120ml</div>
+          <div class="prow"><span class="price">320.000₫</span><span class="add"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></span></div>
+        </div>
+      </article>
+      <article class="pcard-item reveal">
+        <div class="ph"><span class="tag">Mới</span><img src="lumea-img/prod-serum.jpg" alt="Serum dưỡng sáng Luméa"></div>
+        <div class="pbody">
+          <div class="stars">★★★★★</div>
+          <h4>Serum dưỡng sáng</h4>
+          <div class="psub">Niacinamide · 30ml</div>
+          <div class="prow"><span class="price">590.000₫</span><span class="add"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></span></div>
+        </div>
+      </article>
+      <article class="pcard-item reveal">
+        <div class="ph"><img src="lumea-img/prod-moisturizer.jpg" alt="Kem dưỡng ẩm Luméa"></div>
+        <div class="pbody">
+          <div class="stars">★★★★☆</div>
+          <h4>Kem dưỡng ẩm</h4>
+          <div class="psub">Squalane · 50ml</div>
+          <div class="prow"><span class="price">450.000₫</span><span class="add"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></span></div>
+        </div>
+      </article>
+      <article class="pcard-item reveal">
+        <div class="ph"><span class="tag">SPF 50</span><img src="lumea-img/prod-sunscreen.jpg" alt="Kem chống nắng hàng ngày Luméa"></div>
+        <div class="pbody">
+          <div class="stars">★★★★★</div>
+          <h4>Kem chống nắng</h4>
+          <div class="psub">Rau má · 50ml</div>
+          <div class="prow"><span class="price">380.000₫</span><span class="add"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- RESULTS -->
 <section class="block results" id="results">
   <div class="wrap">
     <div class="results-grid">
       <div class="results-copy reveal">
         <div class="eyebrow">Hiệu quả nhìn thấy</div>
-        <h2>Kết quả thật.<br>Tự tin thật.</h2>
+        <h2>Kết quả <span class="serif-it">thật.</span><br>Tự tin <span class="serif-it">thật.</span></h2>
         <p>Công thức của chúng tôi được thiết kế để mang lại cải thiện rõ rệt — dịu nhẹ và hiệu quả.</p>
       </div>
       <div class="reveal">
@@ -314,6 +432,62 @@
           </div>
         </div>
         <p class="results-note">*Dựa trên nghiên cứu người dùng với 120 người tham gia sau 4 tuần sử dụng.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RITUAL -->
+<section class="block ritual">
+  <div class="wrap">
+    <div class="ritual-head reveal">
+      <div class="eyebrow">Nghi thức mỗi ngày</div>
+      <h2>Ba bước <span class="serif-it">đơn giản</span></h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <span class="sic"><svg viewBox="0 0 24 24"><path d="M12 3c4 4 6 7 6 10a6 6 0 0 1-12 0c0-3 2-6 6-10Z"/></svg></span>
+        <h4>Làm sạch</h4>
+        <p>Sữa rửa mặt dịu nhẹ loại bỏ bụi bẩn mà không làm khô da, giữ lớp ẩm tự nhiên.</p>
+      </div>
+      <div class="step reveal">
+        <span class="sic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M8 12h8"/></svg></span>
+        <h4>Nuôi dưỡng</h4>
+        <p>Serum &amp; kem dưỡng thẩm thấu sâu, cấp ẩm và nuôi dưỡng làn da từ bên trong.</p>
+      </div>
+      <div class="step reveal">
+        <span class="sic"><svg viewBox="0 0 24 24"><path d="M12 22c5-3 8-7 8-12V5l-8-3-8 3v5c0 5 3 9 8 12Z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <h4>Bảo vệ</h4>
+        <p>Kem chống nắng bảo vệ da khỏi tia UV, chống lão hóa và giữ vẻ rạng rỡ dài lâu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="block reviews">
+  <svg class="decor decor-leaf float" style="width:90px;top:40px;left:6%;--rot:-20deg" viewBox="0 0 100 100" fill="currentColor"><path d="M50 4C22 6 8 30 10 62c0 6 2 12 5 17C22 55 34 44 55 38c-14 8-26 20-30 40 6 3 12 4 18 4C74 82 82 44 50 4Z"/></svg>
+  <svg class="decor decor-leaf float slow" style="width:70px;bottom:60px;right:7%;--rot:30deg" viewBox="0 0 100 100" fill="currentColor"><path d="M50 4C22 6 8 30 10 62c0 6 2 12 5 17C22 55 34 44 55 38c-14 8-26 20-30 40 6 3 12 4 18 4C74 82 82 44 50 4Z"/></svg>
+  <div class="wrap">
+    <div class="reviews-head reveal">
+      <div class="eyebrow">Khách hàng nói gì</div>
+      <h2>Được yêu thích <span class="serif-it">mỗi ngày</span></h2>
+    </div>
+    <div class="rev-grid">
+      <div class="rev reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>Sau 3 tuần da tôi mềm mịn và sáng hơn hẳn. Kết cấu nhẹ, thấm nhanh, không hề bết dính.</blockquote>
+        <div class="rby"><span class="av">HM</span><div><div class="rname">Hoàng Mai</div><div class="rrole">Da hỗn hợp · 28 tuổi</div></div></div>
+      </div>
+      <div class="rev reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>Cuối cùng cũng tìm được dòng sản phẩm dịu nhẹ cho làn da nhạy cảm của mình. Hết mẩn đỏ.</blockquote>
+        <div class="rby"><span class="av">TL</span><div><div class="rname">Thùy Linh</div><div class="rrole">Da nhạy cảm · 34 tuổi</div></div></div>
+      </div>
+      <div class="rev reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>Thành phần tự nhiên, bao bì đẹp và có tâm với môi trường. Đúng gu mình luôn tin dùng.</blockquote>
+        <div class="rby"><span class="av">QA</span><div><div class="rname">Quỳnh Anh</div><div class="rrole">Da dầu · 25 tuổi</div></div></div>
       </div>
     </div>
   </div>
