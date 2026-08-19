@@ -50,7 +50,7 @@
   .btn-dark:hover{background:var(--coffee);transform:translateY(-2px)}
 
   /* ---------- NAV (trong hero) ---------- */
-  .hero{background:var(--coffee);color:var(--cream);position:relative;overflow:hidden;border-radius:0 0 var(--r-xl) var(--r-xl)}
+  .hero{background:var(--coffee);color:var(--cream);position:relative;overflow:hidden}
   .nav-in{display:flex;align-items:center;gap:24px;height:80px;position:relative;z-index:5}
   .logo{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;letter-spacing:.28em;color:var(--cream)}
   .nav-menu{display:flex;gap:30px;margin-left:auto;margin-right:26px}
@@ -221,6 +221,9 @@
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-img">
+    <img src="lumi-img/hero.jpg" alt="Người phụ nữ nhắm mắt thư thái, làn da rạng rỡ trong ánh sáng ấm áp" loading="eager">
+  </div>
   <div class="wrap nav-in">
     <a href="#" class="logo">LUMI</a>
     <nav class="nav-menu">
@@ -233,9 +236,6 @@
     <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
   <div class="wrap hero-body">
-    <div class="hero-img">
-      <img src="lumi-img/hero.jpg" alt="Người phụ nữ nhắm mắt thư thái, làn da rạng rỡ trong ánh sáng ấm áp" loading="eager">
-    </div>
     <div class="hero-side reveal in">
       <p>Một không gian tĩnh tại và thanh lịch để tôn vinh dịch vụ và niềm đam mê của bạn.</p>
       <a href="#footer" class="btn btn-pill">Đặt lịch hẹn <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
