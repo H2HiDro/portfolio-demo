@@ -121,8 +121,54 @@
   .cta p{color:rgba(247,243,236,.72);margin-bottom:32px;max-width:420px;margin-left:auto;margin-right:auto}
   .cta .btn-pill{background:var(--cream)}
 
+  /* ---------- STATS ---------- */
+  .stats{background:var(--sand-2);padding:clamp(56px,7vw,88px) 0}
+  .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;text-align:center}
+  .stat .n{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,5vw,4.2rem);font-weight:500;color:var(--brown);line-height:1}
+  .stat .lbl{margin-top:8px;font-size:.86rem;color:var(--ink-soft)}
+  .stat+.stat{position:relative}
+  .stat+.stat::before{content:"";position:absolute;left:-15px;top:14%;height:72%;width:1px;background:var(--line)}
+
+  /* ---------- GALLERY ---------- */
+  .gallery{padding:clamp(70px,9vw,116px) 0;background:var(--cream)}
+  .gallery .sec-head{text-align:center;margin-bottom:44px}
+  .gallery .sec-head h2{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:500}
+  .gallery .sec-head h2 .it{font-style:italic;color:var(--taupe-2)}
+  .gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .gal{position:relative;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:3/4;box-shadow:var(--shadow-soft)}
+  .gal img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+  .gal:hover img{transform:scale(1.06)}
+  .gal:nth-child(2){margin-top:36px}
+
+  /* ---------- REVIEWS ---------- */
+  .reviews{padding:clamp(70px,9vw,116px) 0;background:var(--sand-2)}
+  .reviews .sec-head{text-align:center;margin-bottom:44px}
+  .reviews .sec-head h2{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:500}
+  .reviews .sec-head h2 .it{font-style:italic;color:var(--taupe-2)}
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .rev{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:30px 28px;display:flex;flex-direction:column;gap:14px}
+  .rev .stars{color:#c9a24b;letter-spacing:2px}
+  .rev blockquote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.34rem;line-height:1.42;color:var(--ink)}
+  .rev .rby{display:flex;align-items:center;gap:12px;margin-top:auto}
+  .rev .rby img{width:46px;height:46px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+  .rev .rname{font-size:.92rem;font-weight:500;font-family:'Be Vietnam Pro',sans-serif}
+  .rev .rrole{font-size:.8rem;color:var(--muted)}
+
+  /* ---------- PRICING ---------- */
+  .pricing{padding:clamp(70px,9vw,116px) 0;background:var(--cream)}
+  .pricing .sec-head{text-align:center;margin-bottom:44px}
+  .pricing .sec-head h2{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:500}
+  .pricing .sec-head h2 .it{font-style:italic;color:var(--taupe-2)}
+  .price-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column}
+  .price-row{display:flex;align-items:baseline;gap:16px;padding:22px 0;border-bottom:1px solid var(--line)}
+  .price-row:last-child{border-bottom:none}
+  .price-row .pn{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:500;color:var(--ink)}
+  .price-row .pd{font-size:.86rem;color:var(--ink-soft);margin-top:2px}
+  .price-row .dots{flex:1;border-bottom:1px dotted var(--line);transform:translateY(-5px)}
+  .price-row .pp{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--brown);white-space:nowrap}
+
   /* ---------- FOOTER ---------- */
-  footer{background:var(--cream);padding:64px 0 32px;margin-top:clamp(70px,9vw,116px)}
+  footer{background:var(--cream);padding:64px 0 32px;margin-top:0}
   .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:40px}
   .foot-brand .logo{color:var(--ink);font-size:1.5rem}
   .foot-brand p{margin-top:16px;color:var(--ink-soft);font-size:.92rem;max-width:280px}
@@ -146,11 +192,22 @@
     .about-media{order:-1}
     .svc-head{flex-direction:column;align-items:flex-start}
     .svc-grid{grid-template-columns:1fr 1fr}
+    .stats-row{grid-template-columns:1fr 1fr;gap:36px 20px}
+    .stat+.stat::before{display:none}
+    .gal-grid{grid-template-columns:1fr 1fr}
+    .gal:nth-child(2){margin-top:0}
+    .rev-grid{grid-template-columns:1fr}
+    .price-row .pd{max-width:200px}
   }
   @media(max-width:560px){
     .wrap{padding:0 20px}
     .svc-grid{grid-template-columns:1fr}
     .foot-grid{grid-template-columns:1fr 1fr}
+    .stats-row{grid-template-columns:1fr 1fr}
+    .gal-grid{grid-template-columns:1fr}
+    .gal:nth-child(2){margin-top:0}
+    .price-row{flex-wrap:wrap}
+    .price-row .dots{display:none}
     .cta,.hero{margin-left:0;margin-right:0}
     .cta{border-radius:var(--r-lg)}
   }
@@ -225,6 +282,33 @@
   </div>
 </section>
 
+<!-- STATS -->
+<section class="stats">
+  <div class="wrap">
+    <div class="stats-row">
+      <div class="stat reveal"><div class="n" data-count="12" data-suf="+">12+</div><div class="lbl">Năm kinh nghiệm</div></div>
+      <div class="stat reveal"><div class="n" data-count="8" data-suf="K+">8K+</div><div class="lbl">Khách hàng hài lòng</div></div>
+      <div class="stat reveal"><div class="n" data-count="15" data-suf="+">15+</div><div class="lbl">Chuyên gia tận tâm</div></div>
+      <div class="stat reveal"><div class="n" data-count="4" data-suf=".9★">4.9★</div><div class="lbl">Đánh giá trung bình</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow" style="margin-bottom:12px">Không gian LUMI</div>
+      <h2>Nơi bạn được <span class="it">thảnh thơi</span></h2>
+    </div>
+    <div class="gal-grid">
+      <div class="gal reveal"><img src="lumi-img/gal-1.jpg" alt="Góc trị liệu với tinh dầu, nến và không gian ấm cúng"></div>
+      <div class="gal reveal"><img src="lumi-img/gal-2.jpg" alt="Ghế mây thư giãn với khăn và dép trong không gian tối giản"></div>
+      <div class="gal reveal"><img src="lumi-img/gal-3.jpg" alt="Bộ chăm sóc với nến thơm, khăn và tinh dầu tự nhiên"></div>
+    </div>
+  </div>
+</section>
+
 <!-- SERVICES -->
 <section class="services" id="services">
   <div class="wrap">
@@ -253,6 +337,49 @@
         <img src="lumi-img/svc-massage.jpg" alt="Trị liệu massage">
         <div class="svc-foot"><span class="sname">Trị liệu massage</span><span class="sgo"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow" style="margin-bottom:12px">Bảng giá liệu trình</div>
+      <h2>Chăm sóc <span class="it">trọn vẹn</span></h2>
+    </div>
+    <div class="price-list">
+      <div class="price-row reveal"><div><div class="pn">Chăm sóc da chuyên sâu</div><div class="pd">Làm sạch, tẩy tế bào chết, đắp mặt nạ · 75 phút</div></div><span class="dots"></span><span class="pp">650.000₫</span></div>
+      <div class="price-row reveal"><div><div class="pn">Thẩm mỹ công nghệ cao</div><div class="pd">Điện di, ánh sáng sinh học, trẻ hóa · 90 phút</div></div><span class="dots"></span><span class="pp">1.200.000₫</span></div>
+      <div class="price-row reveal"><div><div class="pn">Thẩm mỹ tiêm</div><div class="pd">Tư vấn cùng bác sĩ, meso, filler · theo liệu trình</div></div><span class="dots"></span><span class="pp">từ 2.500.000₫</span></div>
+      <div class="price-row reveal"><div><div class="pn">Trị liệu massage thư giãn</div><div class="pd">Massage toàn thân với tinh dầu thiên nhiên · 60 phút</div></div><span class="dots"></span><span class="pp">550.000₫</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow" style="margin-bottom:12px">Khách hàng của chúng tôi</div>
+      <h2>Được yêu mến <span class="it">mỗi ngày</span></h2>
+    </div>
+    <div class="rev-grid">
+      <div class="rev reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>Không gian yên tĩnh, đội ngũ tận tâm. Sau mỗi buổi trị liệu da mình sáng và khỏe hẳn.</blockquote>
+        <div class="rby"><img src="lumi-img/av1.jpg" alt="Ngọc Hân"><div><div class="rname">Ngọc Hân</div><div class="rrole">Khách hàng thân thiết</div></div></div>
+      </div>
+      <div class="rev reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>Emma và các bạn rất chuyên nghiệp, tư vấn kỹ càng. Mình hoàn toàn yên tâm giao làn da cho LUMI.</blockquote>
+        <div class="rby"><img src="lumi-img/av2.jpg" alt="Phương Vy"><div><div class="rname">Phương Vy</div><div class="rrole">Đã trải nghiệm 8 buổi</div></div></div>
+      </div>
+      <div class="rev reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>Cảm giác thư giãn thật sự — từ hương thơm, ánh sáng đến từng chi tiết. Đúng vẻ đẹp trong sự giản đơn.</blockquote>
+        <div class="rby"><img src="lumi-img/av3.jpg" alt="Thu Trang"><div><div class="rname">Thu Trang</div><div class="rrole">Khách hàng mới</div></div></div>
+      </div>
     </div>
   </div>
 </section>
@@ -303,10 +430,17 @@
   if(burger) burger.addEventListener('click',function(){
     var m=document.querySelector('.nav-menu'); if(m) m.scrollIntoView({behavior:'smooth'});
   });
+  function countUp(el){
+    var t=parseInt(el.getAttribute('data-count'),10)||0,suf=el.getAttribute('data-suf')||'',s=null,d=1500;
+    function step(ts){if(!s)s=ts;var p=Math.min((ts-s)/d,1);el.textContent=Math.round(t*(1-Math.pow(1-p,3)))+suf;if(p<1)requestAnimationFrame(step);}
+    requestAnimationFrame(step);
+  }
   var reveals=[].slice.call(document.querySelectorAll('.reveal'));
-  function showAll(){reveals.forEach(function(el){el.classList.add('in');});}
+  function showAll(){reveals.forEach(function(el){el.classList.add('in');});document.querySelectorAll('.n[data-count]').forEach(countUp);}
   if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -8% 0px'});
+    var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');
+      e.target.querySelectorAll&&e.target.querySelectorAll('.n[data-count]').forEach(function(n){if(!n.dataset.done){n.dataset.done=1;countUp(n);}});
+      io.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -8% 0px'});
     reveals.forEach(function(el){io.observe(el);});
     setTimeout(showAll,3000);
   } else { showAll(); }
