@@ -60,16 +60,16 @@
   .burger span{width:22px;height:1.5px;background:var(--cream)}
 
   /* ---------- HERO ---------- */
-  .hero-body{position:relative;min-height:clamp(560px,82vh,760px);display:flex;align-items:flex-end;padding-bottom:56px}
+  .hero-body{position:relative;min-height:clamp(560px,84vh,780px);display:flex;align-items:center;padding:40px 0}
   .hero-img{position:absolute;inset:0;z-index:0}
-  .hero-img img{width:100%;height:100%;object-fit:cover;object-position:72% 18%;opacity:.98}
-  .hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(74,63,52,.7) 0%,rgba(74,63,52,.34) 34%,rgba(74,63,52,.06) 62%,rgba(74,63,52,.12) 100%)}
-  .hero-content{position:relative;z-index:3;width:100%}
-  .hero-title h1{font-size:clamp(3rem,7vw,5.6rem);font-weight:500;color:#fff}
-  .hero-title h1 .it{display:block;font-style:italic}
-  .hero-title p{margin-top:14px;color:rgba(247,243,236,.82);font-size:.92rem;max-width:230px}
-  .hero-side{position:absolute;top:0;right:0;z-index:4;text-align:right;max-width:230px}
-  .hero-side p{color:rgba(247,243,236,.9);font-size:.9rem;margin-bottom:20px;line-height:1.5}
+  .hero-img img{width:100%;height:100%;object-fit:cover;object-position:78% center;opacity:1}
+  .hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(74,63,52,.42) 0%,rgba(74,63,52,.16) 30%,rgba(74,63,52,0) 55%)}
+  .hero-block{position:relative;z-index:3;max-width:520px;text-align:left}
+  .hero-eyebrow{font-size:.74rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(247,243,236,.82);font-weight:400}
+  .hero-block h1{font-size:clamp(3rem,7vw,5.4rem);font-weight:500;color:#fff;margin-top:18px}
+  .hero-block h1 .it{display:block;font-style:italic}
+  .hero-desc{margin-top:20px;color:rgba(247,243,236,.86);font-size:1rem;max-width:400px;line-height:1.6}
+  .hero-block .btn-pill{margin-top:30px}
 
   /* ---------- MARQUEE ---------- */
   .marquee{background:var(--brown);color:var(--cream);overflow:hidden;padding:14px 0}
@@ -236,15 +236,11 @@
     <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
   <div class="wrap hero-body">
-    <div class="hero-side reveal in">
-      <p>Một không gian tĩnh tại và thanh lịch để tôn vinh dịch vụ và niềm đam mê của bạn.</p>
+    <div class="hero-block reveal in">
+      <span class="hero-eyebrow">Thẩm mỹ viện &amp; chăm sóc da</span>
+      <h1>Vẻ đẹp trong<span class="it">sự giản đơn</span></h1>
+      <p class="hero-desc">Một không gian tĩnh tại và thanh lịch, tôn vinh vẻ đẹp tự nhiên của bạn. Rạng rỡ nhẹ nhàng, chăm sóc chân thành.</p>
       <a href="#footer" class="btn btn-pill">Đặt lịch hẹn <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-    </div>
-    <div class="hero-content">
-      <div class="hero-title reveal in">
-        <h1>Vẻ đẹp trong<span class="it">sự giản đơn</span></h1>
-        <p>Rạng rỡ nhẹ nhàng. Chăm sóc chân thành. Vẻ đẹp bền lâu.</p>
-      </div>
     </div>
   </div>
 </section>
