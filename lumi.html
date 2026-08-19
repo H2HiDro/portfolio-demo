@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUMI — Thẩm mỹ viện & chăm sóc da cao cấp</title>
+<meta name="description" content="LUMI — không gian tĩnh tại và thanh lịch cho làn da của bạn. Chăm sóc da, thẩm mỹ công nghệ cao, trị liệu và massage. Vẻ đẹp trong sự giản đơn.">
+<meta name="theme-color" content="#b5a290">
+<meta property="og:title" content="LUMI — Vẻ đẹp trong sự giản đơn">
+<meta property="og:description" content="Không gian tĩnh tại và thanh lịch cho làn da của bạn. Chăm sóc chân thành, vẻ đẹp bền lâu.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Be+Vietnam+Pro:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sand:#e7ded1;      /* be nền */
+    --sand-2:#efe9df;
+    --cream:#f7f3ec;
+    --taupe:#b5a290;     /* nâu be */
+    --taupe-2:#9c8874;
+    --brown:#7a6a58;     /* nâu đậm */
+    --brown-d:#5a4d3f;
+    --coffee:#4a3f34;    /* nâu cà phê hero */
+    --ink:#3a3128;
+    --ink-soft:#6f6355;
+    --muted:#a49685;
+    --line:#ddd3c4;
+    --card:#fbf8f2;
+    --shadow:0 30px 70px -34px rgba(80,65,48,.4);
+    --shadow-soft:0 16px 40px -24px rgba(80,65,48,.36);
+    --r-xl:30px;--r-lg:22px;--r-md:16px;--r-pill:100px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Be Vietnam Pro',system-ui,-apple-system,sans-serif;background:var(--cream);color:var(--ink);line-height:1.65;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;line-height:1.08;letter-spacing:.005em}
+  .it{font-style:italic}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:none;background:none}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 30px}
+  .eyebrow{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;color:var(--taupe-2)}
+  .btn{display:inline-flex;align-items:center;gap:12px;border-radius:var(--r-pill);font-weight:400;transition:transform .25s,background .25s,color .25s;line-height:1;font-size:.9rem}
+  .btn:active{transform:scale(.98)}
+  .btn-pill{background:var(--cream);color:var(--ink);padding:8px 8px 8px 24px}
+  .btn-pill .arw{width:38px;height:38px;border-radius:50%;background:var(--ink);color:var(--cream);display:flex;align-items:center;justify-content:center;transition:transform .3s}
+  .btn-pill:hover .arw{transform:translateX(3px) rotate(0deg)}
+  .btn-dark{background:var(--brown-d);color:var(--cream);padding:15px 30px}
+  .btn-dark:hover{background:var(--coffee);transform:translateY(-2px)}
+
+  /* ---------- NAV (trong hero) ---------- */
+  .hero{background:var(--coffee);color:var(--cream);position:relative;overflow:hidden;border-radius:0 0 var(--r-xl) var(--r-xl)}
+  .nav-in{display:flex;align-items:center;gap:24px;height:80px;position:relative;z-index:5}
+  .logo{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;letter-spacing:.28em;color:var(--cream)}
+  .nav-menu{display:flex;gap:30px;margin-left:auto;margin-right:26px}
+  .nav-menu a{font-size:.85rem;font-weight:300;color:rgba(247,243,236,.82);transition:color .2s}
+  .nav-menu a:hover{color:#fff}
+  .burger{display:none;margin-left:auto;flex-direction:column;gap:5px;width:42px;height:42px;align-items:center;justify-content:center}
+  .burger span{width:22px;height:1.5px;background:var(--cream)}
+
+  /* ---------- HERO ---------- */
+  .hero-body{position:relative;min-height:clamp(500px,72vh,660px);display:flex;align-items:flex-end;padding-bottom:56px}
+  .hero-img{position:absolute;inset:0;z-index:0}
+  .hero-img img{width:100%;height:100%;object-fit:cover;object-position:center 20%;opacity:.92}
+  .hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(74,63,52,.72) 0%,rgba(74,63,52,.32) 40%,rgba(74,63,52,.12) 70%,rgba(74,63,52,.5) 100%)}
+  .hero-content{position:relative;z-index:3;width:100%}
+  .hero-title h1{font-size:clamp(3rem,7vw,5.6rem);font-weight:500;color:#fff}
+  .hero-title h1 .it{display:block;font-style:italic}
+  .hero-title p{margin-top:14px;color:rgba(247,243,236,.82);font-size:.92rem;max-width:230px}
+  .hero-side{position:absolute;top:0;right:0;z-index:4;text-align:right;max-width:230px}
+  .hero-side p{color:rgba(247,243,236,.9);font-size:.9rem;margin-bottom:20px;line-height:1.5}
+
+  /* ---------- MARQUEE ---------- */
+  .marquee{background:var(--brown);color:var(--cream);overflow:hidden;padding:14px 0}
+  .marquee-track{display:flex;gap:38px;white-space:nowrap;width:max-content;animation:mq 24s linear infinite}
+  @keyframes mq{to{transform:translateX(-50%)}}
+  .marquee-item{display:inline-flex;align-items:center;gap:38px;font-size:.86rem;letter-spacing:.14em;text-transform:uppercase;font-weight:300}
+  .marquee-item::after{content:"•";color:var(--taupe)}
+
+  /* ---------- GOAL ---------- */
+  .goal{padding:clamp(70px,9vw,120px) 0;text-align:center;background:var(--cream)}
+  .goal h2{font-size:clamp(1.9rem,4.4vw,3.4rem);font-weight:500;max-width:16ch;margin:0 auto;line-height:1.22}
+  .goal h2 .it{font-style:italic;color:var(--taupe-2)}
+  .goal .leaf{display:inline-block;width:38px;color:var(--taupe);vertical-align:middle;margin:0 6px}
+
+  /* ---------- ABOUT ---------- */
+  .about{background:var(--sand-2);padding:clamp(60px,7vw,96px) 0}
+  .about-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(30px,4vw,60px);align-items:center}
+  .about-media{border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow)}
+  .about-media img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3.4}
+  .about-copy{text-align:center;padding:0 clamp(0px,2vw,30px)}
+  .about-copy h2{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:500;margin-bottom:24px}
+  .about-copy h2 .it{font-style:italic;color:var(--taupe-2)}
+  .about-copy p{color:var(--ink-soft);margin-bottom:18px;max-width:400px;margin-left:auto;margin-right:auto}
+  .about-emma{width:96px;height:110px;border-radius:14px;object-fit:cover;margin:8px auto 20px;box-shadow:var(--shadow-soft)}
+  .about-copy .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem;color:var(--brown);margin-top:24px}
+
+  /* ---------- SERVICES ---------- */
+  .services{padding:clamp(70px,9vw,116px) 0;background:var(--cream)}
+  .svc-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:48px}
+  .svc-head h2{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:500}
+  .svc-head h2 .it{font-style:italic;color:var(--taupe-2)}
+  .svc-head p{color:var(--ink-soft);max-width:280px;font-size:.94rem}
+  .svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+  .svc{position:relative;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:3/3.7;box-shadow:var(--shadow-soft);transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s}
+  .svc:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+  .svc img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+  .svc:hover img{transform:scale(1.07)}
+  .svc::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(60,49,40,.05) 40%,rgba(60,49,40,.66))}
+  .svc-tag{position:absolute;top:16px;left:16px;z-index:2;background:rgba(247,243,236,.92);color:var(--brown-d);font-size:.76rem;font-weight:500;padding:7px 15px;border-radius:var(--r-pill);backdrop-filter:blur(4px)}
+  .svc-foot{position:absolute;left:16px;right:16px;bottom:16px;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;color:#fff}
+  .svc-foot .sname{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:500;line-height:1.1;max-width:70%}
+  .svc-foot .sgo{width:38px;height:38px;flex:0 0 auto;border-radius:50%;background:rgba(247,243,236,.94);color:var(--brown-d);display:flex;align-items:center;justify-content:center;transition:.3s}
+  .svc:hover .sgo{background:#fff;transform:rotate(-45deg)}
+
+  /* ---------- CTA ---------- */
+  .cta{background:var(--coffee);color:var(--cream);border-radius:var(--r-xl);margin:0 30px;text-align:center;padding:clamp(56px,7vw,92px) 30px;position:relative;overflow:hidden}
+  .cta h2{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:500;margin-bottom:16px;max-width:18ch;margin-left:auto;margin-right:auto}
+  .cta h2 .it{font-style:italic;color:var(--taupe)}
+  .cta p{color:rgba(247,243,236,.72);margin-bottom:32px;max-width:420px;margin-left:auto;margin-right:auto}
+  .cta .btn-pill{background:var(--cream)}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--cream);padding:64px 0 32px;margin-top:clamp(70px,9vw,116px)}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:40px}
+  .foot-brand .logo{color:var(--ink);font-size:1.5rem}
+  .foot-brand p{margin-top:16px;color:var(--ink-soft);font-size:.92rem;max-width:280px}
+  .foot-col h5{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--taupe-2);font-weight:500;margin-bottom:16px}
+  .foot-col a,.foot-col p{display:block;color:var(--ink-soft);font-size:.92rem;margin-bottom:11px;transition:color .2s}
+  .foot-col a:hover{color:var(--brown)}
+  .foot-col .big{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--ink);font-weight:500}
+  .foot-bottom{max-width:1200px;margin:46px auto 0;padding:24px 30px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.82rem;color:var(--muted)}
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform .9s cubic-bezier(.22,.61,.36,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:940px){
+    .nav-menu{display:none}
+    .burger{display:flex}
+    .hero-side{position:static;max-width:none;text-align:left;margin-top:20px}
+    .hero-body{flex-direction:column;align-items:flex-start;gap:20px}
+    .about-grid{grid-template-columns:1fr;gap:34px}
+    .about-media{order:-1}
+    .svc-head{flex-direction:column;align-items:flex-start}
+    .svc-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:560px){
+    .wrap{padding:0 20px}
+    .svc-grid{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr 1fr}
+    .cta,.hero{margin-left:0;margin-right:0}
+    .cta{border-radius:var(--r-lg)}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+    .reveal{opacity:1!important;transform:none!important}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap nav-in">
+    <a href="#" class="logo">LUMI</a>
+    <nav class="nav-menu">
+      <a href="#about">Về chúng tôi</a>
+      <a href="#services">Dịch vụ</a>
+      <a href="#services">Thành quả</a>
+      <a href="#footer">Đánh giá</a>
+      <a href="#footer">Chăm sóc</a>
+    </nav>
+    <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="wrap hero-body">
+    <div class="hero-img">
+      <img src="lumi-img/hero.jpg" alt="Người phụ nữ nhắm mắt thư thái, làn da rạng rỡ trong ánh sáng ấm áp" loading="eager">
+    </div>
+    <div class="hero-side reveal in">
+      <p>Một không gian tĩnh tại và thanh lịch để tôn vinh dịch vụ và niềm đam mê của bạn.</p>
+      <a href="#footer" class="btn btn-pill">Đặt lịch hẹn <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    </div>
+    <div class="hero-content">
+      <div class="hero-title reveal in">
+        <h1>Vẻ đẹp trong<span class="it">sự giản đơn</span></h1>
+        <p>Rạng rỡ nhẹ nhàng. Chăm sóc chân thành. Vẻ đẹp bền lâu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">Thuần chay</span><span class="marquee-item">Thân thiện môi trường</span><span class="marquee-item">Sản phẩm hữu cơ</span><span class="marquee-item">Chuyên gia tận tâm</span>
+    <span class="marquee-item">Thuần chay</span><span class="marquee-item">Thân thiện môi trường</span><span class="marquee-item">Sản phẩm hữu cơ</span><span class="marquee-item">Chuyên gia tận tâm</span>
+  </div>
+</div>
+
+<!-- GOAL -->
+<section class="goal">
+  <div class="wrap">
+    <h2 class="reveal">Mục tiêu của chúng tôi là mang đến trải nghiệm <span class="it">toàn diện</span>, giúp bạn <span class="it">rạng rỡ</span> hơn
+      <span class="leaf"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M20 2C10 6 6 16 8 28c0 2 1 4 2 6C14 22 20 16 30 13c-7 4-13 9-15 22 2 1 4 2 6 2C30 37 34 16 20 2Z"/></svg></span>
+      và cảm nhận sự <span class="it">tự tin</span> từ bên trong</h2>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="about-media reveal">
+      <img src="lumi-img/spa.jpg" alt="Phòng trị liệu spa sạch sẽ, ấm cúng với giường massage và đèn dịu nhẹ" loading="lazy">
+    </div>
+    <div class="about-copy reveal">
+      <h2>Về <span class="it">chúng tôi</span></h2>
+      <img class="about-emma" src="lumi-img/emma.jpg" alt="Emma — nhà sáng lập LUMI Studio">
+      <p>Xin chào, tôi là Emma — nhà sáng lập LUMI Studio. Triết lý của tôi rất đơn giản: vẻ đẹp phải mang lại cảm giác dễ chịu.</p>
+      <p>Với nhiều năm kinh nghiệm trong ngành thẩm mỹ, tôi giúp mọi người tự tin với chính làn da của mình.</p>
+      <div class="quote">Ở đây, mọi thứ đều được tạo nên bằng<br>sự tận tâm, tĩnh lặng và chủ đích.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="svc-head reveal">
+      <h2>Dịch vụ <span class="it">của chúng tôi</span></h2>
+      <p>Mỗi liệu trình được thiết kế riêng để tôn lên vẻ đẹp tự nhiên của bạn.</p>
+    </div>
+    <div class="svc-grid">
+      <article class="svc reveal">
+        <span class="svc-tag">Công nghệ cao</span>
+        <img src="lumi-img/svc-hardware.jpg" alt="Thẩm mỹ công nghệ cao">
+        <div class="svc-foot"><span class="sname">Thẩm mỹ công nghệ</span><span class="sgo"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      </article>
+      <article class="svc reveal">
+        <span class="svc-tag">Chăm sóc da</span>
+        <img src="lumi-img/svc-skincare.jpg" alt="Liệu trình chăm sóc da">
+        <div class="svc-foot"><span class="sname">Chăm sóc da</span><span class="sgo"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      </article>
+      <article class="svc reveal">
+        <span class="svc-tag">Thẩm mỹ</span>
+        <img src="lumi-img/svc-injection.jpg" alt="Thẩm mỹ tiêm">
+        <div class="svc-foot"><span class="sname">Thẩm mỹ tiêm</span><span class="sgo"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      </article>
+      <article class="svc reveal">
+        <span class="svc-tag">Trị liệu</span>
+        <img src="lumi-img/svc-massage.jpg" alt="Trị liệu massage">
+        <div class="svc-foot"><span class="sname">Trị liệu massage</span><span class="sgo"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="wrap" style="padding:0;max-width:none">
+    <h2>Sẵn sàng tỏa sáng theo cách <span class="it">của riêng bạn?</span></h2>
+    <p>Đặt lịch hẹn và để chúng tôi chăm sóc làn da của bạn bằng tất cả sự tận tâm.</p>
+    <a href="#footer" class="btn btn-pill">Đặt lịch hẹn <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo" style="letter-spacing:.28em">LUMI</div>
+        <p>Không gian tĩnh tại và thanh lịch cho làn da của bạn. Vẻ đẹp trong sự giản đơn.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Dịch vụ</h5>
+        <a href="#services">Thẩm mỹ công nghệ</a><a href="#services">Chăm sóc da</a><a href="#services">Thẩm mỹ tiêm</a><a href="#services">Trị liệu massage</a>
+      </div>
+      <div class="foot-col">
+        <h5>Studio</h5>
+        <a href="#about">Về chúng tôi</a><a href="#services">Dịch vụ</a><a href="#">Đánh giá</a>
+      </div>
+      <div class="foot-col">
+        <h5>Liên hệ</h5>
+        <p class="big">1900 6060</p>
+        <a href="mailto:hello@lumi.vn">hello@lumi.vn</a>
+        <p>12 Trần Hưng Đạo, Q.1<br>9:00 — 20:00 hằng ngày</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 LUMI Studio. Bảo lưu mọi quyền.</span>
+      <span>Vẻ đẹp trong sự giản đơn</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var burger=document.querySelector('.burger');
+  if(burger) burger.addEventListener('click',function(){
+    var m=document.querySelector('.nav-menu'); if(m) m.scrollIntoView({behavior:'smooth'});
+  });
+  var reveals=[].slice.call(document.querySelectorAll('.reveal'));
+  function showAll(){reveals.forEach(function(el){el.classList.add('in');});}
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -8% 0px'});
+    reveals.forEach(function(el){io.observe(el);});
+    setTimeout(showAll,3000);
+  } else { showAll(); }
+})();
+</script>
+</body>
+</html>
